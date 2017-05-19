@@ -1,0 +1,8 @@
+<?php
+
+require 'modele.php';
+
+
+
+
+?>

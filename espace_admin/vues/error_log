@@ -1,0 +1,7 @@
+[31-Mar-2015 10:21:27 UTC] PHP Fatal error:  Call to undefined function breadcrumb() in /home/megacour/public_html/espaceprof/vues/template.php on line 2
+[31-Mar-2015 10:22:04 UTC] PHP Warning:  include(/.php): failed to open stream: No such file or directory in /home/megacour/public_html/espaceprof/vues/template.php on line 39
+[31-Mar-2015 10:22:04 UTC] PHP Warning:  include(): Failed opening '/.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/megacour/public_html/espaceprof/vues/template.php on line 39
+[31-Mar-2015 11:12:16 UTC] PHP Warning:  include(/.php): failed to open stream: No such file or directory in /home/megacour/public_html/espaceprof/vues/template.php on line 42
+[31-Mar-2015 11:12:16 UTC] PHP Warning:  include(): Failed opening '/.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/megacour/public_html/espaceprof/vues/template.php on line 42
+[31-Mar-2015 11:12:18 UTC] PHP Warning:  include(/.php): failed to open stream: No such file or directory in /home/megacour/public_html/espaceprof/vues/template.php on line 42
+[31-Mar-2015 11:12:18 UTC] PHP Warning:  include(): Failed opening '/.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/megacour/public_html/espaceprof/vues/template.php on line 42
