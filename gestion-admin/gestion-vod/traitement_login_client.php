@@ -20,36 +20,51 @@ if (isset($_POST ['identification'])) {
     if ($etat) {
         $email = htmlentities(addslashes(trim($_POST ['email'])), ENT_QUOTES);
         $password = htmlentities(addslashes(trim($_POST ['password'])), ENT_QUOTES);
-        $password = md5($password);     
+        $password = md5($password);
         try {
-            $dns = 'mysql:host=localhost;dbname=megatvfr_vod';
-            $user = 'megatvfr_admin';
-            $pass= '7130chachia';
+            if ($_SERVER['SERVER_NAME'] == 'localhost') {
+
+                $dns = 'mysql:host=localhost;dbname=megatv_ip';
+
+                $user = 'root';
+
+                $pass = '';
+            } else {
+
+                $dns = 'mysql:host=localhost;dbname=megatv_ip';
+
+                $user = 'achachia';
+
+                $pass = '7130chachia';
+            }
             $options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             );
             $cxn = new PDO($dns, $user, $pass, $options);
-            $sql=" SELECT code_user FROM UserAdmin WHERE email='" . $email . "'  AND  mot_passe='" . $password . "' ";           
-            $select = $cxn->query($sql);            
+            $sql = " SELECT code_user FROM UserAdmin WHERE email='" . $email . "'  AND  mot_passe='" . $password . "' ";
+
+            $select = $cxn->query($sql);
             $nb = $select->rowCount();
             if ($nb <= 0) {
-             //   echo '3';
+                //   echo '3';
                 $etat = FALSE;
             } else {
-               // echo '4';
+                // echo '4';
                 $enregistrement = $select->fetch();
                 $_SESSION ['code_admin'] = $enregistrement ['code_user'];
             }
-        } catch (Exception $e) {        
-          //  echo $e->getMessage(); 
+        } catch (Exception $e) {
+            //  echo $e->getMessage(); 
             $etat = FALSE;
         }
     }
+    
+
     if ($etat) {
-       header("Location:  index.php");
+       header("Location:  http://megatv.ovh/gestion-admin/gestion-vod/index.php");
     } else {
-         header("Location:  login.php?message_erreur=erreur");
+       header("Location:  login.php?message_erreur=erreur");
     }
     exit();
 }

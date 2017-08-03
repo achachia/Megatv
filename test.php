@@ -8,9 +8,15 @@
 //echo $sql;
 
 
-include 'espace_client/modele/modele.php';
-$random=random('6');
-echo $random; 
+//include 'espace_client/modele/modele.php';
+//$random=random('6');
+//echo $random;
+
+$flux = simplexml_load_file("http://xmltv.dtdns.net/alacarte/ddl?fichier=/xmltv_site/xmlPerso/achachia.xml");
+
+//$flux=  file_get_contents("http://xmltv.dtdns.net/alacarte/ddl?fichier=/xmltv_site/xmlPerso/achachia.xml");
+
+print_r($flux);
 
 ?>
 
