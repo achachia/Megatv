@@ -1,0 +1,38 @@
+#EXTM3U
+#EXTINF:-1,AQSATV
+http://live.aqsatv.ps:1935/aqsatv/live/tv/playlist.m3u8
+#EXTINF:-1,IQRA TV LIVE
+http://iqraa.cdn.mangomolo.com/iqraaar/smil:iqraaardir.smil/chunklist_b2500000_t64NTc2cA==.m3u8
+#EXTINF:-1,ABU DHABI NATIONAL GEO
+http://streaming.i-sat.tv:1935/live/Nat/chunklist_w310391696.m3u8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjI3LjI1My42Ny44OSIsImlzcyI6IiIsIm5iZiI6IjAiLCJqdGkiOiIiLCJpYXQiOjE1MDA4MjUxNDQsImV4cCI6MTUwMDgzMDU0NH0.WNYEj9Gb2X4cfyyZfAcA2vuRQB64ieqtnr5XvrsdrBA
+#EXTINF:-1,AL JAZEERA DOCUMENTARY
+http://aljazeera-doc-apple-live.adaptive.level3.net/apple/aljazeera/hq-doc/800kStream.m3u8
+#EXTINF:-1,EL HIWAR TV - ARABIC - LONDON
+http://mn-i.mncdn.com/alhiwar_live/smil:alhiwar.smil/playlist.m3u8
+#EXTINF:-1,AL JAZEERA MUBACHER
+http://aljazeera-mubasher-apple-live.adaptive.level3.net/apple/aljazeera/mubasher/800.m3u8
+#EXTINF:-1,AL JAZEERA DOCUMENTARY LIVE
+http://aljazeera-doc-apple-live.adaptive.level3.net/apple/aljazeera/hq-doc/800kStream.m3u8
+#EXTINF:-1,DUBAI TV
+http://dmi.mangomolo.com:1935/dubaitv/smil:dubaitv.smil/gmswf.m3u8
+#EXTINF:-1,Al Arabiya
+http://www.elahmad.com/tv/m3u8/arabiya.m3u8?id=aa
+#EXTINF:-1,FRANCE 24 AR
+http://www.elahmad.com/tv/m3u8/akamaihd.m3u8?id=france24_ar
+#EXTINF:-1,Arte HD
+http://artelive-lh.akamaihd.net/i/artelive_fr@344805/master.m3u8
+#EXTINF:-1,BFMTV
+http://csm-e.dai.bfmtv.com/csm/live/109797390.m3u8
+#EXTINF:-1,FRANCE 24 FR
+http://www.elahmad.com/tv/m3u8/akamaihd.m3u8?id=france24_fr
+#EXTINF:-1,BEINSPORT HD1 AR-SERVER 2
+http://145.239.108.17:6500/live/vZ5EoP9ACD/lvao3W3Rnq/6959.m3u8
+#EXTINF:-1,BEINSPORT HD1 FR-SERVER 1
+http://145.239.108.17:6500/live/vZ5EoP9ACD/lvao3W3Rnq/8301.m3u8
+#EXTINF:-1,BEINSPORT HD2 FR-SERVER 1
+http://145.239.108.17:6500/live/vZ5EoP9ACD/lvao3W3Rnq/8302.m3u8
+#EXTINF:-1,BEINSPORT HD3 FR-SERVER 1
+http://145.239.108.17:6500/live/vZ5EoP9ACD/lvao3W3Rnq/8303.m3u8
+#EXTINF:-1,Chaine 23
+http://stream-03.dc3.dailymotion.com/31/dm/3/x13p3qi/live-2.m3u8
+
