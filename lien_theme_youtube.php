@@ -34,7 +34,6 @@ try {
     
     $sql = "   SELECT lien_iptv  FROM Liste_iptv_youtube   WHERE  theme='" . $theme . "' ";
 
-    echo $sql;
 
     $resultat = $cxn->query($sql);
     $nb = $resultat->rowCount();
