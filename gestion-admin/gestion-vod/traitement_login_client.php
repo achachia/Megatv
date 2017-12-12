@@ -31,7 +31,7 @@ if (isset($_POST ['identification'])) {
                 $pass = '';
             } else {
 
-                $dns = 'mysql:host=localhost;dbname=megatv_ip';
+                $dns = 'mysql:host=localhost:3307;dbname=megatv_ip';
 
                 $user = 'achachia';
 

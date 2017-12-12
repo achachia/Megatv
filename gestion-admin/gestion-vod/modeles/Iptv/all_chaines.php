@@ -1,37 +1,12 @@
 <?php
 
-function getobjetcxn() {
 
-
-    $dns = 'mysql:host=localhost;dbname=megatv_ip';
-
-    $user = 'achachia';
-
-    $password = '7130chachia';
-
-    $options = array(
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    );
-
-    try {
-
-        $cxn = new PDO($dns, $user, $password, $options);
-    } catch (Exception $e) {
-
-        echo "Connection à Mysql imposible : " . $e->getMessage();
-
-        die();
-    }
-
-    return $cxn;
-}
 
 function ListeChainesIptv() {
 
     $liste = array();
 
-    $cxn = getobjetcxn();
+    global $cxn;
 
     /*     * ************************************************ */
 
@@ -117,7 +92,7 @@ function ListeChainesIptv() {
 
 function liste_categorie_tv() {
 
-    $cxn = getobjetcxn();
+    global $cxn;
 
     $sql = " SELECT  id_categorie,nom AS nom_bouquet FROM  CategorieTv  ";
 
