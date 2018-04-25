@@ -19,9 +19,9 @@ function ListeChainesIptv() {
 
         $i = 0;
 
-        $dir = "/volume1/web/Megatv/MegatvProcedural/gestion-admin/gestion-vod/images/IconChaineTv";
+        $dir = "/volume1/web/Megatv/MegatvProcedural/gestion-admin/images/IconChaineTv";
 
-        $root_web = "http://megatv.ovh/gestion-admin/gestion-vod/images/IconChaineTv/";
+        $root_web = "http://megatv.ovh/gestion-admin/images/IconChaineTv/";
 
         while ($enregistrement = $resultat->fetch()) {
 

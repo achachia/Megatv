@@ -2,7 +2,83 @@
 
 //modele
 
+function liste_serie($mod) {
+    
+    global $cxn;
 
+    if ($_SERVER['SERVER_NAME'] == 'localhost') {
+
+        $dir = "C:\wamp64\www\MegatvProcedural\Media-Vod\Serie-Tv";
+    } else {
+
+        $dir = "/volume1/web/media/Serie-Tv";
+    }
+
+    $liste_serie_enregistre = array();
+    $liste_serie_non_enregistre=array();
+
+    $cdir = scandir($dir);
+    
+    $j=0;
+
+    foreach ($cdir as $key => $value) {
+        if (!in_array($value, array(".", ".."))) {
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                
+                
+                /******************* requette sql *********************************/
+                
+                                try {
+
+                    $sql = " SELECT  id_serie,nom_serie,id_TMD,date_created    FROM  SerieTvFr   WHERE  nom_serie='".$value."' ";
+
+                    $select = $cxn->query($sql);
+
+                    $nb = $select->rowCount();
+
+                    if ($nb <= 0) {
+
+                        $liste_serie_non_enregistre[$j]['nom_serie'] = $value;
+        
+                    } else {
+
+                        $enregistrement = $select->fetch();
+
+
+                        $liste_serie_enregistre[$j]['id_serie'] = $enregistrement['id_serie'];
+
+                        $liste_serie_enregistre[$j]['nom_serie'] = $enregistrement['nom_serie'];
+
+                        $liste_serie_enregistre[$j]['id_TMD'] = $enregistrement['id_TMD'];
+
+                        $liste_serie_enregistre[$j]['date_created'] = $enregistrement['date_created'];            
+
+                    }
+                } catch (Exception $e) {
+
+                    echo $e->getMessage();
+                }               
+                
+                
+                /*********************************************************************/             
+                
+             
+            }
+        }
+        $j++;
+    }  
+        if ($mod == 'enregistre') {
+
+
+        return $liste_serie_enregistre;
+    }
+
+    if ($mod == 'non_enregistre') {
+
+        return $liste_serie_non_enregistre;
+    }
+    
+}
 
 function liste_fichiers($mod = '') {
 

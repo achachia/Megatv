@@ -43,7 +43,7 @@ if (isset($_POST ['identification'])) {
         /*         * ************************ Identification admin ******************************************* */
 
         try {
-            $sql=" SELECT code_user FROM  useradmin WHERE email='" . $email . "'  AND  mot_passe='" . $password . "' ";
+            $sql=" SELECT code_user FROM  UserAdmin WHERE email='" . $email . "'  AND  mot_passe='" . $password . "' ";
       
             $select = $cxn->query($sql);
             
