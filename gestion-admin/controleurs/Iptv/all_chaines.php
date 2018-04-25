@@ -14,6 +14,6 @@ $liste_categorie_tv=liste_categorie_tv();
 
 
 
-include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php";
+include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php"; 
 
 ?>

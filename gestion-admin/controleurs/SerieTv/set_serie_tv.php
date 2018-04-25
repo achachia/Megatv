@@ -20,7 +20,7 @@ if (!empty($_POST['button_register'])) {
 
         $stmt = $cxn->prepare($sql);
 
-        $stmt->bindParam(':param1', $nom_serie);
+        $stmt->bindParam(':param1', $nom_serie); 
 
         $stmt->bindParam(':param2', $idtmd);
 

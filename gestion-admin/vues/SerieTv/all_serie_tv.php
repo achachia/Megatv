@@ -24,7 +24,7 @@
                 <!-- END widget-->
             </div>
             <div class="col-lg-4">
-                <!-- START widget-->
+                <!-- START widget--> 
                 <div class="panel widget">
                     <div class="row row-table row-flush">
                         <div class="col-xs-4 bg-danger text-center"  style="min-height: 120px;">

@@ -25,7 +25,7 @@
 
                             <th>Activation chaine</th>
 
-                            <th class="sort-alpha">ACTION</th>
+                            <th class="sort-alpha">ACTION</th> 
 
                         </tr>
 

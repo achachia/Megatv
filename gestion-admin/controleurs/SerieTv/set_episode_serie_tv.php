@@ -16,7 +16,7 @@ function creerFichierStrm($fichierChemin, $fichierNom, $fichierExtension, $fichi
 
 // création du fichier sur le serveur
 
-    $leFichier = fopen($fichierCheminComplet, "wb");
+    $leFichier = fopen($fichierCheminComplet, "wb"); 
 
     fwrite($leFichier, $fichierContenu);
 

@@ -21,7 +21,7 @@ $id_chaine = $_POST['id_chaine'];
 
 $nom_chaine = $_POST['nom_chaine'];
 
-$categorie_tv = $_POST['categorie_tv'];
+$categorie_tv = $_POST['categorie_tv']; 
 
 $active_chaine = $_POST['active_chaine'];
 

@@ -23,7 +23,7 @@ function liste_serie($mod) {
 
     foreach ($cdir as $key => $value) {
         if (!in_array($value, array(".", ".."))) {
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) { 
                 
                 
                 /******************* requette sql *********************************/

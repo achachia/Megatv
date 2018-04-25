@@ -20,6 +20,6 @@ $liste_serie_enregistre=liste_serie('enregistre');
 
 
 
-include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php";
+include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php"; 
 
 ?>
