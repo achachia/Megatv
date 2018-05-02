@@ -7,7 +7,7 @@ $nom_saison = $_POST['nom_saison'];
 
 $id_serie = $_POST['id_serie'];
 
-$idtmd_saison = $_POST['idtmd_saison'];
+$Num_saison = $_POST['Num_saison'];
 
 $etat = TRUE;
 
@@ -17,7 +17,7 @@ if (!empty($_POST['button_register'])) {
     
     try {
 
-        $sql = " INSERT INTO  SaisonsTvFr (nom_saison,id_serie,id_TMD,date_created) VALUES (:param1,:param2,:param3,:param4)";
+        $sql = " INSERT INTO  SaisonsTvFr (nom_saison,id_serie,date_created,Num_saison ) VALUES (:param1,:param2,:param3,:param4)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -25,9 +25,9 @@ if (!empty($_POST['button_register'])) {
 
         $stmt->bindParam(':param2', $id_serie);
 
-        $stmt->bindParam(':param3', $idtmd_saison);
+        $stmt->bindParam(':param3', $date_created);
         
-        $stmt->bindParam(':param4', $date_created);
+        $stmt->bindParam(':param4',$Num_saison ); 
 
         $stmt->execute();
         

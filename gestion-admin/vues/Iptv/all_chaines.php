@@ -1,10 +1,92 @@
-
-
 <div class="row">
 
     <div class="col-lg-12">
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">GENERATEURS PLAYLIST M3U EN LIGNE</div>
+
+            <div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type logiciel IPTV</th>                            
+                            <th>Type fichier</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="info">
+                            <td>KODI</td>
+                            <td>M3U-MONDE</td>
+                            <td><a href="<?= $host; ?>/fichier_m3u_perso.php"><button   class="btn btn-primary btn-lg"  > Générer le fichier</button></a></td>
+                        </tr> 
+                        <tr class="danger">
+                            <td>KODI</td>
+                            <td>M3U-FRANCOPHONE</td>
+                            <td><a href="<?= $host; ?>/fichier_m3u_fr.php"><button   class="btn btn-primary btn-lg"  > Générer le fichier</button></a></td>
+                        </tr>      
+                                          
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">GENERATEURS PLAYLIST M3U [LOCAL]</div>
+
+            <div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type logiciel IPTV</th>                            
+                            <th>Type fichier</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="info">
+                            <td>KODI</td>
+                            <td>M3U-MONDE</td>
+                            <td><a href="<?= $host; ?>/fichier_m3u_perso.php"><button   class="btn btn-primary btn-lg"  > Générer le fichier</button></a></td>
+                        </tr> 
+                        <tr class="danger">
+                            <td>KODI</td>
+                            <td>M3U-FRANCOPHONE</td>
+                            <td><a href="<?= $host; ?>/fichier_m3u_fr.php"><button   class="btn btn-primary btn-lg"  > Générer le fichier</button></a></td>
+                        </tr>      
+                        <tr class="success">
+                            <td>OTT PLAYER</td>
+                            <td>M3U</td>
+                            <td><a href="<?= $host; ?>/fichier_m3u_ottplayer.php"><button   class="btn btn-primary btn-lg"  > Générer le fichier</button></a></td>
+                        </tr>                       
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="panel panel-primary">
 
             <div class="panel-heading">LISTES DES CHAINES IPTV</div>
 

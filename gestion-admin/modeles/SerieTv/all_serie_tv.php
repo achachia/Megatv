@@ -31,7 +31,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
                 try {
 
-                    $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_serie,id_saison,id_TMD   FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ";
+                    $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ";
                     
                      
 
@@ -54,15 +54,13 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
                         $liste_episodes_saison_enregistre[$j]['nom_episode'] = $enregistrement['nom_fichier'];
                         
-                        $liste_episodes_saison_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
+                        $liste_episodes_saison_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];                     
 
-                        $liste_episodes_saison_enregistre[$j]['id_serie'] = $enregistrement['id_serie'];
-
-                        $liste_episodes_saison_enregistre[$j]['id_saison'] = $enregistrement['id_saison'];
-
-                        $liste_episodes_saison_enregistre[$j]['id_TMD'] = $enregistrement['id_TMD'];
+                        $liste_episodes_saison_enregistre[$j]['id_saison'] = $enregistrement['id_saison'];                     
 
                         $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+                        
+                        $liste_episodes_saison_enregistre[$j]['Num_episode'] = $enregistrement['Num_episode'];
                     }
                 } catch (Exception $e) {
 
@@ -119,7 +117,7 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
                 try {
 
-                    $sql = " SELECT  id_saison,nom_saison,id_TMD,date_created,id_serie   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ";
+                    $sql = " SELECT  id_saison,nom_saison,date_created,id_serie,Num_saison   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ";
 
                     $select = $cxn->query($sql);
 
@@ -137,9 +135,9 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
                         $liste_saison_enregistre[$j]['id_serie'] = $enregistrement['id_serie'];
 
-                        $liste_saison_enregistre[$j]['nom_saison'] = $enregistrement['nom_saison'];
-
-                        $liste_saison_enregistre[$j]['id_TMD'] = $enregistrement['id_TMD'];
+                        $liste_saison_enregistre[$j]['nom_saison'] = $enregistrement['nom_saison'];  
+                        
+                        $liste_saison_enregistre[$j]['Num_saison'] = $enregistrement['Num_saison']; 
 
                         $liste_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
                     }
