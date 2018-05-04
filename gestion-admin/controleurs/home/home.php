@@ -1,1 +1,1 @@
-<?phprequire './librairie/redirection.php';redirection_membre($_SESSION ['user_admin'] ['code_user']);include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php";?>
+<?phprequire './librairie/redirection.php';redirection_membre($_SESSION ['user_admin'] ['code_user']);include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";?>

@@ -64,7 +64,7 @@ if (!empty($_POST['button_update'])) {
 
 if ($etat) {
 
-    $url = $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&message=succes';
+    $url = $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&message=success';
 
    
 } else {
