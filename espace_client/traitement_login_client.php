@@ -24,8 +24,11 @@ if (isset($_POST ['identification'])) {
     }
     if ($etat) {
         $email = htmlentities(addslashes(trim($_POST ['email'])), ENT_QUOTES);
+        
         $password = htmlentities(addslashes(trim($_POST ['password'])), ENT_QUOTES);
+        
         $password = md5($password);
+        
         try {
             $select = $cxn->query(" SELECT code_user FROM ClientsAbonnement WHERE email='" . $email . "'  AND  mot_passe='" . $password . "' ");
             $nb = $select->rowCount();
