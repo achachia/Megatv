@@ -65,18 +65,8 @@ function ListeChainesIptv() {
 
             $filename = $dir . '/' . $enregistrement['nom_chaine'] . '.png';
 
-
-            if (file_exists($filename)) {
-
-                $liste[$i]['icone_chaine'] = $root_web . $enregistrement['nom_chaine'] . '.png';
-            } else {
-
-                $liste[$i]['icone_chaine'] = $root_web . 'logo_chaine.png';
-            }
-
-
-
-
+            $liste[$i]['icone_chaine'] = $root_web . $enregistrement['logo'] . '.png';
+            
             $i++;
         }
     } catch (Exception $e) {

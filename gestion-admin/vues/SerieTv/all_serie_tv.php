@@ -1,80 +1,4 @@
-<section>
-    <section class="main-content">
-        <div class="row">
-            <div class="col-lg-4">
-                <!-- START widget-->
-                <div class="panel widget">
-                    <div class="row row-table row-flush">
-                        <div class="col-xs-4 bg-info text-center"  style="min-height: 120px;">
-                            <em class="fa fa-film fa-2x"  style="padding-top: 40px;"></em>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="panel-body text-center">
-                                <h4 class="mt0">FILMS</h4>
-                                <p class="mb0 text-muted"><?= $nbr_films; ?> films</p>
 
-                            </div>
-                        </div>
-                        <div class="col-xs-2 bg-info text-center"  style="min-height: 120px;padding-top: 20px">
-                            <h4 class="mt0">DATA</h4>
-                            <p class="mb0 text-muted"><?= $data_films; ?></p>
-                        </div>
-                    </div>
-                </div>
-                <!-- END widget-->
-            </div>
-            <div class="col-lg-4">
-                <!-- START widget--> 
-                <div class="panel widget">
-                    <div class="row row-table row-flush">
-                        <div class="col-xs-4 bg-danger text-center"  style="min-height: 120px;">
-                            <em class="fa fa-film fa-2x"  style="padding-top: 40px;"></em>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="panel-body text-center">
-                                <h4 class="mt0">CARTOON</h4>
-                                <p class="mb0 text-muted"><?= $nbr_cartoon; ?> films</p>
-
-                            </div>
-                        </div>
-                        <div class="col-xs-2 bg-info text-center"  style="min-height: 120px;padding-top: 20px">
-                            <h4 class="mt0">DATA</h4>
-                            <p class="mb0 text-muted"><?= $data_cartoon; ?></p>
-                        </div>
-                    </div>
-                </div>
-                <!-- END widget-->
-            </div>
-
-            <div class="col-lg-4">
-                <!-- START widget-->
-                <div class="panel widget">
-                    <div class="row row-table row-flush">
-                        <div class="col-xs-4 bg-success text-center"  style="min-height: 120px;">
-                            <em class="fa fa-film fa-2x"  style="padding-top: 40px;"></em>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="panel-body text-center">
-                                <h4 class="mt0">SERIE TV</h4>
-                                <p class="mb0 text-muted"><?= $nbr_serie_tv; ?> serie</p>
-
-                            </div>
-                        </div>
-                        <div class="col-xs-2 bg-info text-center"  style="min-height: 120px;padding-top: 20px">
-                            <h4 class="mt0">DATA</h4>
-                            <p class="mb0 text-muted"><?= $data_serie_tv; ?></p>
-                        </div>
-                    </div>
-                </div>
-                <!-- END widget-->
-            </div>
-
-
-        </div>
-    </section>
-
-</section>
-<!-------------------------------------------------------------------------------->
 <div class="row">
 
     <div class="col-lg-12">
@@ -297,7 +221,7 @@
                             <thead style="color:#red">
 
                                 <tr>  
-                                    
+
                                     <th>Num SAISON</th>
 
                                     <th>Nom SAISON</th>                            
@@ -317,7 +241,7 @@
                                 foreach ($liste_saisons_enregistre as $value) {
 
                                     $tr .= '<tr>';
-                                    
+
                                     $tr .= '<td>' . $value['Num_saison'] . '</td>';
 
                                     $tr .= '<td>' . $value['nom_saison'] . '</td>';
@@ -516,8 +440,10 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                 <div class="modal-content">
                     <form class="form-horizontal" id="form1_add_serie_<?= $j; ?>" name="form1_add_serie_<?= $j; ?>" method="POST" action="./controleurs/SerieTv/set_serie_tv.php">
                         <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                            <h4 id="myModalLabel" class="modal-title">Enregistrer une serie tv</h4>
+                            <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une serie TV</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
 
@@ -566,8 +492,10 @@ if (isset($liste_serie_enregistre) && sizeof($liste_serie_enregistre) > 0) {
                 <div class="modal-content">
                     <form class="form-horizontal" id="form1_update_serie_<?= $j; ?>" name="form1_update_serie_<?= $j; ?>" method="POST" action="./controleurs/SerieTv/set_serie_tv.php">
                         <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                            <h4 id="myModalLabel" class="modal-title">Editer une serie tv</h4>
+                            <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Modifier la fiche</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
 
@@ -619,8 +547,11 @@ if (isset($liste_saisons_non_enregistre) && sizeof($liste_saisons_non_enregistre
                 <div class="modal-content">
                     <form class="form-horizontal" id="form1_add_saison_<?= $j; ?>" name="form1_add_saison_<?= $j; ?>" method="POST" action="./controleurs/SerieTv/set_saison_serie_tv.php">
                         <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                            <h4 id="myModalLabel" class="modal-title">Enregistrer une saison [<?= $_GET['nom_serie']; ?>]</h4>
+                            <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une saison [<?= $_GET['nom_serie']; ?>]</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
                         </div>
                         <div class="modal-body">
 
@@ -668,8 +599,12 @@ if (isset($liste_episodes_saison_non_enregistre) && sizeof($liste_episodes_saiso
                 <div class="modal-content">
                     <form class="form-horizontal" id="form1_add_saison_<?= $j; ?>" name="form1_add_saison_<?= $j; ?>" method="POST" action="./controleurs/SerieTv/set_episode_saison_serie_tv.php">
                         <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                            <h4 id="myModalLabel" class="modal-title">Enregistrer une episode [<?= $_GET['nom_serie']; ?>][<?= $_GET['nom_saison']; ?>]</h4>
+
+                            <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une episode [<?= $_GET['nom_serie']; ?>][<?= $_GET['nom_saison']; ?>]</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
                         </div>
                         <div class="modal-body">
 
