@@ -1,4 +1,4 @@
-
+<?php if (sizeof($liste_serie_non_enregistre) > 0) { ?>
 <div class="row">
 
     <div class="col-lg-12">
@@ -63,6 +63,7 @@
     </div>
 
 </div>
+<?php } ?>
 <!--------------------------------------------------------------------------------------------------------------->
 
 <?php if (sizeof($liste_serie_enregistre) > 0) { ?>
@@ -83,7 +84,9 @@
 
                             <tr>                          
 
-                                <th>NOM SERIE</th>                            
+                                <th>NOM SERIE</th> 
+                                
+                                <th>Progression</th>
 
                                 <th class="sort-alpha">ACTION</th>
 
@@ -103,9 +106,13 @@
 
                                     $tr .= '<tr>';
 
-                                    $tr .= '<td>' . $value['nom_serie'] . '</td>';
+                                    $tr .= '<td style="text-align:center;padding-top:2%">' . $value['nom_serie'] . '</td>';
+                                    
+                                 //   $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
+                                    
+                                      $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
 
-                                    $tr .= '<td><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg" style="margin:5px" > Editer </button>';
+                                    $tr .= '<td style="text-align:left;padding-top:2%"><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg" style="margin:5px" > Editer </button>';
 
                                     $tr .= '<a href="' . $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > CONSULTER LES SAISONS</button></a></td>';
 

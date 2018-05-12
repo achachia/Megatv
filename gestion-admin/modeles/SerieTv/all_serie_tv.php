@@ -12,7 +12,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
         $dir = "/volume1/web/media/Serie-Tv/" . $nom_serie . "/" . $nom_saison;
     }
-   
+
 
     $liste_episodes_saison_enregistre = array();
 
@@ -24,53 +24,53 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
     foreach ($cdir as $key => $value) {
 
-        if (!in_array($value, array(".", ".."))) {           
+        if (!in_array($value, array(".", ".."))) {
 
 
-                /*                 * ***************** requette sql ******************************** */
+            /*             * ***************** requette sql ******************************** */
 
-                try {
+            try {
 
-                    $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ";
-                    
-                     
-
-                    $select = $cxn->query($sql);
-
-                    $nb = $select->rowCount();
-                    
-                  
-
-                    if ($nb <= 0) {
-
-                        $liste_episodes_saison_non_enregistre[$j]['nom_episode'] = $value;
-                    } else {
-                       
-
-                        $enregistrement = $select->fetch();
+                $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ";
 
 
-                        $liste_episodes_saison_enregistre[$j]['id_episode'] = $enregistrement['id_episode'];
 
-                        $liste_episodes_saison_enregistre[$j]['nom_episode'] = $enregistrement['nom_fichier'];
-                        
-                        $liste_episodes_saison_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];                     
+                $select = $cxn->query($sql);
 
-                        $liste_episodes_saison_enregistre[$j]['id_saison'] = $enregistrement['id_saison'];                     
+                $nb = $select->rowCount();
 
-                        $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
-                        
-                        $liste_episodes_saison_enregistre[$j]['Num_episode'] = $enregistrement['Num_episode'];
-                    }
-                } catch (Exception $e) {
 
-                    echo $e->getMessage();
+
+                if ($nb <= 0) {
+
+                    $liste_episodes_saison_non_enregistre[$j]['nom_episode'] = $value;
+                } else {
+
+
+                    $enregistrement = $select->fetch();
+
+
+                    $liste_episodes_saison_enregistre[$j]['id_episode'] = $enregistrement['id_episode'];
+
+                    $liste_episodes_saison_enregistre[$j]['nom_episode'] = $enregistrement['nom_fichier'];
+
+                    $liste_episodes_saison_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
+
+                    $liste_episodes_saison_enregistre[$j]['id_saison'] = $enregistrement['id_saison'];
+
+                    $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+
+                    $liste_episodes_saison_enregistre[$j]['Num_episode'] = $enregistrement['Num_episode'];
                 }
+            } catch (Exception $e) {
 
-
-                /*                 * ****************************************************************** */
+                echo $e->getMessage();
             }
-       
+
+
+            /*             * ****************************************************************** */
+        }
+
         $j++;
     }
 
@@ -135,9 +135,9 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
                         $liste_saison_enregistre[$j]['id_serie'] = $enregistrement['id_serie'];
 
-                        $liste_saison_enregistre[$j]['nom_saison'] = $enregistrement['nom_saison'];  
-                        
-                        $liste_saison_enregistre[$j]['Num_saison'] = $enregistrement['Num_saison']; 
+                        $liste_saison_enregistre[$j]['nom_saison'] = $enregistrement['nom_saison'];
+
+                        $liste_saison_enregistre[$j]['Num_saison'] = $enregistrement['Num_saison'];
 
                         $liste_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
                     }
@@ -214,6 +214,22 @@ function liste_serie($mod) {
                         $liste_serie_enregistre[$j]['id_TMD'] = $enregistrement['id_TMD'];
 
                         $liste_serie_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+                        
+                        /************************** Progression d'enregistrement ***************************************/
+                        
+                       $nbr=liste_fichiers($enregistrement['nom_serie']);
+                       
+                       $pourcentage=$nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
+                       
+                      $liste_serie_enregistre[$j]['progression']=  intval($pourcentage);                
+                  
+                       
+                     //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
+                        
+                        /*******************************************************************/
+                        
+                        
+                        
                     }
                 } catch (Exception $e) {
 
@@ -238,20 +254,24 @@ function liste_serie($mod) {
     }
 }
 
-function liste_fichiers($mod = '') {
+function liste_fichiers($serie) {
 
     global $cxn;
 
-    $liste_episode_enregistre = array();
+    $nbr_fichiers = 0;
 
-    $liste_episode_non_enregistre = array();
+    $nbr_episode_enregistre = 0;
+
+    $nbr_episode_non_enregistre = 0;
+
+    $nbr = array();
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:\wamp64\www\MegatvProcedural\Media-Vod\Serie-Tv";
+        $dir = "C:/wamp64/www/MegatvProcedural/Media-Vod/Serie-Tv/".$serie;
     } else {
 
-        $dir = "/volume1/web/media/Serie-Tv";
+        $dir = "/volume1/web/media/Serie-Tv/".$serie;
     }
 
 
@@ -260,23 +280,20 @@ function liste_fichiers($mod = '') {
     $j = 1;
 
 
-    foreach ($result as $serie => $value) {
+        foreach ($result  as $saison => $value) {
 
 
 
-        foreach ($value as $saison => $value1) {
+            foreach ($value as $num_episode => $nom_episode) {
 
+                $filename = $dir  . '/' . $saison . '/' . $nom_episode;
 
-
-            foreach ($value1 as $num_episode => $nom_episode) {
-
-                $filename = $dir . '/' . $serie . '/' . $saison . '/' . $nom_episode;
-
-                $info = new SplFileInfo($filename);
-
+                $nbr_fichiers++;
+                
+                
                 try {
 
-                    $sql = " SELECT id_episode,titre_originale,nom_fichier,date_upload,taille_fichier,nom_serie,num_saison   FROM  SerieTv  WHERE  nom_fichier='" . $nom_episode . "' ";
+                    $sql = " SELECT id_episode   FROM  EpisodesSerieTvFr  WHERE  nom_fichier='" . $nom_episode . "' ";
 
                     $select = $cxn->query($sql);
 
@@ -284,43 +301,10 @@ function liste_fichiers($mod = '') {
 
                     if ($nb <= 0) {
 
-                        $liste_episode_non_enregistre[$j]['nom_serie'] = $serie;
-
-                        $liste_episode_non_enregistre[$j]['num_saison'] = $saison;
-
-                        $liste_episode_non_enregistre[$j]['episode'] = $nom_episode;
-
-                        $liste_episode_non_enregistre[$j]['taille_fichier'] = FileSizeConvert(filesize($filename));
-
-                        $liste_episode_non_enregistre[$j]['extention_fichier'] = $info->getExtension();
-
-                        $liste_episode_non_enregistre[$j]['nom_fichier'] = substr($info->getBasename($info->getExtension()), 0, -1);
-
-                        $liste_episode_non_enregistre[$j]['date_created_fichier'] = date("d-m-Y H:i:s", filectime($filename));
-
-                        $liste_episode_non_enregistre[$j]['date_update_fichier'] = date("d-m-Y H:i:s", filemtime($filename));
+                        $nbr_episode_non_enregistre++;
                     } else {
 
-                        $enregistrement = $select->fetch();
-
-
-                        $liste_episode_enregistre[$j]['nom_serie'] = $enregistrement['nom_serie'];
-
-                        $liste_episode_enregistre[$j]['num_saison'] = $enregistrement['num_saison'];
-
-                        $liste_episode_enregistre[$j]['nom_fichier_complet'] = $enregistrement['nom_fichier'];
-
-                        $liste_episode_enregistre[$j]['taille_fichier'] = $enregistrement['taille_fichier'];
-
-                        $liste_episode_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
-
-                        $liste_episode_enregistre[$j]['extention_fichier'] = $info->getExtension();
-
-                        $liste_episode_enregistre[$j]['nom_fichier'] = substr($info->getBasename($info->getExtension()), 0, -1);
-
-                        $liste_episode_enregistre[$j]['date_created_fichier'] = date("d-m-Y H:i:s", filectime($filename));
-
-                        $liste_episode_enregistre[$j]['date_update_fichier'] = date("d-m-Y H:i:s", filemtime($filename));
+                        $nbr_episode_enregistre++;
                     }
                 } catch (Exception $e) {
 
@@ -332,23 +316,15 @@ function liste_fichiers($mod = '') {
                 $j++;
             }
         }
-    }
+  
 
+    $nbr['nbr_total_fichier'] = $nbr_fichiers;
 
+    $nbr['nbr_fichier_enregistre'] = $nbr_episode_enregistre;
 
+    $nbr['nbr_fichier_non_enregistre'] = $nbr_episode_non_enregistre;
 
-
-
-    if ($mod == 'enregistre') {
-
-
-        return $liste_episode_enregistre;
-    }
-
-    if ($mod == 'non_enregistre') {
-
-        return $liste_episode_non_enregistre;
-    }
+    return $nbr;
 }
 ?>
 

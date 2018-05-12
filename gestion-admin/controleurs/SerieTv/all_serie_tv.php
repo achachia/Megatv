@@ -38,5 +38,7 @@ if (isset($_GET['id_serie']) && isset($_GET['nom_serie']) && isset($_GET['nom_sa
 
 
 
+       
+
 include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";
 ?>
