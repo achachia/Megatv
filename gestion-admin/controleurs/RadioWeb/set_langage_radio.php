@@ -11,16 +11,16 @@ $etat=true;
 
 /* * *********************** Donnes recus par le navigateur client *************************** */
 
-$nv_nom_theme = $_POST['nv_nom_theme']; //nouveau nom complet
+$nv_nom_langage = $_POST['nv_nom_langage']; //nouveau nom complet
 
 
 try {
 
-    $sql = " INSERT INTO  ListeThemeRadio (nom_theme,date_created) VALUES (:param1,:param2)";
+    $sql = " INSERT INTO  ListeLangages (nom_langage,date_created) VALUES (:param1,:param2)";
 
     $stmt = $cxn->prepare($sql);
 
-    $stmt->bindParam(':param1', $nv_nom_theme);
+    $stmt->bindParam(':param1', $nv_nom_langage);
 
     $stmt->bindParam(':param2', $date_created);
 

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 session_regenerate_id();
@@ -19,11 +20,13 @@ $activation = $_POST['activation_chaine'];
 
 $theme_chaine = $_POST['theme_chaine']; // ancien nom  complet
 
-$url = $_POST['url_chaine']; 
+$url = $_POST['url_chaine'];
 
-$date_created=date("Y-m-d  H:i:s");
+$langage = $_POST['langage_chaine'];
 
-$etat=true;
+$date_created = date("Y-m-d  H:i:s");
+
+$etat = true;
 
 
 /* * ************************************************************************************************************ */
@@ -32,7 +35,7 @@ if (!empty($_POST['add_fiche_radio'])) {
 
     try {
 
-        $sql = " INSERT INTO  ListeRadioWeb (nom_radio,affiche,pays,theme,activation,url,date_created) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7)";
+        $sql = " INSERT INTO  ListeRadioWeb (nom_radio,affiche,pays,theme,activation,url,date_created,langage) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -47,15 +50,12 @@ if (!empty($_POST['add_fiche_radio'])) {
         $stmt->bindParam(':param5', $activation);
 
         $stmt->bindParam(':param6', $url);
-        
+
         $stmt->bindParam(':param7', $date_created);
 
+        $stmt->bindParam(':param8', $langage);
+
         $stmt->execute();
-
-
-
-
-
     } catch (Exception $e) {
 
         echo $e->getMessage();
@@ -68,7 +68,7 @@ if (!empty($_POST['add_fiche_radio'])) {
 
 /* * ********************************************************************************************** */
 
-if (!empty($_POST['update_chaine'])) {    
+if (!empty($_POST['update_chaine'])) {
 
 
     if (isset($_POST['id_chaine']) && !empty($_POST['id_chaine'])) {
@@ -83,7 +83,7 @@ if (!empty($_POST['update_chaine'])) {
 
     try {
 
-        $sql = " UPDATE  ListeRadioWeb   SET  nom_radio=:param1,affiche=:param2,pays=:param3,theme=:param4,activation=:param5,url=:param6   WHERE  id_radio=:param7";
+        $sql = " UPDATE  ListeRadioWeb   SET  nom_radio=:param1,affiche=:param2,pays=:param3,theme=:param4,activation=:param5,url=:param6,langage=:param8   WHERE  id_radio=:param7";
 
         $stmt = $cxn->prepare($sql);
 
@@ -96,23 +96,22 @@ if (!empty($_POST['update_chaine'])) {
         $stmt->bindParam(':param4', $theme_chaine);
 
         $stmt->bindParam(':param5', $activation);
-        
+
         $stmt->bindParam(':param6', $url);
-        
+
         $stmt->bindParam(':param7', $id_fichier);
 
+        $stmt->bindParam(':param8', $langage);
+
         $stmt->execute();
-        
     } catch (Exception $e) {
-        
+
         echo $e->getMessage();
 
         $etat = FALSE;
 
         $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
     }
-
-  
 }
 
 if (!empty($_POST['button_delete'])) {
@@ -134,8 +133,8 @@ if (!empty($_POST['button_delete'])) {
 
             $stmt->execute();
         } catch (Exception $e) {
-            
-           echo $e->getMessage();
+
+            echo $e->getMessage();
 
             $etat = FALSE;
 
@@ -150,7 +149,6 @@ if (!empty($_POST['button_delete'])) {
 if ($etat) {
 
     $url = $url_espace_admin . "/index.php?module=RadioWeb&action=all_radio&message=success";
-    
 } else {
 
     $url = $url_espace_admin . "/index.php?module=RadioWeb&action=all_radio=echec";
