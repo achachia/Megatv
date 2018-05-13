@@ -65,7 +65,7 @@ function ListeChainesIptv() {
 
             $filename = $dir . '/' . $enregistrement['nom_chaine'] . '.png';
 
-            $liste[$i]['icone_chaine'] = $root_web . $enregistrement['logo'] . '.png';
+            $liste[$i]['icone_chaine'] = $root_web . $enregistrement['logo'];
             
             $i++;
         }
