@@ -7,10 +7,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     $host = 'http://localhost/MegacoursProcedural';
 } else {
 
-    $dns = 'mysql:host=localhost;dbname=megatv_ip';
-    $user = 'achachia';
-    $password = '7130chachia';
-    $host = 'http://' . $_SERVER['SERVER_NAME'];
+
 }
 
 
