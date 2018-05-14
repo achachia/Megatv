@@ -20,13 +20,13 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
         $dns = 'mysql:host=localhost:3307;dbname=megatv_vod';
     }
 
-    $user = 'achachia';
+    $user = '';
 
-    $password = '7130chachia';
+    $password = '';
 
     $host = 'http://' . $_SERVER['SERVER_NAME'];
 
-    $root_projet = '/volume1/web/Megacours/MegacoursProcedural';
+    $root_projet = '';
 }
 
 // Constantes a definir .Chemins à utiliser pour accéder aux vues/controleur/fonctions
@@ -48,7 +48,7 @@ define('chemin_controleur', '/controleurs/');
 
 define('Directory_web', 'gestion-admin');
 
-define('Host', "http://megatv.ovh");
+define('Host', "");
 
 define('Separator', DIRECTORY_SEPARATOR);
 
@@ -76,5 +76,5 @@ try {
 
     die();
 }
-$toto='fff';
+
 ?>
