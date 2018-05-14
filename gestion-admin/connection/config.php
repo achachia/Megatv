@@ -12,21 +12,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     $root_projet = 'C:\wamp64\www\MegacoursProcedural';
 } else {
  
-    if ($_GET['module'] == 'Iptv') {
 
-        $dns = 'mysql:host=localhost:3307;dbname=megatv_ip';
-    } else {
-
-        $dns = 'mysql:host=localhost:3307;dbname=megatv_vod';
-    }
-
-    $user = '';
-
-    $password = '';
-
-    $host = 'http://' . $_SERVER['SERVER_NAME'];
-
-    $root_projet = '';
 }
 
 // Constantes a definir .Chemins à utiliser pour accéder aux vues/controleur/fonctions
