@@ -12,7 +12,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     $root_projet = 'C:\wamp64\www\MegacoursProcedural';
 } else {
 
-
+toto
    
 }
 
