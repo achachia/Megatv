@@ -1,5 +1,5 @@
 <?php
-
+$toto='';
 require_once 'connection/config.php';
 require_once 'espace_client/modele/modele.php';
 
