@@ -1,52 +1,45 @@
 ﻿<?php
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-    $dns = 'mysql:host=localhost;dbname=megatv_vod';
+    $dns = 'mysql:host=localhost;dbname=megatv_ip';
 
     $user = 'root';
 
     $password = '';
 
-    $host = 'http://localhost/MegatvProcedural';
-
-    $root_projet = 'C:\wamp64\www\MegacoursProcedural';
+    $host = 'http://localhost/MegaTV-Backend';
+    
+    $root_projet = 'C:\wamp64\www\MegaTV-Backend';
 } else {
- 
 
+    $dns = 'mysql:host=localhost:3307;dbname=megatv_ip';
+
+    $user = 'achachia';
+
+    $password = '7130chachia';
+
+    $host = 'http://' . $_SERVER['SERVER_NAME'];
+    
+    $root_projet = '/volume1/web/Megacours/MegacoursProcedural';
 }
-
-// Constantes a definir .Chemins à utiliser pour accéder aux vues/controleur/fonctions
 
 $url_espace_client=$host.'/espace_client';
 
-
-define('root_web', getcwd());
-
-define('chemin_global', '/global/');
-
 define('chemin_vue', '/vues/');
 
-define('chemin_modele', '/modeles/');
+define('chemin_modele', '/modele/');
 
 define('chemin_controleur', '/controleurs/');
 
-/* * ******************************************** */
+define('dir_media', 'http://megatv.fr/media');
 
-define('Directory_web', 'gestion-admin');
+define('dir_vues', '/vues/');
 
-define('Host', "");
+define('dir_modele', '/modele/');
 
-define('Separator', DIRECTORY_SEPARATOR);
+define('dir_controleur', '/controleurs/');
 
-
-
-
-
-
-
-
-
-/* * **************************************** */
+define('root_web', getcwd());
 
 $options = array(
     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
@@ -62,5 +55,4 @@ try {
 
     die();
 }
-
 ?>

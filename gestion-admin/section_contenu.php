@@ -146,9 +146,10 @@
 
 
 
-        </section>
+        </section>       
+     
 
-        <?php require dirname(__FILE__) . chemin_controleur . $module . "/" . $action . ".php"; ?>
+        <?php  require dirname(__FILE__) . chemin_controleur . $module . "/" . $action . ".php"; ?>
 
         <!-- END panel-->
     </section>

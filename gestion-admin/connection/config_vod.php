@@ -11,9 +11,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
     $password = '';
 
-    $host = 'http://localhost/MegatvProcedural';
+    $host = 'http://localhost/MegaTV-Backend';
 
-    $root_projet = 'C:\wamp64\www\MegacoursProcedural';
+    $root_projet = 'C:\wamp64\www\MegaTV-Backend';
 
     //$environnement='DEBUG';
 
@@ -42,7 +42,7 @@ define('chemin_controleur', '/controleurs/');
 
 define('Directory_web', 'gestion-admin');
 
-define('Host', "");
+define('Host', $host);
 
 define('Separator', DIRECTORY_SEPARATOR);
 
