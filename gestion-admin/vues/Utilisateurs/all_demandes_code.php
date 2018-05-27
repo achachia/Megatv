@@ -212,4 +212,95 @@ if (isset($liste_demandes_attente) && sizeof($liste_demandes_attente) > 0) {
 }
 ?>
 
+<?php
+   $hn      = 'localhost';
+   $un      = 'root';
+   $pwd     = '';
+   $db      = 'megatv_vod';
+   $cs      = 'utf8';
+
+   // Set up the PDO parameters
+   $dsn 	= "mysql:host=" . $hn . ";dbname=" . $db . ";charset=" . $cs;
+   
+   $opt 	= array(
+                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+                        PDO::ATTR_EMULATE_PREPARES   => false,
+                       );
+   // Create a PDO instance (connect to the database)
+   $pdo 	= new PDO($dsn, $un, $pwd, $opt);
+   
+   $id_device='1a25';
+   $plate_form='android';
+   $code_activation='415755';
+   
+   
+   $date_start = date("Y-m-d  H:i:s");
+   $periode='+7 days';
+   
+   $periode='+2 week';
+   
+   $periode='+1 month';
+   
+   $periode='+1 year';
+     
+   $date_end = date("Y-m-d  H:i:s", strtotime($date_start." $periode"));
+   
+   echo $date_end;
+
+try {
+
+    $sql = " SELECT   id_code,date_start,date_end  FROM  CodesMegaTv  WHERE  id_device='" . $id_device . "'  AND  plate_form='" . $plate_form . "'   AND  code_activation='" . $code_activation . "' ";
+
+
+    $select = $pdo->query($sql);
+
+    $nb = $select->rowCount();    
+   
+
+    if ($nb > 0) {
+        
+       
+
+        $enregistrement = $select->fetch();
+        
+        var_dump($enregistrement['date_start']);
+
+        if ($enregistrement['date_start'] == '' && $enregistrement['date_end'] == '') {
+
+            echo $nb;
+
+            /*             * **************** Mettre a jour lenregistrement ******************* */
+
+            $id_code = $enregistrement['id_code'];
+
+            $date_start = date("Y-m-d  H:i:s");
+
+            $date_end = $sql1 = " UPDATE  CodesMegaTv  SET  date_start='" . $date_start . "',date_end='" . $date_end . "'  WHERE  id_code='" . $id_code . "' ";
+
+
+            $select = $pdo->query($sql);
+        }
+
+        /*         * ************************** Recuperation des informations ******************************** */
+
+        $sql2 = " SELECT  token_device AS token,code_iptv,plate_form FROM  CodesMegaTv  WHERE  id_device='" . $id_device . "'  AND  plate_form='" . $plate_form . "'  AND date_start<='" . $date_connection . "'  AND date_end>='" . $date_connection . "' ";
+
+        try {
+            $stmt = $pdo->query($sql2);
+
+            $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+            $data = $row;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+?>
+
+
+
 

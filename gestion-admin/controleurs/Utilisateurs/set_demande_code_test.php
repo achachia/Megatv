@@ -35,7 +35,7 @@ function sendmailbymailgun ($to, $toname, $mailfromnane, $mailfrom, $subject, $h
     return $results;
 }
 
-sendmailbymailgun('expediteur@yopmail','expediteur@yopmail','nom_expediteur','achachia2003@yahoo.fr','test_email','<p>test</p>','test','toto','achachia2003@yahoo.fr');
+sendmailbymailgun('achachia2003@yahoo.fr','abdel','test@yopmail.com','test@yopmail.com','test_email','<p>test</p>','test','toto','achachia2003@yahoo.fr');
 
 $etat = TRUE;
 
