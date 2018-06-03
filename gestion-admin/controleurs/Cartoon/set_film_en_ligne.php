@@ -95,7 +95,7 @@ if (!empty($_POST['add_serveur'])) {
 
     try {
 
-        $sql = " INSERT INTO  listefilmsstreamingenligne (titre_originale,identifiant_streaming,date_upload,section,id_TMD,langage,url,id_serveur,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9)";
+         $sql = " INSERT INTO  FichierVod (titre_originale,identifiant_streaming,date_upload,section_fichier,id_TMD,langage,url,id_serveur,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9)";
 
         $stmt = $cxn->prepare($sql);
 

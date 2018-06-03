@@ -35,12 +35,12 @@ if (isset($_GET['id_serie']) && isset($_GET['nom_serie'])) {
 
 
 
-        $liste_episodes = liste_episodes_saison($id_serie, $nom_serie);
+        $liste_episodes = liste_episodes($id_serie, $nom_serie);
     } else {
 
         $nom_saison = $_GET['nom_saison'];
 
-        $liste_episodes = liste_episodes_saison($id_serie, $nom_serie, $nom_saison);
+        $liste_episodes = liste_episodes($id_serie, $nom_serie, $nom_saison);
     }
 
 

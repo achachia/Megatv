@@ -163,7 +163,7 @@
                         </div>
                     </div> 
                     <div class="form-group"  style="padding-top:1%">
-                        <label class="control-label col-lg-3 col-md-3 col-sm-4" for="logo" style="color:blue;font-size:16px">URL SERVEUR: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        <label class="control-label col-lg-3 col-md-3 col-sm-4" for="logo" style="color:blue;font-size:16px">LOGO SERVEUR: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                         <div class="col-sm-8">
 
                             <input type="text" class="form-control" id="logo_serveur"  name="logo_serveur"  placeholder="Entrer le logo de serveur">

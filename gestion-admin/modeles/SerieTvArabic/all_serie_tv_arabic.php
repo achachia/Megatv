@@ -203,7 +203,7 @@ function liste_saisons($id_serie, $nom_serie) {
     return $liste_saison;
 }
 
-function liste_episodes_saison($id_serie, $nom_serie, $nom_saison = NULL) {
+function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL) {
 
     global $cxn;
 
@@ -276,40 +276,38 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison = NULL) {
     try {
 
         $sql = " SELECT  EpisodesSerieTvEtrangere.id_episode,EpisodesSerieTvEtrangere.titre_originale,EpisodesSerieTvEtrangere.identifiant_streaming,ListeServeursVod.nom_serveur  "
-            
                 . " FROM  EpisodesSerieTvEtrangere,ListeServeursVod "
-          
                 . "  WHERE  EpisodesSerieTvEtrangere.id_serveur=ListeServeursVod.id_serveur "
-   
-                . "  AND EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'   ORDER BY EpisodesSerieTvEtrangere.id_episode DESC";      
-  
+                . "  AND EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'   ORDER BY EpisodesSerieTvEtrangere.id_episode DESC";
 
 
 
-        $select = $cxn->query($sql);
 
-        $nb = $select->rowCount();
+        $resultat = $cxn->query($sql);
 
+        $j = 0;
 
-        $enregistrement = $select->fetch();
+        while ($enregistrement = $resultat->fetch()) {
 
+            $liste_episodes_enregistre[$j]['id_episode'] = $enregistrement['id_episode'];
 
-        $liste_episodes_enregistre[$j]['id_episode'] = $enregistrement['id_episode'];
+            $liste_episodes_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
 
-        $liste_episodes_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
+            $liste_episodes_enregistre[$j]['identifiant_streaming'] = $enregistrement['identifiant_streaming'];
 
-        $liste_episodes_enregistre[$j]['identifiant_streaming'] = $enregistrement['identifiant_streaming'];
-        
-        $liste_episodes_enregistre[$j]['nom_serveur'] = $enregistrement['nom_serveur'];
+            $liste_episodes_enregistre[$j]['nom_serveur'] = $enregistrement['nom_serveur'];
 
-        // $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+            // $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+
+            $j++;
+        }
     } catch (Exception $e2) {
 
         echo $e2->getMessage();
     }
 
-    /*     * *************************************************************************** */   
-    
+    /*     * *************************************************************************** */
+
 
 
     $liste_episodes['episodes_enregistre'] = $liste_episodes_enregistre;

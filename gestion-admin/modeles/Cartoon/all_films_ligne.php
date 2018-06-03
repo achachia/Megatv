@@ -14,12 +14,12 @@ function liste_films_en_ligne() {
 
     try {
 
-        $sql = " SELECT  ListeFilmsStreamingEnLigne.titre_originale,ListeFilmsStreamingEnLigne.id_film,ListeFilmsStreamingEnLigne.identifiant_streaming,ListeFilmsStreamingEnLigne.date_upload,ListeFilmsStreamingEnLigne.section,ListeFilmsStreamingEnLigne.id_TMD,"
-                . "ListeFilmsStreamingEnLigne.genre,ListeFilmsStreamingEnLigne.langage,ListeFilmsStreamingEnLigne.url,ListeFilmsStreamingEnLigne.id_serveur,ListeFilmsStreamingEnLigne.activation,"
+        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_film,FichierVod.identifiant_streaming,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
+                . "FichierVod.genre,FichierVod.langage,FichierVod.url,FichierVod.id_serveur,ListeFilmsStreamingEnLigne.activation,"
                 . " ListeServeursVod.nom_serveur "
                 . "FROM  ListeFilmsStreamingEnLigne,ListeServeursVod "
                 . "WHERE ListeFilmsStreamingEnLigne.id_serveur=ListeServeursVod.id_serveur "
-                . " AND   ListeFilmsStreamingEnLigne.section=5  ";
+                . " AND   ListeFilmsStreamingEnLigne.section_fichier=5  ";
 
         
       
@@ -29,7 +29,7 @@ function liste_films_en_ligne() {
         while ($enregistrement = $resultat->fetch()) {
 
 
-            $liste[$i]['id_fichier'] = $enregistrement['id_film'];
+            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
 
             $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
 
