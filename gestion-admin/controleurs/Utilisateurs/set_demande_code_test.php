@@ -92,7 +92,7 @@ if (!empty($_POST['id_demande'])) {
 
     try {
 
-        $sql = " INSERT INTO  CodesMegaTv  (code_activation,token_device,id_device,plate_form,date_created,type_code,staut_code,Type_periode)  VALUES ('" . $code_test . "','" . $code_token . "','" . $id_device . "','" . $platforme . "','" . $date_created . "','1','4','" . $periode_test . "') ";
+        $sql = " INSERT INTO  CodesMegaTv  (code_activation,token_device,id_device,plate_form,date_created,type_code,Type_periode)  VALUES ('" . $code_test . "','" . $code_token . "','" . $id_device . "','" . $platforme . "','" . $date_created . "','1','" . $periode_test . "') ";
 
         $stmt = $cxn->prepare($sql);
 

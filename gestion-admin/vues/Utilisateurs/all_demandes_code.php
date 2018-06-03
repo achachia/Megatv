@@ -59,34 +59,31 @@
                         <tbody>
 
                             <?php
-                            if (isset($liste_demandes_attente)) {
+                            $tr = '';
+                            $j = 1;
 
-                                $tr = '';
-                                $j = 1;
+                            foreach ($liste_demandes_attente as $value1) {
 
-                                foreach ($liste_demandes_attente as $value1) {
+                                $tr .= '<tr>';
 
-                                    $tr .= '<tr>';
+                                $tr .= '<td>' . $value1 ['id_device'] . '</td>';
 
-                                    $tr .= '<td>' . $value1 ['id_device'] . '</td>';
+                                $tr .= '<td>' . $value1 ['email'] . '</td>';
 
-                                    $tr .= '<td>' . $value1 ['email'] . '</td>';
+                                $tr .= '<td>' . $value1 ['platforme'] . '</td>';
 
-                                    $tr .= '<td>' . $value1 ['platforme'] . '</td>';
-
-                                    $tr .= '<td>' . $value1 ['date_demande'] . '</td>';
+                                $tr .= '<td>' . $value1 ['date_demande'] . '</td>';
 
 
-                                    $tr .= '<td><button data-toggle="modal" data-target="#myModal_add_code_test_' . $j . '"  class="btn btn-primary btn-lg"  > CRERER UN CODE TEST </button></td>';
+                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_add_code_test_' . $j . '"  class="btn btn-primary btn-lg"  > CRERER UN CODE TEST </button></td>';
 
 
-                                    $tr .= '</tr>';
+                                $tr .= '</tr>';
 
-                                    $j++;
-                                }
-
-                                echo $tr;
+                                $j++;
                             }
+
+                            echo $tr;
                             ?>
 
 
@@ -127,7 +124,7 @@
         </div>
 
     </div>
-<?php }  ?>
+<?php } ?>
 <?php
 if (isset($liste_demandes_attente) && sizeof($liste_demandes_attente) > 0) {
 
@@ -180,7 +177,7 @@ if (isset($liste_demandes_attente) && sizeof($liste_demandes_attente) > 0) {
 
 
                                             $tr.="<option value='" . $value3['id_periode'] . "' ";
-                                            
+
                                             $tr.= ">" . $value3['nom_periode'] . "</option>";
                                         }
 
@@ -211,95 +208,135 @@ if (isset($liste_demandes_attente) && sizeof($liste_demandes_attente) > 0) {
     }
 }
 ?>
+<?php if (isset($liste_codes_test_valides) && sizeof($liste_codes_test_valides) > 0) { ?>
+    <div class="row">
 
-<?php
-   $hn      = 'localhost';
-   $un      = 'root';
-   $pwd     = '';
-   $db      = 'megatv_vod';
-   $cs      = 'utf8';
+        <div class="col-lg-12">
 
-   // Set up the PDO parameters
-   $dsn 	= "mysql:host=" . $hn . ";dbname=" . $db . ";charset=" . $cs;
-   
-   $opt 	= array(
-                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-                        PDO::ATTR_EMULATE_PREPARES   => false,
-                       );
-   // Create a PDO instance (connect to the database)
-   $pdo 	= new PDO($dsn, $un, $pwd, $opt);
-   
-   $id_device='1a25';
-   $plate_form='android';
-   $code_activation='415755';
-   
-   
-   $date_start = date("Y-m-d  H:i:s");
-   $periode='+7 days';
-   
-   $periode='+2 week';
-   
-   $periode='+1 month';
-   
-   $periode='+1 year';
-     
-   $date_end = date("Y-m-d  H:i:s", strtotime($date_start." $periode"));
-   
-   echo $date_end;
+            <div class="panel panel-primary">
 
-try {
+                <div class="panel-heading">LISTES DES CODES TEST VALIDES</div>
 
-    $sql = " SELECT   id_code,date_start,date_end  FROM  CodesMegaTv  WHERE  id_device='" . $id_device . "'  AND  plate_form='" . $plate_form . "'   AND  code_activation='" . $code_activation . "' ";
+                <div class="panel-body">
 
 
-    $select = $pdo->query($sql);
+                    <table  id="liste_codes_test_valides" name="liste_codes_test_valides" class="table table-striped table-hover">
 
-    $nb = $select->rowCount();    
-   
+                        <thead>
 
-    if ($nb > 0) {
-        
-       
+                            <tr>
 
-        $enregistrement = $select->fetch();
-        
-        var_dump($enregistrement['date_start']);
+                                <th>DATE DEMANDE</th>
 
-        if ($enregistrement['date_start'] == '' && $enregistrement['date_end'] == '') {
+                                <th>EMAIL</th>
 
-            echo $nb;
+                                <th>CODE ACTIVATION</th>
 
-            /*             * **************** Mettre a jour lenregistrement ******************* */
+                                <th>ID-DEVICE</th>
 
-            $id_code = $enregistrement['id_code'];
+                                <th>DATE START</th>
 
-            $date_start = date("Y-m-d  H:i:s");
+                                <th>DATE END</th>   
+                                
+                                <th>Expiration</th>
 
-            $date_end = $sql1 = " UPDATE  CodesMegaTv  SET  date_start='" . $date_start . "',date_end='" . $date_end . "'  WHERE  id_code='" . $id_code . "' ";
+                                <th class="sort-alpha">ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <?php
+                            $tr = '';
+                            $j = 1;
+
+                            foreach ($liste_codes_test_valides as $value2) {
+
+                                $tr .= '<tr>';
+
+                                $tr .= '<td>' . $value2 ['date_demande'] . '</td>';
+
+                                $tr .= '<td>' . $value2 ['email'] . '</td>';
+
+                                $tr .= '<td>' . $value2 ['code_activation'] . '</td>';
+
+                                $tr .= '<td>' . $value2 ['id_device'] . '</td>';
+
+                                $tr .= '<td>' . $value2 ['date_start'] . '</td>';
+
+                                $tr .= '<td>' . $value2 ['date_end'] . '</td>';
+                                
+                                 $tr .= '<td>' . $value2 ['expiration_code'] . '</td>';
 
 
-            $select = $pdo->query($sql);
-        }
+                                $tr .= '<td></td>';
 
-        /*         * ************************** Recuperation des informations ******************************** */
 
-        $sql2 = " SELECT  token_device AS token,code_iptv,plate_form FROM  CodesMegaTv  WHERE  id_device='" . $id_device . "'  AND  plate_form='" . $plate_form . "'  AND date_start<='" . $date_connection . "'  AND date_end>='" . $date_connection . "' ";
+                                $tr .= '</tr>';
 
-        try {
-            $stmt = $pdo->query($sql2);
+                                $j++;
+                            }
 
-            $row = $stmt->fetch(PDO::FETCH_OBJ);
+                            echo $tr;
+                            ?>
 
-            $data = $row;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-} catch (Exception $e) {
-    echo $e->getMessage();
-}
-?>
+
+
+                        </tbody>
+
+                        <tfoot>
+
+                            <tr>
+
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter date demande" class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter email" class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter code activation " class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter id device " class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter date start " class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                                <th>
+
+                                    <input type="text" name="filter_browser" placeholder="Filter date end " class="form-control input-sm datatable_input_col_search">
+
+                                </th>
+                            </tr>
+
+                        </tfoot>
+
+
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<?php } ?>
+
 
 
 

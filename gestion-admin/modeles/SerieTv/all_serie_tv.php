@@ -7,7 +7,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:/wamp64/www/MegatvProcedural/Media-Vod/Serie-Tv/" . $nom_serie . "/" . $nom_saison;
+        $dir = "C:/wamp64/www/MegaTV-Backend/Media-Vod/Serie-Tv/" . $nom_serie . "/" . $nom_saison;
     } else {
 
         $dir = "/volume1/web/media/Serie-Tv/" . $nom_serie . "/" . $nom_saison;
@@ -31,7 +31,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
             try {
 
-                $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ";
+                $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ORDER BY id_episode DESC";
 
 
 
@@ -92,7 +92,7 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:/wamp64/www/MegatvProcedural/Media-Vod/Serie-Tv/" . $nom_serie;
+        $dir = "C:/wamp64/www/MegaTV-Backend/Media-Vod/Serie-Tv/" . $nom_serie;
     } else {
 
         $dir = "/volume1/web/media/Serie-Tv/" . $nom_serie;
@@ -117,7 +117,7 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
                 try {
 
-                    $sql = " SELECT  id_saison,nom_saison,date_created,id_serie,Num_saison   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ";
+                    $sql = " SELECT  id_saison,nom_saison,date_created,id_serie,Num_saison   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ORDER BY id_saison DESC ";
 
                     $select = $cxn->query($sql);
 
@@ -171,7 +171,7 @@ function liste_serie($mod) {
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:\wamp64\www\MegatvProcedural\Media-Vod\Serie-Tv";
+        $dir = "C:\wamp64\www\MegaTV-Backend\Media-Vod\Serie-Tv";
     } else {
 
         $dir = "/volume1/web/media/Serie-Tv";
@@ -193,7 +193,7 @@ function liste_serie($mod) {
 
                 try {
 
-                    $sql = " SELECT  id_serie,nom_serie,id_TMD,date_created    FROM  SerieTvFr   WHERE  nom_serie='" . $value . "' ";
+                    $sql = " SELECT  id_serie,nom_serie,id_TMD,date_created    FROM  SerieTvFr   WHERE  nom_serie='" . $value . "' ORDER BY id_serie DESC ";
 
                     $select = $cxn->query($sql);
 
@@ -268,7 +268,7 @@ function liste_fichiers($serie) {
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:/wamp64/www/MegatvProcedural/Media-Vod/Serie-Tv/".$serie;
+        $dir = "C:/wamp64/www/MegaTV-Backend/Media-Vod/Serie-Tv/".$serie;
     } else {
 
         $dir = "/volume1/web/media/Serie-Tv/".$serie;
