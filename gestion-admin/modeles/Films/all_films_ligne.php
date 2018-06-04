@@ -14,12 +14,14 @@ function liste_films_en_ligne() {
 
     try {
 
-        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_film,FichierVod.identifiant_streaming,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
-                . "FichierVod.genre,FichierVod.langage,FichierVod.url,FichierVod.id_serveur,ListeFilmsStreamingEnLigne.activation,"
+        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_fichier,FichierVod.identifiant_streaming,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
+                . "FichierVod.genre,FichierVod.langage,FichierVod.url,FichierVod.id_serveur,FichierVod.activation,"
                 . " ListeServeursVod.nom_serveur "
-                . "FROM  ListeFilmsStreamingEnLigne,ListeServeursVod "
-                . "WHERE ListeFilmsStreamingEnLigne.id_serveur=ListeServeursVod.id_serveur "
-                . " AND   ListeFilmsStreamingEnLigne.section_fichier=8  ";
+                . "FROM  FichierVod,ListeServeursVod "
+                . "WHERE FichierVod.id_serveur=ListeServeursVod.id_serveur "
+                . " AND   FichierVod.section_fichier=8  ";
+        
+      
 
 
 

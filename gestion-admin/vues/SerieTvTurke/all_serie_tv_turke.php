@@ -35,7 +35,7 @@
 
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 
-                Enregistrer une nouvelle serie arabe
+                Enregistrer une nouvelle serie turke
 
             </button>  
 
@@ -53,7 +53,7 @@
 
             <div class="panel panel-primary">
 
-                <div class="panel-heading">LISTES DES SERIES TV ARABE NON ENREGISTRE</div>
+                <div class="panel-heading">LISTES DES SERIES TV TURKE NON ENREGISTRE</div>
 
                 <div class="panel-body">
 
@@ -121,7 +121,7 @@
 
             <div class="panel panel-primary">
 
-                <div class="panel-heading">LISTES DES SERIES TV ARABE  ENREGISTRE</div>
+                <div class="panel-heading">LISTES DES SERIES TV TURKE  ENREGISTRE</div>
 
                 <div class="panel-body">
 
@@ -517,7 +517,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
         <div id="myModal_serie_non_enregistre_<?= $j; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="form-horizontal" id="form1_add_serie_<?= $j; ?>" name="form1_add_serie_<?= $j; ?>" method="POST"  enctype="multipart/form-data"  action="./controleurs/SerieTvArabic/set_serie_tv.php">
+                    <form class="form-horizontal" id="form1_add_serie_<?= $j; ?>" name="form1_add_serie_<?= $j; ?>" method="POST"  enctype="multipart/form-data"  action="./controleurs/SerieTvTurke/set_serie_tv.php">
                         <div class="modal-header">
                             <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une serie TV</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
@@ -597,7 +597,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
 <div id="myModal_add_serie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" id="form1_add_serie" name="form1_add_serie" method="POST"  enctype="multipart/form-data"  action="./controleurs/SerieTvArabic/set_serie_tv.php">
+            <form class="form-horizontal" id="form1_add_serie" name="form1_add_serie" method="POST"  enctype="multipart/form-data"  action="./controleurs/SerieTvTurke/set_serie_tv.php">
                 <div class="modal-header">
                     <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une serie TV</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
@@ -676,7 +676,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
     <div id="myModal_add_saison" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="form-horizontal" id="form1_add_saison" name="form1_add_saison" method="POST" action="./controleurs/SerieTvArabic/set_saison_serie_tv.php">
+                <form class="form-horizontal" id="form1_add_saison" name="form1_add_saison" method="POST" action="./controleurs/SerieTvTurke/set_saison_serie_tv.php">
                     <div class="modal-header">
                         <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une saison [<?= $_GET['nom_serie']; ?>]</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
@@ -717,7 +717,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
     <div id="myModal_add_episode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="form-horizontal" id="form1_add_episode" name="form1_add_episode" method="POST" action="./controleurs/SerieTvArabic/set_episode_serie_tv.php">
+                <form class="form-horizontal" id="form1_add_episode" name="form1_add_episode" method="POST" action="./controleurs/SerieTvTurke/set_episode_serie_tv.php">
                     <div class="modal-header">
 
                         <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer un episode [<?= $_GET['nom_serie']; ?>]<?php if (!empty($_GET['nom_saison'])) {
