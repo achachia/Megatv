@@ -19,7 +19,7 @@ function liste_films_en_ligne() {
                 . " ListeServeursVod.nom_serveur "
                 . "FROM  FichierVod,ListeServeursVod "
                 . "WHERE FichierVod.id_serveur=ListeServeursVod.id_serveur "
-                . " AND   FichierVod.section_fichier=8  ";
+                . " AND   FichierVod.section_fichier=2  ";
         
       
 
