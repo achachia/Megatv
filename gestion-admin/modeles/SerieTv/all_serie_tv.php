@@ -92,7 +92,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
     }
 }
 
-function insert_episode($id_episode, $nom_fichier, $dir_episode) {
+function update_episode($id_episode, $nom_fichier, $dir_episode) {
 
     global $cxn;
 
@@ -104,11 +104,12 @@ function insert_episode($id_episode, $nom_fichier, $dir_episode) {
 
     try {
 
-        $sql = " INSERT INTO  LinksServersEpisodesSeriesTvFr  (id_fichier,id_serveur,url,date_created) VALUES ('" . $id_episode . "','" . $id_serveur . "','" . $url . "','" . $date_created . "') ";
+        $sql = " UPDATE  LinksServersEpisodesSeriesTvFr  SET   nom_fichier='" . $nom_fichier . "'  WHERE  id_fichier='" . $id_episode . "' ";
 
         $resultat = $cxn->prepare($sql);
 
         $resultat->execute();
+        
     } catch (Exception $e) {
 
         echo $e->getMessage();
