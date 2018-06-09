@@ -64,7 +64,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
                     /*                     * ************************************************************** */
 
-                    insert_episode($enregistrement['id_episode'], $enregistrement['nom_fichier'], "/Serie-Tv/" . $nom_serie . "/" . $nom_saison);
+                    update_episode($enregistrement['id_episode'], $enregistrement['nom_fichier'], "/Serie-Tv/" . $nom_serie . "/" . $nom_saison);
 
                     /*                     * ***************************************************************** */
                 }
