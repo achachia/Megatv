@@ -61,6 +61,12 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
                     $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
 
                     $liste_episodes_saison_enregistre[$j]['Num_episode'] = $enregistrement['Num_episode'];
+
+                    /*                     * ************************************************************** */
+
+                    insert_episode($enregistrement['id_episode'], $enregistrement['nom_fichier'], "/Serie-Tv/" . $nom_serie . "/" . $nom_saison);
+
+                    /*                     * ***************************************************************** */
                 }
             } catch (Exception $e) {
 
@@ -83,6 +89,29 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
     if ($mod == 'non_enregistre') {
 
         return $liste_episodes_saison_non_enregistre;
+    }
+}
+
+function insert_episode($id_episode, $nom_fichier, $dir_episode) {
+
+    global $cxn;
+
+    $date_created = date("Y-m-d");
+
+    $url = 'http://megatvmedia.ddns.net' . $dir_episode . '/' . $nom_fichier;
+
+    $id_serveur = 2;
+
+    try {
+
+        $sql = " INSERT INTO  LinksServersEpisodesSeriesTvFr  (id_fichier,id_serveur,url,date_created) VALUES ('" . $id_episode . "','" . $id_serveur . "','" . $url . "','" . $date_created . "') ";
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
     }
 }
 
@@ -214,22 +243,19 @@ function liste_serie($mod) {
                         $liste_serie_enregistre[$j]['id_TMD'] = $enregistrement['id_TMD'];
 
                         $liste_serie_enregistre[$j]['date_created'] = $enregistrement['date_created'];
-                        
-                        /************************** Progression d'enregistrement ***************************************/
-                        
-                       $nbr=liste_fichiers($enregistrement['nom_serie']);
-                       
-                       $pourcentage=$nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
-                       
-                      $liste_serie_enregistre[$j]['progression']=  intval($pourcentage);                
-                  
-                       
-                     //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
-                        
-                        /*******************************************************************/
-                        
-                        
-                        
+
+                        /*                         * ************************ Progression d'enregistrement ************************************** */
+
+                        $nbr = liste_fichiers($enregistrement['nom_serie']);
+
+                        $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
+
+                        $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
+
+
+                        //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
+
+                        /*                         * **************************************************************** */
                     }
                 } catch (Exception $e) {
 
@@ -268,10 +294,10 @@ function liste_fichiers($serie) {
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
-        $dir = "C:/wamp64/www/MegaTV-Backend/Media-Vod/Serie-Tv/".$serie;
+        $dir = "C:/wamp64/www/MegaTV-Backend/Media-Vod/Serie-Tv/" . $serie;
     } else {
 
-        $dir = "/volume1/web/media/Serie-Tv/".$serie;
+        $dir = "/volume1/web/media/Serie-Tv/" . $serie;
     }
 
 
@@ -280,43 +306,43 @@ function liste_fichiers($serie) {
     $j = 1;
 
 
-        foreach ($result  as $saison => $value) {
+    foreach ($result as $saison => $value) {
 
 
 
-            foreach ($value as $num_episode => $nom_episode) {
+        foreach ($value as $num_episode => $nom_episode) {
 
-                $filename = $dir  . '/' . $saison . '/' . $nom_episode;
+            $filename = $dir . '/' . $saison . '/' . $nom_episode;
 
-                $nbr_fichiers++;
-                
-                
-                try {
+            $nbr_fichiers++;
 
-                    $sql = " SELECT id_episode   FROM  EpisodesSerieTvFr  WHERE  nom_fichier='" . $nom_episode . "' ";
 
-                    $select = $cxn->query($sql);
+            try {
 
-                    $nb = $select->rowCount();
+                $sql = " SELECT id_episode   FROM  EpisodesSerieTvFr  WHERE  nom_fichier='" . $nom_episode . "' ";
 
-                    if ($nb <= 0) {
+                $select = $cxn->query($sql);
 
-                        $nbr_episode_non_enregistre++;
-                    } else {
+                $nb = $select->rowCount();
 
-                        $nbr_episode_enregistre++;
-                    }
-                } catch (Exception $e) {
+                if ($nb <= 0) {
 
-                    echo $e->getMessage();
+                    $nbr_episode_non_enregistre++;
+                } else {
+
+                    $nbr_episode_enregistre++;
                 }
+            } catch (Exception $e) {
 
-
-
-                $j++;
+                echo $e->getMessage();
             }
+
+
+
+            $j++;
         }
-  
+    }
+
 
     $nbr['nbr_total_fichier'] = $nbr_fichiers;
 
