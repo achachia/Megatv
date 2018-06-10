@@ -31,7 +31,10 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
             try {
 
-                $sql = " SELECT  id_episode,titre_originale,nom_fichier,date_created,id_saison,Num_episode  FROM  EpisodesSerieTvFr   WHERE   nom_fichier='" . $value . "' ORDER BY id_episode DESC";
+                $sql = " SELECT  EpisodesSerieTvFr.id_episode,EpisodesSerieTvFr.titre_originale,EpisodesSerieTvFr.date_created,EpisodesSerieTvFr.id_saison,EpisodesSerieTvFr.Num_episode ,LinksServersEpisodesSeriesTvFr.nom_fichier "
+                        . " FROM  EpisodesSerieTvFr,LinksServersEpisodesSeriesTvFr  "
+                        . "  WHERE  EpisodesSerieTvFr.id_episode=LinksServersEpisodesSeriesTvFr.id_fichier "
+                        . "AND LinksServersEpisodesSeriesTvFr.nom_fichier='" . $value . "' ORDER BY EpisodesSerieTvFr.id_episode DESC";
 
 
 
@@ -64,7 +67,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
                     /*                     * ************************************************************** */
 
-                  //  update_episode($enregistrement['id_episode'], $enregistrement['nom_fichier'], "/Serie-Tv/" . $nom_serie . "/" . $nom_saison);
+                 
 
                     /*                     * ***************************************************************** */
                 }
@@ -92,29 +95,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
     }
 }
 
-function update_episode($id_episode, $nom_fichier, $dir_episode) {
 
-    global $cxn;
-
-    $date_created = date("Y-m-d");
-
-    $url = 'http://megatvmedia.ddns.net' . $dir_episode . '/' . $nom_fichier;
-
-    $id_serveur = 2;
-
-    try {
-
-        $sql = " UPDATE  LinksServersEpisodesSeriesTvFr  SET   nom_fichier='" . $nom_fichier . "'  WHERE  id_fichier='" . $id_episode . "' ";
-
-        $resultat = $cxn->prepare($sql);
-
-        $resultat->execute();
-        
-    } catch (Exception $e) {
-
-        echo $e->getMessage();
-    }
-}
 
 function liste_saisons($id_serie, $nom_serie, $mod) {
 
@@ -247,11 +228,11 @@ function liste_serie($mod) {
 
                         /*                         * ************************ Progression d'enregistrement ************************************** */
 
-                        $nbr = liste_fichiers($enregistrement['nom_serie']);
+                       $nbr = liste_fichiers($enregistrement['nom_serie']);
 
-                        $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
+                       $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
 
-                        $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
+                       $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
 
 
                         //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
@@ -320,7 +301,7 @@ function liste_fichiers($serie) {
 
             try {
 
-                $sql = " SELECT id_episode   FROM  EpisodesSerieTvFr  WHERE  nom_fichier='" . $nom_episode . "' ";
+                $sql = " SELECT id_fichier   FROM  LinksServersEpisodesSeriesTvFr  WHERE  nom_fichier='" . $nom_episode . "' ";
 
                 $select = $cxn->query($sql);
 
@@ -353,6 +334,44 @@ function liste_fichiers($serie) {
 
     return $nbr;
 }
+function listeServeursVod() {
+
+    global $cxn;
+
+    $liste = array();
+
+    try {
+
+        $sql = " SELECT  id_serveur,url_serveur,emplacement,nom_serveur  FROM  ListeServeursVod   ";
+
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+
+        $i = 0;
+
+        while ($enregistrement = $resultat->fetch()) {
+
+            $liste[$i]['id_serveur'] = $enregistrement['id_serveur'];
+
+            $liste[$i]['url_serveur'] = $enregistrement['url_serveur'];
+
+            $liste[$i]['emplacement_serveur'] = $enregistrement['emplacement'];
+
+            $liste[$i]['nom_serveur'] = $enregistrement['nom_serveur'];
+
+
+            $i++;
+        }
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
+    }
+
+    return $liste;
+}
+
 ?>
 
 

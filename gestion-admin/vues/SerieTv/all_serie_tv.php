@@ -1,68 +1,68 @@
 <?php if (sizeof($liste_serie_non_enregistre) > 0) { ?>
-<div class="row">
+    <div class="row">
 
-    <div class="col-lg-12">
+        <div class="col-lg-12">
 
-        <div class="panel panel-primary">
+            <div class="panel panel-primary">
 
-            <div class="panel-heading">LISTES DES SERIES TV NON ENREGISTRE</div>
+                <div class="panel-heading">LISTES DES SERIES TV NON ENREGISTRE</div>
 
-            <div class="panel-body">
-
-
-                <table  id="liste_serie_non_enregistre" name="liste_serie_non_enregistre" class="table table-striped table-hover"> 
-
-                    <thead  style="background-color:#D8ECF7">
-
-                        <tr>                          
-
-                            <th>NOM SERIE</th>                            
-
-                            <th class="sort-alpha">ACTION</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <?php
-                        if (isset($liste_serie_non_enregistre)) {
-
-                            $tr = '';
-                            $j = 1;
-
-                            foreach ($liste_serie_non_enregistre as $value) {
-
-                                $tr .= '<tr>';
-
-                                $tr .= '<td>' . $value['nom_serie'] . '</td>';
-
-                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_serie_non_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > Enregistrer </button></td>';
+                <div class="panel-body">
 
 
-                                $tr .= '</tr>';
+                    <table  id="liste_serie_non_enregistre" name="liste_serie_non_enregistre" class="table table-striped table-hover"> 
 
-                                $j++;
+                        <thead  style="background-color:#D8ECF7">
+
+                            <tr>                          
+
+                                <th>NOM SERIE</th>                            
+
+                                <th class="sort-alpha">ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <?php
+                            if (isset($liste_serie_non_enregistre)) {
+
+                                $tr = '';
+                                $j = 1;
+
+                                foreach ($liste_serie_non_enregistre as $value) {
+
+                                    $tr .= '<tr>';
+
+                                    $tr .= '<td>' . $value['nom_serie'] . '</td>';
+
+                                    $tr .= '<td><button data-toggle="modal" data-target="#myModal_serie_non_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > Enregistrer </button></td>';
+
+
+                                    $tr .= '</tr>';
+
+                                    $j++;
+                                }
+
+                                echo $tr;
                             }
-
-                            echo $tr;
-                        }
-                        ?>
+                            ?>
 
 
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+
+                </div>
 
             </div>
 
         </div>
 
     </div>
-
-</div>
 <?php } ?>
 <!--------------------------------------------------------------------------------------------------------------->
 
@@ -85,7 +85,7 @@
                             <tr>                          
 
                                 <th>NOM SERIE</th> 
-                                
+
                                 <th>Progression</th>
 
                                 <th class="sort-alpha">ACTION</th>
@@ -107,10 +107,10 @@
                                     $tr .= '<tr>';
 
                                     $tr .= '<td style="text-align:center;padding-top:2%">' . $value['nom_serie'] . '</td>';
-                                    
-                                 //   $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
-                                    
-                                      $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
+
+                                    //   $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
+
+                                    $tr .= '<td><div data-label="' . $value['progression'] . '%" class="radial-bar radial-bar-' . $value['progression'] . '"></div></td>';
 
                                     $tr .= '<td style="text-align:left;padding-top:2%"><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg" style="margin:5px" > Editer </button>';
 
@@ -616,27 +616,62 @@ if (isset($liste_episodes_saison_non_enregistre) && sizeof($liste_episodes_saiso
                         <div class="modal-body">
 
                             <div class="form-group"  style="padding-top:1%">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="titre_originale_episode_<?= $j; ?>" style="color:blue;font-size:16px">Titre originale: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="titre_originale_episode_<?= $j; ?>" style="color:blue;font-size:16px">Titre originale: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="titre_originale"  name="titre_originale"   value="" >
 
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="Num_episode_<?= $j; ?>" style="color:blue;font-size:16px">Numero [Episode]: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="Num_episode_<?= $j; ?>" style="color:blue;font-size:16px">Numero [Episode]: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="Num_episode"  name="Num_episode"   value="" >
 
                                 </div>
                             </div>
 
                             <div class="form-group"  style="padding-top:1%">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="nom_fichier_<?= $j; ?>" style="color:blue;font-size:16px">Nom saison: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="nom_fichier_<?= $j; ?>" style="color:blue;font-size:16px">Nom saison: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="nom_fichier"  name="nom_fichier"   value="<?= $value['nom_episode']; ?>" >
 
                                 </div>
-                            </div>                    
+                            </div> 
+                            <div class="form-group"  style="padding-top:1%">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="serveur_<?= $j; ?>" style="color:blue;font-size:16px">SERVEUR: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" name="serveur_episode"  id="serveur_episode" >
+
+                                        <?php
+                                        $tr = '<option value="">Select-serveur</option>';
+
+                                        foreach ($liste_serveurs_vod as $serveur) {
+
+
+                                            $tr.="<option value='" . $serveur['id_serveur'] . "' ";
+
+                                            $tr.= ">" . $serveur['nom_serveur'] . '-' . $serveur['emplacement_serveur'] . "</option>";
+                                        }
+
+                                        echo $tr;
+                                        ?>
+
+                                    </select>
+
+                                </div>
+                            </div>
 
                             <input type="hidden" name="id_serie" value="<?= $_GET['id_serie']; ?>">
 

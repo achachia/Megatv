@@ -36,7 +36,7 @@ if (isset($_GET['id_serie']) && isset($_GET['nom_serie']) && isset($_GET['nom_sa
     //var_dump($liste_episodes_saison_non_enregistre);
 }
 
-
+$liste_serveurs_vod=listeServeursVod();
 
        
 
