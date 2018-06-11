@@ -18,7 +18,7 @@ function liste_films_en_ligne() {
                 . "FichierVod.genre,FichierVod.langage,FichierVod.activation "
                 . "FROM  FichierVod  WHERE FichierVod.section_fichier=5 ";
 
-
+          
 
         $resultat = $cxn->query($sql);
 
@@ -26,24 +26,7 @@ function liste_films_en_ligne() {
 
         while ($enregistrement = $resultat->fetch()) {
 
-            $id_fichier = $enregistrement['id_fichier'];
-
-            $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
-
-            $liste[$i]['date_upload'] = $enregistrement['date_upload'];
-
-            $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
-
-            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
-
-            /*             * ******************************************************* */
-
-            $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $enregistrement['id_TMD'] . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
-
-            // Décode le JSON
-            $json_data = json_decode($json_source);
-
-            $liste[$i]['poster_path'] = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' . $json_data->poster_path;
+             $id_fichier = $enregistrement['id_fichier'];
 
 
 
@@ -54,6 +37,8 @@ function liste_films_en_ligne() {
                 $sql1 = "  SELECT  LinksServersFichierVod.id_link,LinksServersFichierVod.identifiant_streaming,LinksServersFichierVod.url,LinksServersFichierVod.activation,LinksServersFichierVod.date_created,"
                         . " ListeServeursVod.nom_serveur "
                         . "    FROM  LinksServersFichierVod,ListeServeursVod   WHERE LinksServersFichierVod.id_serveur=ListeServeursVod.id_serveur   AND  LinksServersFichierVod.id_fichier='" . $id_fichier . "' ";
+                
+                
 
 
 
@@ -63,7 +48,7 @@ function liste_films_en_ligne() {
 
                 $nb = $select->rowCount();
 
-
+                
 
                 if ($nb > 0) {
 
@@ -72,6 +57,32 @@ function liste_films_en_ligne() {
                     while ($enregistrement1 = $select->fetch()) {
 
                         if ($enregistrement1['identifiant_streaming'] != '') {
+
+                            /*                             * ****************************************************************************** */
+
+                          
+
+                            $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
+
+                            $liste[$i]['date_upload'] = $enregistrement['date_upload'];
+
+                            $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
+
+                            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
+
+                            /*                             * ******************************************************* */
+
+                            $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $enregistrement['id_TMD'] . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
+
+                            // Décode le JSON
+                            $json_data = json_decode($json_source);
+
+                            $liste[$i]['poster_path'] = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' . $json_data->poster_path;
+
+
+                            /*                             * ******************************************************************************************* */
+
+
 
                             $liste[$i]['list_serveur'][$j]['id_link'] = $enregistrement1['id_link'];
 
@@ -82,21 +93,17 @@ function liste_films_en_ligne() {
                             $liste[$i]['list_serveur'][$j]['url'] = $enregistrement1['url'];
 
                             $liste[$i]['list_serveur'][$j]['date_created'] = $enregistrement1['date_created'];
-                            
-                            if($enregistrement1['activation']=='0'){
-                                
-                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-danger btn-md"  > Inactif </button>';
-                                
-                                
+
+                            if ($enregistrement1['activation'] == '0') {
+
+                                $liste[$i]['list_serveur'][$j]['activation'] = '<button    class="btn btn-danger btn-md"  > Inactif </button>';
                             }
-                             if($enregistrement1['activation']=='1'){
-                                
-                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-success btn-md"  > Actif </button>';
-                                
-                                
+                            if ($enregistrement1['activation'] == '1') {
+
+                                $liste[$i]['list_serveur'][$j]['activation'] = '<button    class="btn btn-success btn-md"  > Actif </button>';
                             }
 
-                          
+
 
 
 

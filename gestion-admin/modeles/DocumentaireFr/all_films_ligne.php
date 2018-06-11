@@ -25,29 +25,10 @@ function liste_films_en_ligne() {
 
 
         while ($enregistrement = $resultat->fetch()) {
-
-            $id_fichier = $enregistrement['id_fichier'];
-
-            $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
-
-            $liste[$i]['date_upload'] = $enregistrement['date_upload'];
-
-            $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
-
-            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
-
-            /*             * ******************************************************* */
-
-            $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $enregistrement['id_TMD'] . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
-
-            // Décode le JSON
-            $json_data = json_decode($json_source);
-
-            $liste[$i]['poster_path'] = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' . $json_data->poster_path;
+            
+             $id_fichier = $enregistrement['id_fichier'];
 
 
-
-            /*             * ********************************************************************* */
 
             try {
 
@@ -73,6 +54,30 @@ function liste_films_en_ligne() {
 
                         if ($enregistrement1['identifiant_streaming'] != '') {
 
+                            /*                             * ****************************************************************************** */
+
+                       
+
+                            $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
+
+                            $liste[$i]['date_upload'] = $enregistrement['date_upload'];
+
+                            $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
+
+                            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
+
+                            /*                             * ******************************************************* */
+
+                            $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $enregistrement['id_TMD'] . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
+
+                            // Décode le JSON
+                            $json_data = json_decode($json_source);
+
+                            $liste[$i]['poster_path'] = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' . $json_data->poster_path;
+
+
+                            /*                             * ******************************************************************************************* */
+
                             $liste[$i]['list_serveur'][$j]['id_link'] = $enregistrement1['id_link'];
 
                             $liste[$i]['list_serveur'][$j]['identifiant_streaming'] = $enregistrement1['identifiant_streaming'];
@@ -82,21 +87,17 @@ function liste_films_en_ligne() {
                             $liste[$i]['list_serveur'][$j]['url'] = $enregistrement1['url'];
 
                             $liste[$i]['list_serveur'][$j]['date_created'] = $enregistrement1['date_created'];
-                            
-                            if($enregistrement1['activation']=='0'){
-                                
-                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-danger btn-md"  > Inactif </button>';
-                                
-                                
+
+                            if ($enregistrement1['activation'] == '0') {
+
+                                $liste[$i]['list_serveur'][$j]['activation'] = '<button    class="btn btn-danger btn-md"  > Inactif </button>';
                             }
-                             if($enregistrement1['activation']=='1'){
-                                
-                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-success btn-md"  > Actif </button>';
-                                
-                                
+                            if ($enregistrement1['activation'] == '1') {
+
+                                $liste[$i]['list_serveur'][$j]['activation'] = '<button    class="btn btn-success btn-md"  > Actif </button>';
                             }
 
-                          
+
 
 
 

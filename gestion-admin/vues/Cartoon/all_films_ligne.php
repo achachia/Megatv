@@ -82,7 +82,7 @@
 
                                     $tr.="<option value='" . $value3['id_section'] . "' ";
 
-                                    if ($value3['id_section'] == '2') {
+                                    if ($value3['id_section'] == '5') {
 
                                         $tr.=' selected="selected" ';
                                     }
