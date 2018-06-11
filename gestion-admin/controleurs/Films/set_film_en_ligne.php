@@ -93,7 +93,7 @@ if (!empty($_POST['add_serveur'])) {
 
     try {
 
-        $sql = " INSERT INTO  FichierVod (titre_originale,identifiant_streaming,date_upload,section_fichier,id_TMD,langage,url,id_serveur,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9)";
+        $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6)";
         
       
 
@@ -101,23 +101,15 @@ if (!empty($_POST['add_serveur'])) {
 
         $stmt->bindParam(':param1', $titre_original);
 
-        $stmt->bindParam(':param2', $identifiant_streaming);
+        $stmt->bindParam(':param2', $date_upload);
 
-        $stmt->bindParam(':param3', $date_upload);
+        $stmt->bindParam(':param3', $section_film);
 
-        $stmt->bindParam(':param4', $section_film);
+        $stmt->bindParam(':param4', $idtmd);
 
-        $stmt->bindParam(':param5', $idtmd);
+        $stmt->bindParam(':param5', $langage);
 
-        $stmt->bindParam(':param6', $langage);
-
-        $stmt->bindParam(':param7', $url);
-
-        $stmt->bindParam(':param8', $serveur_film);
-
-        $stmt->bindParam(':param9', $genres);
-
-
+        $stmt->bindParam(':param6', $genres);
 
         $stmt->execute();
         

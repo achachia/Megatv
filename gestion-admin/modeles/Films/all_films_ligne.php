@@ -14,24 +14,19 @@ function liste_films_en_ligne() {
 
     try {
 
-        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_fichier,FichierVod.identifiant_streaming,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
-                . "FichierVod.genre,FichierVod.langage,FichierVod.url,FichierVod.id_serveur,FichierVod.activation,"
-                . " ListeServeursVod.nom_serveur "
-                . "FROM  FichierVod,ListeServeursVod "
-                . "WHERE FichierVod.id_serveur=ListeServeursVod.id_serveur "
-                . " AND   FichierVod.section_fichier=2  ";
-        
-      
+        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_fichier,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
+                . "FichierVod.genre,FichierVod.langage,FichierVod.activation "
+                . "FROM  FichierVod  WHERE FichierVod.section_fichier=2 ";
 
 
 
         $resultat = $cxn->query($sql);
 
 
+
         while ($enregistrement = $resultat->fetch()) {
 
-
-            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
+            $id_fichier = $enregistrement['id_fichier'];
 
             $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
 
@@ -39,11 +34,7 @@ function liste_films_en_ligne() {
 
             $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
 
-            $liste[$i]['id_serveur'] = $enregistrement['id_serveur'];
-
-            $liste[$i]['identifiant_streaming'] = $enregistrement['identifiant_streaming'];
-
-            $liste[$i]['nom_serveur'] = $enregistrement['nom_serveur'];
+            $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
 
             /*             * ******************************************************* */
 
@@ -54,11 +45,79 @@ function liste_films_en_ligne() {
 
             $liste[$i]['poster_path'] = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' . $json_data->poster_path;
 
+
+
+            /*             * ********************************************************************* */
+
+            try {
+
+                $sql1 = "  SELECT  LinksServersFichierVod.id_link,LinksServersFichierVod.identifiant_streaming,LinksServersFichierVod.url,LinksServersFichierVod.activation,LinksServersFichierVod.date_created,"
+                        . " ListeServeursVod.nom_serveur "
+                        . "    FROM  LinksServersFichierVod,ListeServeursVod   WHERE LinksServersFichierVod.id_serveur=ListeServeursVod.id_serveur   AND  LinksServersFichierVod.id_fichier='" . $id_fichier . "' ";
+
+
+
+
+
+                $select = $cxn->query($sql1);
+
+                $nb = $select->rowCount();
+
+
+
+                if ($nb > 0) {
+
+                    $j = 0;
+
+                    while ($enregistrement1 = $select->fetch()) {
+
+                        if ($enregistrement1['identifiant_streaming'] != '') {
+
+                            $liste[$i]['list_serveur'][$j]['id_link'] = $enregistrement1['id_link'];
+
+                            $liste[$i]['list_serveur'][$j]['identifiant_streaming'] = $enregistrement1['identifiant_streaming'];
+
+                            $liste[$i]['list_serveur'][$j]['nom_serveur'] = $enregistrement1['nom_serveur'];
+
+                            $liste[$i]['list_serveur'][$j]['url'] = $enregistrement1['url'];
+
+                            $liste[$i]['list_serveur'][$j]['date_created'] = $enregistrement1['date_created'];
+                            
+                            if($enregistrement1['activation']=='0'){
+                                
+                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-danger btn-md"  > Inactif </button>';
+                                
+                                
+                            }
+                             if($enregistrement1['activation']=='1'){
+                                
+                                $liste[$i]['list_serveur'][$j]['activation']='<button    class="btn btn-success btn-md"  > Actif </button>';
+                                
+                                
+                            }
+
+                          
+
+
+
+                            $j++;
+                        }
+                    }
+                }
+            } catch (Exception $e2) {
+
+                echo $e2->getMessage();
+            }
+
+
+
+            /*             * ******************************************************** */
+
             $i++;
         }
-    } catch (Exception $e) {
+    } catch (Exception $e1) {
 
-        echo $e->getMessage();
+        echo $e1->getMessage();
     }
 
 
