@@ -107,14 +107,7 @@
     <?php
     if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
 
-
-
-
-
         $wikipediaURL = 'https://vidoza.net/embed-' . $_GET['identifiant_streaming'] . '.html';
-
-
-
 
 
         $ch = curl_init();
@@ -136,6 +129,8 @@
 
         $parsing = '';
 
+        $contenu_affiche = '';
+
         foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
 
@@ -148,24 +143,25 @@
 
                 foreach ($contenus as $key1 => $contenu) {
 
-                    if (strpos($contenu, 'window.player = player') !== FALSE) {  
+                    if (strpos($contenu, 'window.player = player') !== FALSE) {
 
                         $parsing.=$key1 . '-';
 
-                        echo $contenu . "<br/>";
 
-                        if (!empty($_GET['nbr_lettres'])) {
 
-                            $parsing.=$nbr_lettres . '-' . $_GET['identifiant_streaming'].'<br/>';
+                        $parsing.=$nbr_lettres . '-' . $_GET['identifiant_streaming'];
 
-                            $chaine = substr($contenu, $_GET['nbr_lettres']);
 
-                            $chaine = substr($chaine, 0, -1);
+                        $chaine = substr($contenu, $nbr_lettres);
 
-                            $lien1 = stripslashes($chaine);
+                        $chaine = substr($chaine, 0, -1);
 
-                            echo $lien1;
-                        }
+                        $lien1 = stripslashes($chaine);
+
+
+                         $contenu_affiche.=$parsing."</br/>".$contenu . "<br/>" . $lien1;
+                         
+                         echo $contenu_affiche;
                     }
                 }
             }
