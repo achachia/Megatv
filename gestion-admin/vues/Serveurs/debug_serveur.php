@@ -94,7 +94,7 @@
 
                 if ($key == $_GET['identifiant_streaming']) {
                     
-                    echo "toto".$key;
+                    echo "test".$key.'<br/>';
 
 
 
@@ -105,13 +105,13 @@
 
                         if (empty($_GET['nbr_lettres'])) {
                             
-                            echo "toto1".$key1;
+                            echo "coucou".$key1.'<br>';
 
-                            echo $key1;
-
-                            var_dump($contenu);
-
-                            echo '<br/>';
+//                            echo $key1;
+//
+//                            var_dump($contenu);
+//
+//                            echo '<br/>';
                         }
 
 
