@@ -152,13 +152,17 @@
 
         foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
+            if (strstr($script->textContent, 'var player = this; window.player = player')) {
+                
+                echo $key . '-test-<br/>'; 
+                
+            }
+
             if (empty($_GET['key_block_script'])) {
 
-                echo $key.'<br/>';;
+                echo $key . '<br/>';
 
-                echo $script->textContent.'<br/>';            
-
-            
+                echo $script->textContent . '<br/>';
             }
 
 
@@ -188,7 +192,7 @@
 
                     if ($key1 == $_GET['key_ligne_script']) {
 
-                        echo $contenu."<br/>";
+                        echo $contenu . "<br/>";
 
                         if (!empty($_GET['nbr_lettres'])) {
 
