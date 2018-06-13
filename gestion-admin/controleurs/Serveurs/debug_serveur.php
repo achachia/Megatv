@@ -4,10 +4,15 @@ require './librairie/redirection.php';
 
 redirection_membre($_SESSION ['user_admin'] ['code_user']);
 
-require dirname(dirname(dirname(__FILE__) )).chemin_modele . $module . "/" . $action . ".php";
+require dirname(dirname(dirname(__FILE__))) . chemin_modele . $module . "/" . $action . ".php";
 
+if (!empty($_GET['nbr_lettres'])) {
 
+    $nbr_lettres = $_GET['nbr_lettres'];
+} else {
 
-include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php"; 
+    $nbr_lettres = 144;
+}
 
+include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";
 ?>

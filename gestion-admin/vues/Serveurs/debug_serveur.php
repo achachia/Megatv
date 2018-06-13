@@ -55,52 +55,25 @@
 
 
 
-        <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
+        <div class="row" style="margin-top: 5%">
+            <div class="col-sm-4" style="text-align: center">
+                <label class="control-label" for="nom" style="color:blue;font-size:16px">NOMBRE DE LETTRES: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+            </div>   
+            <div class="col-sm-8">
+                <div class="form-group"  style="padding-top:1%">
 
-            <div class="row" style="margin-top: 5%">
-                <div class="col-sm-4"  style="text-align: center">
-                    <label class="control-label" for="nom" style="color:blue;font-size:16px">NUMERO LIGNE SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                </div>   
-                <div class="col-sm-8">
-                    <div class="form-group"  style="padding-top:1%">
-
-                        <input type="text" class="form-control" id="key_ligne_script"  name="key_ligne_script"  placeholder="Entrer le numero de ligne de script" value="<?php
-                        if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) {
-                            echo $_GET['key_ligne_script'];
-                        }
-                        ?>">
+                    <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le numero de ligne de script" value="<?php
+                    if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
+                        echo $_GET['nbr_lettres'];
+                    }
+                    ?>">
 
 
-                    </div>
+                </div>
 
-                </div>    
-            </div>
-        <?php } ?>
+            </div>    
+        </div>
 
-
-
-
-        <?php if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) { ?>
-
-            <div class="row" style="margin-top: 5%">
-                <div class="col-sm-4" style="text-align: center">
-                    <label class="control-label" for="nom" style="color:blue;font-size:16px">NOMBRE DE LETTRES: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                </div>   
-                <div class="col-sm-8">
-                    <div class="form-group"  style="padding-top:1%">
-
-                        <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le numero de ligne de script" value="<?php
-                        if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
-                            echo $_GET['nbr_lettres'];
-                        }
-                        ?>">
-
-
-                    </div>
-
-                </div>    
-            </div>
-        <?php } ?>
 
 
 
@@ -182,6 +155,8 @@
                         echo $contenu . "<br/>";
 
                         if (!empty($_GET['nbr_lettres'])) {
+
+                            $parsing.=$nbr_lettres . '-' . $_GET['identifiant_streaming'].'<br/>';
 
                             $chaine = substr($contenu, $_GET['nbr_lettres']);
 
