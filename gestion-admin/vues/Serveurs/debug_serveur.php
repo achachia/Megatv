@@ -30,7 +30,7 @@
                         echo $_GET['key_block_script'];
                     }
                     ?>">
-
+                 <?php } ?>
 
                     <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming']) && isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
 
