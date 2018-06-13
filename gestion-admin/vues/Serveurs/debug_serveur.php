@@ -21,11 +21,11 @@
         }
         ?>
 
-<?php
-if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
-    echo $_GET['identifiant_streaming'];
-}
-?>
+        <?php
+        if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
+            echo $_GET['identifiant_streaming'];
+        }
+        ?>
 
 
 
@@ -43,10 +43,10 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
                 <div class="form-group"  style="padding-top:1%">
 
                     <input type="text" class="form-control" id="identifiant_streaming"  name="identifiant_streaming"  placeholder="Entrer identifiant_streaming"  value="<?php
-if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
-    echo $_GET['identifiant_streaming'];
-}
-?>">
+                    if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
+                        echo $_GET['identifiant_streaming'];
+                    }
+                    ?>">
 
                 </div>
 
@@ -54,7 +54,7 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
         </div>
 
 
-<?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
+        <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
 
             <div class="row" style="margin-top: 5%"  >
                 <div class="col-sm-4" style="text-align: center">
@@ -64,10 +64,10 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
                     <div class="form-group"  style="padding-top:1%">
 
                         <input type="text" class="form-control" id="key_block_script"  name="key_block_script"  placeholder="Entrer le key block script"  value="<?php
-    if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
-        echo $_GET['key_block_script'];
-    }
-    ?>">
+                        if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
+                            echo $_GET['key_block_script'];
+                        }
+                        ?>">
 
                     </div>
 
@@ -75,9 +75,9 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
             </div>
 
 
-<?php } ?>
+        <?php } ?>
 
-<?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
+        <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
 
             <div class="row" style="margin-top: 5%">
                 <div class="col-sm-4"  style="text-align: center">
@@ -87,22 +87,22 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
                     <div class="form-group"  style="padding-top:1%">
 
                         <input type="text" class="form-control" id="key_ligne_script"  name="key_ligne_script"  placeholder="Entrer le numero de ligne de script" value="<?php
-    if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) {
-        echo $_GET['key_ligne_script'];
-    }
-    ?>">
+                        if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) {
+                            echo $_GET['key_ligne_script'];
+                        }
+                        ?>">
 
 
                     </div>
 
                 </div>    
             </div>
-<?php } ?>
+        <?php } ?>
 
 
 
 
-<?php if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) { ?>
+        <?php if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) { ?>
 
             <div class="row" style="margin-top: 5%">
                 <div class="col-sm-4" style="text-align: center">
@@ -112,17 +112,17 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
                     <div class="form-group"  style="padding-top:1%">
 
                         <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le numero de ligne de script" value="<?php
-    if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
-        echo $_GET['nbr_lettres'];
-    }
-    ?>">
+                        if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
+                            echo $_GET['nbr_lettres'];
+                        }
+                        ?>">
 
 
                     </div>
 
                 </div>    
             </div>
-<?php } ?>
+        <?php } ?>
 
 
 
@@ -183,51 +183,46 @@ if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming
 
         $wikipediaPage->loadHTML($resultat);
 
-
+        $parsing='';
 
         foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
 
             if (strpos($script->textContent, '$( document ).ready(function()') !== FALSE) {
+                
+                $parsing.=$key.'-';
 
-                if (empty($_GET['key_block_script'])) {
+                $contenus = explode(",", $script->textContent);
 
-                    echo $key . '<br/>';
 
-                    echo $script->textContent . '<br/>';
+                foreach ($contenus as $key1 => $contenu) {
                     
-                } else {
+                    
 
-                    $contenus = explode(",", $script->textContent);
-
-
-                    foreach ($contenus as $key1 => $contenu) {
-
-                        if (empty($_GET['key_ligne_script'])) {
+                    if (empty($_GET['key_ligne_script'])) {
 
 
-                            echo $key1;
+                        echo $key1;
 
-                            var_dump($contenu);
+                        var_dump($contenu);
 
-                            echo '<br/>';
-                        }
+                        echo '<br/>';
+                    }
 
 
-                        if ($key1 == $_GET['key_ligne_script']) {
+                    if ($key1 == $_GET['key_ligne_script']) {
 
-                            echo $contenu . "<br/>";
+                        echo $contenu . "<br/>";
 
-                            if (!empty($_GET['nbr_lettres'])) {
+                        if (!empty($_GET['nbr_lettres'])) {
 
-                                $chaine = substr($contenu, $_GET['nbr_lettres']);
+                            $chaine = substr($contenu, $_GET['nbr_lettres']);
 
-                                $chaine = substr($chaine, 0, -1);
+                            $chaine = substr($chaine, 0, -1);
 
-                                $lien1 = stripslashes($chaine);
+                            $lien1 = stripslashes($chaine);
 
-                                echo $lien1;
-                            }
+                            echo $lien1;
                         }
                     }
                 }
