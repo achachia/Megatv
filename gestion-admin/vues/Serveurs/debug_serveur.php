@@ -113,7 +113,7 @@
 
 
 
-                        if ($key1 == $_GET['key_block_script']  && !empty($_GET['key_block_script'])) {
+                        if ($key1 == $_GET['key_block_script']  && !empty($_GET['nbr_lettres'])) {
 
                             $chaine = substr($contenu, $_GET['nbr_lettres']);
 
