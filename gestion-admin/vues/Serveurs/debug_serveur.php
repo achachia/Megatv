@@ -61,8 +61,8 @@
 
                 <input type="hidden"  name="action"  value="debug_serveur">
 
-                <div class="form-group"  style="padding-top:1%">
-                    <button type="submit" class="btn btn-primary" name="envoyer"  value="envoyer" style="margin-top:2% ">Envoyer</button> 
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="envoyer"  value="envoyer" >Envoyer</button> 
                 </div>
 
 
@@ -143,7 +143,7 @@
 
 
 
-                        if ($key1 == $_GET['key_ligne_script'] && !empty($_GET['key_ligne_script']) && empty($_GET['nbr_lettres'])) {
+                        if ($key1 == $_GET['key_ligne_script'] &&  !empty($_GET['nbr_lettres'])) {
 
                             $chaine = substr($contenu, $_GET['nbr_lettres']);
 
