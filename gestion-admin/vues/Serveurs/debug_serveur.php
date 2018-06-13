@@ -154,11 +154,11 @@
 
             if (empty($_GET['key_block_script'])) {
 
-                echo $key;
+                echo $key.'<br/>';;
 
-                var_dump($script->textContent);
+                echo $script->textContent.'<br/>';            
 
-                echo '<br/>';
+            
             }
 
 
