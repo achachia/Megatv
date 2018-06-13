@@ -148,7 +148,7 @@
 
                 foreach ($contenus as $key1 => $contenu) {
 
-                    if (strpos($contenu, 'window.player = player') !== FALSE) {
+                    if (strpos($contenu, 'window.player = player') !== FALSE) {  
 
                         $parsing.=$key1 . '-';
 
