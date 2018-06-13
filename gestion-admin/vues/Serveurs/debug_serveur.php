@@ -1,4 +1,23 @@
 <div class="row" style="margin-top: 5%">
+    <h2>Resulat de parsing :</h2>
+    
+    <h2>
+        
+         <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { echo $_GET['key_block_script'].'-'; } ?>
+        
+         <?php if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) { echo $_GET['key_ligne_script'].'-'; } ?>
+        
+         <?php if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) { echo $_GET['nbr_lettres'].'-'; } ?>
+        
+        <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { echo $_GET['identifiant_streaming']; } ?>
+        
+         
+        
+        
+    </h2>
+</div>
+
+<div class="row" style="margin-top: 5%">
     <form class="form-horizontal" id="debug_server" name="debug_server" method="GET" action="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur">
         <div class="row" style="margin-top: 5%">
             <div class="col-sm-4"  style="text-align: center">
@@ -109,12 +128,12 @@
 
 
 
-
+    </form>
 
 </div>
-</div> 
 
-</form>
+
+
 
 <div class="row" style="margin-top: 5%">
 
