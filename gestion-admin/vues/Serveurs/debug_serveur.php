@@ -13,27 +13,38 @@
 
                 <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
 
+                    <div class="form-group"  style="padding-top:1%">
 
-                    <input type="text" class="form-control" id="key_block_script"  name="key_block_script"  placeholder="Entrer le key block script"  value="<?php
-                    if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
-                        echo $_GET['key_block_script'];
-                    }
-                    ?>">
+                        <input type="text" class="form-control" id="key_block_script"  name="key_block_script"  placeholder="Entrer le key block script"  value="<?php
+                        if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
+                            echo $_GET['key_block_script'];
+                        }
+                        ?>">
+
+                    </div>
+
+
+
 
                 <?php } ?>
 
                 <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
 
+                    <div class="form-group"  style="padding-top:1%">
 
-                    <input type="text" class="form-control" id="key_block_script"  name="key_block_script"  placeholder="Entrer le numero de ligne de script" value="<?php
-                    if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
-                        echo $_GET['key_block_script'];
-                    }
-                    ?>">
-                 <?php } ?>
+                        <input type="text" class="form-control" id="key_ligne_script"  name="key_ligne_script"  placeholder="Entrer le numero de ligne de script" value="<?php
+                        if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) {
+                            echo $_GET['key_ligne_script'];
+                        }
+                        ?>">
+                           <?php } ?>
 
-                    <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming']) && isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
+                </div>
 
+
+                <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming']) && isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
+
+                    <div class="form-group"  style="padding-top:1%">
 
                         <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le nombre de caracteres" value="<?php
                         if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
@@ -41,105 +52,108 @@
                         }
                         ?>">
 
-                    <?php } ?>
-
-                    <input type="hidden"  name="module"  value="Serveurs">
-
-                    <input type="hidden"  name="action"  value="debug_serveur">
-
-                    <button type="submit" class="btn btn-primary" name="envoyer"  value="envoyer" style="margin-top:2% ">Envoyer</button>
+                    </div>
 
 
-                </div>
-            </div> 
+                <?php } ?>
 
-        </form>
+                <input type="hidden"  name="module"  value="Serveurs">
 
-        <div class="row" style="margin-top: 5%">
+                <input type="hidden"  name="action"  value="debug_serveur">
 
-            <?php
-            if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
+                <button type="submit" class="btn btn-primary" name="envoyer"  value="envoyer" style="margin-top:2% ">Envoyer</button>
 
 
+            </div>
+        </div> 
 
+    </form>
 
+    <div class="row" style="margin-top: 5%">
 
-                $wikipediaURL = 'https://vidoza.net/embed-' . $_GET['identifiant_streaming'] . '.html';
+        <?php
+        if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) {
 
 
 
 
 
-                $ch = curl_init();
-
-                curl_setopt($ch, CURLOPT_URL, $wikipediaURL);
-
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-                curl_setopt($ch, CURLOPT_USERAGENT, 'Le blog de Samy Dindane (www.dinduks.com');
-
-                $resultat = curl_exec($ch);
-
-                curl_close($ch);
-
-
-                $wikipediaPage = new DOMDocument();
-
-                $wikipediaPage->loadHTML($resultat);
-
-
-
-                foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
-
-                    if (empty($_GET['key_block_script'])) {
-
-                        echo $key;
-
-                        var_dump($script->textContent);
-
-                        echo '<br/>';
-                    }
-
-
-
-                    if ($key == $_GET['key_block_script']) {
+            $wikipediaURL = 'https://vidoza.net/embed-' . $_GET['identifiant_streaming'] . '.html';
 
 
 
 
-                        $contenus = explode(",", $script->textContent);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $wikipediaURL);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Le blog de Samy Dindane (www.dinduks.com');
+
+            $resultat = curl_exec($ch);
+
+            curl_close($ch);
 
 
-                        foreach ($contenus as $key1 => $contenu) {
+            $wikipediaPage = new DOMDocument();
 
-                            if (empty($_GET['key_ligne_script'])) {
-
-
-                                echo $key1;
-
-                                var_dump($contenu);
-
-                                echo '<br/>';
-                            }
+            $wikipediaPage->loadHTML($resultat);
 
 
 
+            foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
-                            if ($key1 == $_GET['key_ligne_script'] && !empty(key_ligne_script) && empty($_GET['nbr_lettres'])) {
+                if (empty($_GET['key_block_script'])) {
 
-                                $chaine = substr($contenu, $_GET['nbr_lettres']);
+                    echo $key;
 
-                                $chaine = substr($chaine, 0, -1);
+                    var_dump($script->textContent);
 
-                                $lien1 = stripslashes($chaine);
+                    echo '<br/>';
+                }
 
-                                echo $lien1;
-                            }
+
+
+                if ($key == $_GET['key_block_script']) {
+
+
+
+
+                    $contenus = explode(",", $script->textContent);
+
+
+                    foreach ($contenus as $key1 => $contenu) {
+
+                        if (empty($_GET['key_ligne_script'])) {
+
+
+                            echo $key1;
+
+                            var_dump($contenu);
+
+                            echo '<br/>';
+                        }
+
+
+
+
+                        if ($key1 == $_GET['key_ligne_script'] && !empty(key_ligne_script) && empty($_GET['nbr_lettres'])) {
+
+                            $chaine = substr($contenu, $_GET['nbr_lettres']);
+
+                            $chaine = substr($chaine, 0, -1);
+
+                            $lien1 = stripslashes($chaine);
+
+                            echo $lien1;
                         }
                     }
                 }
             }
-            ?>
+        }
+        ?>
     </div>
 </div>
 
