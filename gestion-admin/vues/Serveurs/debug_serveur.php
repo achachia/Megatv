@@ -54,28 +54,6 @@
         </div>
 
 
-        <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
-
-            <div class="row" style="margin-top: 5%"  >
-                <div class="col-sm-4" style="text-align: center">
-                    <label class="control-label" for="nom" style="color:blue;font-size:16px">ID BLOCK SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                </div>   
-                <div class="col-sm-8">
-                    <div class="form-group"  style="padding-top:1%">
-
-                        <input type="text" class="form-control" id="key_block_script"  name="key_block_script"  placeholder="Entrer le key block script"  value="<?php
-                        if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) {
-                            echo $_GET['key_block_script'];
-                        }
-                        ?>">
-
-                    </div>
-
-                </div>    
-            </div>
-
-
-        <?php } ?>
 
         <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
 
@@ -196,6 +174,11 @@
 
 
                 foreach ($contenus as $key1 => $contenu) {
+                    
+                  if (strpos($contenu, 'function(){ var player = this; window.player = player;') !== FALSE) {
+                      
+                      echo $key1."-test2";
+                  }
                     
                     
 
