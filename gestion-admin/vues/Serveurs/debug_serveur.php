@@ -161,39 +161,23 @@
 
         $wikipediaPage->loadHTML($resultat);
 
-        $parsing='';
+        $parsing = '';
 
         foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
 
             if (strpos($script->textContent, '$( document ).ready(function()') !== FALSE) {
-                
-                $parsing.=$key.'-';
+
+                $parsing.=$key . '-';
 
                 $contenus = explode(",", $script->textContent);
 
 
                 foreach ($contenus as $key1 => $contenu) {
-                    
-                  if (strpos($contenu, 'window.player = player') !== FALSE) {
-                      
-                      echo $key1."-test2";
-                  }
-                    
-                    
 
-                    if (empty($_GET['key_ligne_script'])) {
+                    if (strpos($contenu, 'window.player = player') !== FALSE) {
 
-
-                        echo $key1;
-
-                        var_dump($contenu);
-
-                        echo '<br/>';
-                    }
-
-
-                    if ($key1 == $_GET['key_ligne_script']) {
+                        $parsing.=$key1 . '-';
 
                         echo $contenu . "<br/>";
 
