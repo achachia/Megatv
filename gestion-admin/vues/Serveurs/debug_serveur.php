@@ -175,7 +175,7 @@
 
                 foreach ($contenus as $key1 => $contenu) {
                     
-                  if (strpos($contenu, 'function(){ var player = this; window.player = player;') !== FALSE) {
+                  if (strpos($contenu, 'window.player = player') !== FALSE) {
                       
                       echo $key1."-test2";
                   }
