@@ -93,6 +93,8 @@
 
 
                 if ($key == $_GET['identifiant_streaming']) {
+                    
+                    echo "toto".$key;
 
 
 
@@ -102,6 +104,8 @@
                     foreach ($contenus as $key1 => $contenu) {
 
                         if (empty($_GET['nbr_lettres'])) {
+                            
+                            echo "toto1".$key1;
 
                             echo $key1;
 
