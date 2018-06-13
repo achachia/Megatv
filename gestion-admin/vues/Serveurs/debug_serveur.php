@@ -92,7 +92,7 @@
 
 
 
-                if ($key == $_GET['identifiant_streaming']) {
+                if ($key == $_GET['key_block_script']) {
                     
                     echo "test".$key.'<br/>';
 
@@ -107,11 +107,11 @@
                             
                             echo "coucou".$key1.'<br>';
 
-//                            echo $key1;
-//
-//                            var_dump($contenu);
-//
-//                            echo '<br/>';
+                           echo $key1;
+
+                           var_dump($contenu);
+
+                           echo '<br/>';
                         }
 
 
