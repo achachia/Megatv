@@ -1,7 +1,7 @@
 <div class="row" style="margin-top: 5%">
     <form class="form-horizontal" id="debug_server" name="debug_server" method="GET" action="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur">
         <div class="row" style="margin-top: 5%">
-            <div class="col-sm-4">
+            <div class="col-sm-4"  style="text-align: center">
                 <label class="control-label" for="nom" style="color:blue;font-size:16px">IDENTIFIANT STREAMING: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
             </div>   
             <div class="col-sm-8">
@@ -21,7 +21,7 @@
 
         <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
 
-            <div class="row" style="margin-top: 5%">
+            <div class="row" style="margin-top: 5%"  style="text-align: center">
                 <div class="col-sm-4">
                     <label class="control-label" for="nom" style="color:blue;font-size:16px">ID BLOCK SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                 </div>   
@@ -45,7 +45,7 @@
         <?php if (isset($_GET['key_block_script']) && !empty($_GET['key_block_script'])) { ?>
 
             <div class="row" style="margin-top: 5%">
-                <div class="col-sm-4">
+                <div class="col-sm-4"  style="text-align: center">
                     <label class="control-label" for="nom" style="color:blue;font-size:16px">NUMERO LIGNE SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                 </div>   
                 <div class="col-sm-8">
@@ -70,15 +70,15 @@
         <?php if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) { ?>
 
             <div class="row" style="margin-top: 5%">
-                <div class="col-sm-4">
-                    <label class="control-label" for="nom" style="color:blue;font-size:16px">NUMERO LIGNE SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                <div class="col-sm-4" style="text-align: center">
+                    <label class="control-label" for="nom" style="color:blue;font-size:16px">NOMBRE DE LETTRES: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                 </div>   
                 <div class="col-sm-8">
                     <div class="form-group"  style="padding-top:1%">
 
-                        <input type="text" class="form-control" id="key_ligne_script"  name="key_ligne_script"  placeholder="Entrer le numero de ligne de script" value="<?php
-                        if (isset($_GET['key_ligne_script']) && !empty($_GET['key_ligne_script'])) {
-                            echo $_GET['key_ligne_script'];
+                        <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le numero de ligne de script" value="<?php
+                        if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
+                            echo $_GET['nbr_lettres'];
                         }
                         ?>">
 
@@ -186,17 +186,20 @@
 
 
 
-                    if ($key1 == $_GET['key_ligne_script'] && !empty($_GET['nbr_lettres'])) {
+                    if ($key1 == $_GET['key_ligne_script']) {
 
                         echo $contenu;
 
-                        $chaine = substr($contenu, $_GET['nbr_lettres']);
+                        if (!empty($_GET['nbr_lettres'])) {
 
-                        $chaine = substr($chaine, 0, -1);
+                            $chaine = substr($contenu, $_GET['nbr_lettres']);
 
-                        $lien1 = stripslashes($chaine);
+                            $chaine = substr($chaine, 0, -1);
 
-                        echo $lien1;
+                            $lien1 = stripslashes($chaine);
+
+                            echo $lien1;
+                        }
                     }
                 }
             }
