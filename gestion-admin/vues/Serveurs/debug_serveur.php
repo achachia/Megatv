@@ -21,8 +21,8 @@
 
         <?php if (isset($_GET['identifiant_streaming']) && !empty($_GET['identifiant_streaming'])) { ?>
 
-            <div class="row" style="margin-top: 5%"  style="text-align: center">
-                <div class="col-sm-4">
+            <div class="row" style="margin-top: 5%"  >
+                <div class="col-sm-4" style="text-align: center">
                     <label class="control-label" for="nom" style="color:blue;font-size:16px">ID BLOCK SCRIPT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                 </div>   
                 <div class="col-sm-8">
@@ -98,7 +98,7 @@
 
         <div class="row" style="margin-top: 5%">
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="text-align: center">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary block" name="envoyer"  value="envoyer" >Envoyer</button> 
                 </div>
@@ -188,7 +188,7 @@
 
                     if ($key1 == $_GET['key_ligne_script']) {
 
-                        echo $contenu;
+                        echo $contenu."<br/>";
 
                         if (!empty($_GET['nbr_lettres'])) {
 
