@@ -172,8 +172,10 @@
         foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
 
 
-            if (strpos($script->textContent, 'var player = this; window.player = player') !== FALSE) {
+            if (strpos($script->textContent, '$( document ).ready(function()') !== FALSE) {
                 echo $key . '-test-<br/>';
+                
+                echo "toto";
             }
 
             if (empty($_GET['key_block_script'])) {
