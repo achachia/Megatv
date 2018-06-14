@@ -59,8 +59,8 @@
                 <div class="form-group"  style="padding-top:1%">
 
                     <input type="text" class="form-control" id="nbr_lettres"  name="nbr_lettres"  placeholder="Entrer le numero de ligne de script" value="<?php
-                    if (isset($_GET['nbr_lettres']) && !empty($_GET['nbr_lettres'])) {
-                        echo $_GET['nbr_lettres'];
+                    if (isset($nbr_lettres) && !empty($nbr_lettres)) {
+                        echo $nbr_lettres;
                     }
                     ?>">
 
