@@ -12,6 +12,7 @@ $liste_films_en_ligne=liste_films_en_ligne();
 
 $liste_serveurs_vod=listeServeursVod();
 
+$listeQualiteVod=listeQualiteVod();
 
 include  dirname(dirname(dirname(__FILE__) )).chemin_vue  . $module . "/" . $action . ".php"; 
 

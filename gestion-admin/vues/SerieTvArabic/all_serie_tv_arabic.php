@@ -134,7 +134,7 @@
 
                                 <th>NOM SERIE</th> 
 
-                                                                                        <!--                                <th>Progression</th>-->
+                                                                                            <!--                                <th>Progression</th>-->
 
                                 <th class="sort-alpha">ACTION</th>
 
@@ -357,149 +357,149 @@
 
 <?php } ?>
 
-    
-
-
-    <?php if (isset($liste_episodes_enregistre ) && sizeof($liste_episodes_enregistre ) > 0) { ?>
-
-
-        <div class="row"  style="margin-left:200px">
-
-            <div class="col-lg-12">
-
-                <div class="panel panel-primary">
-
-                    <div class="panel-heading" >LISTES DES EPISODES TV  ENREGISTRE [<?= $_GET['nom_serie']; ?>]</div>
-
-                    <div class="panel-body">
-
-
-                        <table   id="liste_episodes_enregistre" name="liste_episodes_enregistre" class="table table-striped table-hover"> 
-
-                            <thead style="color:#3797DA">
-
-                                <tr>                          
-
-                                    <th>Titre originale</th>
-
-                                    <th>IDENTIFIANT</th>   
-                                    
-                                    <th>NOM SERVEUR </th>
-
-                                    <th class="sort-alpha">ACTION</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody>
-
-                                <?php
-                                $tr = '';
-                                $j = 1;
-
-                                foreach ($liste_episodes_enregistre  as $value) {
-
-                                    $tr .= '<tr>';
-
-                                    $tr .= '<td>' . $value['titre_originale'] . '</td>';
-
-                                    $tr .= '<td>' . $value['identifiant_streaming'] . '</td>';  
-                                    
-                                    $tr .= '<td>' . $value['nom_serveur'] . '</td>';  
-
-                                    $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button></td>';
-
-
-                                    $tr .= '</tr>';
-
-                                    $j++;
-                                }
-
-                                echo $tr;
-                                ?>
 
 
 
-                            </tbody>
+<?php if (isset($liste_episodes_enregistre) && sizeof($liste_episodes_enregistre) > 0) { ?>
 
-                        </table>
 
-                    </div>
+    <div class="row"  style="margin-left:200px">
+
+        <div class="col-lg-12">
+
+            <div class="panel panel-primary">
+
+                <div class="panel-heading" >LISTES DES EPISODES TV  ENREGISTRE [<?= $_GET['nom_serie']; ?>]</div>
+
+                <div class="panel-body">
+
+
+                    <table   id="liste_episodes_enregistre" name="liste_episodes_enregistre" class="table table-striped table-hover"> 
+
+                        <thead style="color:#3797DA">
+
+                            <tr>                          
+
+                                <th>Titre originale</th>
+
+                                <th>IDENTIFIANT</th>   
+
+                                <th>NOM SERVEUR </th>
+
+                                <th class="sort-alpha">ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <?php
+                            $tr = '';
+                            $j = 1;
+
+                            foreach ($liste_episodes_enregistre as $value) {
+
+                                $tr .= '<tr>';
+
+                                $tr .= '<td>' . $value['titre_originale'] . '</td>';
+
+                                $tr .= '<td>' . $value['identifiant_streaming'] . '</td>';
+
+                                $tr .= '<td>' . $value['nom_serveur'] . '</td>';
+
+                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button></td>';
+
+
+                                $tr .= '</tr>';
+
+                                $j++;
+                            }
+
+                            echo $tr;
+                            ?>
+
+
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
             </div>
 
         </div>
-    <?php } ?>
-    <?php if (isset($liste_episodes_non_enregistre) && sizeof($liste_episodes_non_enregistre) > 0) { ?>
+
+    </div>
+<?php } ?>
+<?php if (isset($liste_episodes_non_enregistre) && sizeof($liste_episodes_non_enregistre) > 0) { ?>
 
 
-        <div class="row"  style="margin-left:320px">
+    <div class="row"  style="margin-left:320px">
 
-            <div class="col-lg-12">
+        <div class="col-lg-12">
 
-                <div class="panel panel-primary">
+            <div class="panel panel-primary">
 
-                    <div class="panel-heading" >LISTES DES EPISODES TV  NON ENREGISTRE [<?= $_GET['nom_serie']; ?>]</div>
+                <div class="panel-heading" >LISTES DES EPISODES TV  NON ENREGISTRE [<?= $_GET['nom_serie']; ?>]</div>
 
-                    <div class="panel-body">
-
-
-                        <table   id="liste_episodes_non_enregistre" name="liste_episodes_non_enregistre" class="table table-striped table-hover"> 
-
-                            <thead  style="color:#3797DA">
-
-                                <tr>                  
-
-                                    <th>NOM DE FICHIER</th>                                       
+                <div class="panel-body">
 
 
-                                    <th class="sort-alpha">ACTION</th>
+                    <table   id="liste_episodes_non_enregistre" name="liste_episodes_non_enregistre" class="table table-striped table-hover"> 
 
-                                </tr>
+                        <thead  style="color:#3797DA">
 
-                            </thead>
+                            <tr>                  
 
-                            <tbody>
-
-                                <?php
-                                $tr = '';
-                                $j = 1;
-
-                                foreach ($liste_episodes_saison_non_enregistre as $value) {
-
-                                    $tr .= '<tr>';
-
-                                    $tr .= '<td>' . $value['nom_episode'] . '</td>';
+                                <th>NOM DE FICHIER</th>                                       
 
 
-                                    $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_non_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > Enregistrer </button></td>';
+                                <th class="sort-alpha">ACTION</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <?php
+                            $tr = '';
+                            $j = 1;
+
+                            foreach ($liste_episodes_saison_non_enregistre as $value) {
+
+                                $tr .= '<tr>';
+
+                                $tr .= '<td>' . $value['nom_episode'] . '</td>';
 
 
-                                    $tr .= '</tr>';
-
-                                    $j++;
-                                }
-
-                                echo $tr;
-                                ?>
+                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_non_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > Enregistrer </button></td>';
 
 
+                                $tr .= '</tr>';
 
-                            </tbody>
+                                $j++;
+                            }
 
-                        </table>
+                            echo $tr;
+                            ?>
 
-                    </div>
+
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
             </div>
 
         </div>
-    <?php } ?>
+
+    </div>
+<?php } ?>
 
 
 
@@ -720,9 +720,11 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                 <form class="form-horizontal" id="form1_add_episode" name="form1_add_episode" method="POST" action="./controleurs/SerieTvArabic/set_episode_serie_tv.php">
                     <div class="modal-header">
 
-                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer un episode [<?= $_GET['nom_serie']; ?>]<?php if (!empty($_GET['nom_saison'])) {
-        echo '[' . $_GET['nom_saison'] . ']';
-    } ?></h3>
+                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer un episode [<?= $_GET['nom_serie']; ?>]<?php
+                            if (!empty($_GET['nom_saison'])) {
+                                echo '[' . $_GET['nom_saison'] . ']';
+                            }
+                            ?></h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -794,11 +796,37 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
 
                             </div>
                         </div>
+                        <div class="form-group"  style="padding-top:1%">
+                            <div class="col-sm-12">
+                                <label class="control-label" for="qualite_video_<?= $j; ?>" style="color:blue;font-size:16px">QUALITE VIDEO: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <select class="form-control" name="qualite_video"  id="qualite_video" >
+
+                                    <?php
+                                    $tr = '<option value="">Select-qualite</option>';
+
+                                    foreach ($listeQualiteVod as $qualite) {
+
+
+                                        $tr.="<option value='" . $qualite['id_qualite'] . "' ";
+
+                                        $tr.= ">" . $value3['nom_qualite'] . "</option>";
+                                    }
+
+                                    echo $tr;
+                                    ?>
+
+                                </select>
+
+                            </div>
+                        </div>
                         <input type="hidden" name="id_serie" value="<?= $_GET['id_serie']; ?>">                   
 
                         <input type="hidden" name="nom_serie" value="<?= $_GET['nom_serie']; ?>">
-                        
-                       <input type="hidden" name="saisonTV" value="<?= $_GET['saisonTV']; ?>">
+
+                        <input type="hidden" name="saisonTV" value="<?= $_GET['saisonTV']; ?>">
 
     <?php if ($_GET['saisonTV'] != 'no') { ?>
 

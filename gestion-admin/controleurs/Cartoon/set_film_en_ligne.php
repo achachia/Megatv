@@ -33,22 +33,11 @@ $section_film = $_POST['section_film'];
 
 $titre_original = $_POST['titre_original'];
 
-$serveur_film = $_POST['serveur_film'];
-
 $idtmd = $_POST['idtmd'];
-
-$identifiant_streaming = $_POST['identifiant_streaming'];
-
 
 $langage = 'VF';
 
-if (!empty($_POST['url'])) {
 
-    $url = $_POST['url'];
-} else {
-
-    $url = NULL;
-}
 
 $date_upload = date("Y-m-d");
 
@@ -94,8 +83,8 @@ if (!empty($_POST['add_serveur'])) {
     try {
 
         $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6)";
-        
-      
+
+
 
         $stmt = $cxn->prepare($sql);
 
@@ -112,7 +101,6 @@ if (!empty($_POST['add_serveur'])) {
         $stmt->bindParam(':param6', $genres);
 
         $stmt->execute();
-        
     } catch (Exception $e1) {
 
         echo $e1->getMessage();
@@ -120,6 +108,57 @@ if (!empty($_POST['add_serveur'])) {
         $etat = FALSE;
 
         $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
+    }
+
+    /*     * ******************************************************************* */
+
+    try {
+
+        $sql = " SELECT MAX(id_fichier) AS MaxId  FROM FichierVod ";
+
+        $stmt = $cxn->prepare($sql);
+
+        $stmt->execute();
+
+        $enregistrement = $stmt->fetch();
+
+        $MaxId = $enregistrement['MaxId'];
+    } catch (Exception $e) {
+
+        $etat = FALSE;
+
+        $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
+    }
+
+
+
+
+    /*     * ******************************************************************* */
+
+    $id_serveur = $_POST['serveur_film'];
+
+    $identifiant_streaming = $_POST['identifiant_streaming'];
+
+    $qualite_video = $_POST['qualite_video'];
+
+    if (!empty($_POST['url'])) {
+
+        $url = $_POST['url'];
+    } else {
+
+        $url = NULL;
+    }
+    try {
+
+        $sql = " INSERT INTO  LinksServersFichierVod (id_fichier,id_serveur,url,date_created,qualite) VALUES ('" . $MaxId . "','" . $id_serveur . "','" . $url . "','" . $date_upload . "','" . $qualite_video . "') ";
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+        
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
     }
 }
 

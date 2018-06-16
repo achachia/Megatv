@@ -31,5 +31,6 @@ if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '1') {
 
 $liste_serveurs_vod = listeServeursVod();
 
+
 include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";
 ?>

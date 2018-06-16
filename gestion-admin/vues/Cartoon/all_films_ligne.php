@@ -124,6 +124,32 @@
                     </div>
                     <div class="form-group"  style="padding-top:1%">
                         <div class="col-sm-12">
+                            <label class="control-label" for="qualite_video_<?= $j; ?>" style="color:blue;font-size:16px">QUALITE VIDEO: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <select class="form-control" name="qualite_video"  id="qualite_video" >
+
+                                <?php
+                                $tr = '<option value="">Select-qualite</option>';
+
+                                foreach ($listeQualiteVod as $qualite) {
+
+
+                                    $tr.="<option value='" . $qualite['id_qualite'] . "' ";
+
+                                    $tr.= ">" . $value3['nom_qualite'] . "</option>";
+                                }
+
+                                echo $tr;
+                                ?>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group"  style="padding-top:1%">
+                        <div class="col-sm-12">
                             <label class="control-label" for="identifiant_<?= $j; ?>" style="color:blue;font-size:16px">Identifiant streaming: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                         </div>
 
@@ -299,6 +325,10 @@ if (isset($liste_films_en_ligne) && sizeof($liste_films_en_ligne) > 0) {
                                     <tr>
                                         <th scope="row"  style="color:blue">ACTIVATION :</th>
                                         <td><?= $serveur['activation'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"  style="color:blue">ACTION :</th>
+                                        <td><a href="<?= $url_espace_admin; ?>/controleurs/Films/delete_links_serveur.php?id_link=<?= $serveur['id_link']; ?>"><button    class="btn btn-danger btn-md"  > Supprimer </button></a></td>
                                     </tr>
                                 </tbody>
                             </table>        

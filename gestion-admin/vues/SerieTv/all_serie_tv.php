@@ -672,6 +672,32 @@ if (isset($liste_episodes_saison_non_enregistre) && sizeof($liste_episodes_saiso
 
                                 </div>
                             </div>
+                            <div class="form-group"  style="padding-top:1%">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="qualite_video_<?= $j; ?>" style="color:blue;font-size:16px">QUALITE VIDEO: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" name="qualite_video"  id="qualite_video" >
+
+                                        <?php
+                                        $tr = '<option value="">Select-qualite</option>';
+
+                                        foreach ($listeQualiteVod as $qualite) {
+
+
+                                            $tr.="<option value='" . $qualite['id_qualite'] . "' ";
+
+                                            $tr.= ">" . $value3['nom_qualite'] . "</option>";
+                                        }
+
+                                        echo $tr;
+                                        ?>
+
+                                    </select>
+
+                                </div>
+                            </div>
 
                             <input type="hidden" name="id_serie" value="<?= $_GET['id_serie']; ?>">
 

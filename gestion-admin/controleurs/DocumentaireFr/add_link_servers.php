@@ -16,6 +16,8 @@ $serveur_film = $_POST['serveur_film'];
 
 $id_fichier = $_POST['id_fichier'];
 
+$qualite_video = $_POST['qualite_video'];
+
 
 $date_created = date("Y-m-d");
 
@@ -37,7 +39,7 @@ if ($_POST['action_module'] == 'all_films_ligne') {
 }
 try {
 
-    $sql = " INSERT INTO  LinksServersFichierVod  (id_fichier,identifiant_streaming,id_serveur,url,date_created) VALUES (:param1,:param2,:param3,:param4,:param5)";
+    $sql = " INSERT INTO  LinksServersFichierVod  (id_fichier,identifiant_streaming,id_serveur,url,date_created,qualite) VALUES (:param1,:param2,:param3,:param4,:param5,:param6)";
 
 
 
@@ -52,6 +54,8 @@ try {
     $stmt->bindParam(':param4', $url);
 
     $stmt->bindParam(':param5', $date_created);
+
+    $stmt->bindParam(':param6', $qualite_video);
 
     $stmt->execute();
 } catch (Exception $e1) {

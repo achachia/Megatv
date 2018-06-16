@@ -103,14 +103,17 @@ if (!empty($_POST['button_register'])) {
 
 
         $date_created = date("Y-m-d");
+        
+        $qualite_video = $_POST['qualite_video'];
 
         try {
 
-            $sql = " INSERT INTO  LinksServersEpisodesSeriesTvFr (id_fichier,nom_fichier,id_serveur,url,date_created) VALUES ('" . $MaxId . "','" . $nom_fichier . "','" . $id_serveur . "','" . $url . "','" . $date_created . "') ";
+            $sql = " INSERT INTO  LinksServersEpisodesSeriesTvFr (id_fichier,nom_fichier,id_serveur,url,date_created,qualite) VALUES ('" . $MaxId . "','" . $nom_fichier . "','" . $id_serveur . "','" . $url . "','" . $date_created . "','" . $qualite_video . "') ";
 
             $resultat = $cxn->prepare($sql);
 
             $resultat->execute();
+            
         } catch (Exception $e) {
 
             echo $e->getMessage();

@@ -38,6 +38,8 @@ if (isset($_GET['id_serie']) && isset($_GET['nom_serie']) && isset($_GET['nom_sa
 
 $liste_serveurs_vod=listeServeursVod();
 
+$listeQualiteVod=listeQualiteVod();
+
        
 
 include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";

@@ -1,7 +1,39 @@
 <?php
 
 //modele
+function listeQualiteVod() {
 
+    global $cxn;
+
+    $liste = array();
+
+    try {
+
+        $sql = " SELECT  id_qualite,qualite   FROM  QualiteVod    ";
+
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+
+        $i = 0;
+
+        while ($enregistrement = $resultat->fetch()) {
+
+            $liste[$i]['id_qualite'] = $enregistrement['id_qualite'];
+
+            $liste[$i]['nom_qualite'] = $enregistrement['qualite']; 
+
+
+            $i++;
+        }
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
+    }
+
+    return $liste;
+}
 function liste_films_en_ligne() {
 
     global $cxn;
@@ -176,6 +208,37 @@ function getListeGenreFilms() {
 
             $liste[$i]['nom_section'] = $enregistrement['nom_section'];
 
+
+            $i++;
+        }
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
+    }
+
+    return $liste;
+}
+
+function getListeGenreDocs() {
+
+    global $cxn;
+
+    $liste = array();
+
+    try {
+
+        $sql = " SELECT   nom    FROM   genresVideoDocs  ";
+
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+
+        $i = 0;
+
+        while ($enregistrement = $resultat->fetch()) {
+
+            $liste[$i]['nom_genre'] = $enregistrement['nom'];
 
             $i++;
         }

@@ -2,6 +2,40 @@
 
 //modele
 
+function listeQualiteVod() {
+
+    global $cxn;
+
+    $liste = array();
+
+    try {
+
+        $sql = " SELECT  id_qualite,qualite   FROM  QualiteVod    ";
+
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+
+        $i = 0;
+
+        while ($enregistrement = $resultat->fetch()) {
+
+            $liste[$i]['id_qualite'] = $enregistrement['id_qualite'];
+
+            $liste[$i]['nom_qualite'] = $enregistrement['qualite']; 
+
+
+            $i++;
+        }
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
+    }
+
+    return $liste;
+}
+
 function liste_films_en_ligne() {
 
     global $cxn;

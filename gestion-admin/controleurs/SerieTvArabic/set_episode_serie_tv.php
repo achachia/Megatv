@@ -12,7 +12,7 @@ $titre_originale = $_POST['titre_originale'];
 
 $identifiant_streaming = $_POST['identifiant_streaming'];
 
-
+$qualite_video = $_POST['qualite_video'];
 
 $id_serie = $_POST['id_serie'];
 
@@ -48,12 +48,12 @@ if (!empty($_POST['button_register'])) {
         if (!empty($_POST['id_saison'])) {
             
 
-            $sql = " INSERT INTO  EpisodesSerieTvEtrangere (titre_originale,identifiant_streaming,id_saison,id_serie,id_serveur,url) VALUES ('" . $titre_originale . "','" . $identifiant_streaming . "','" . $id_saison . "','" . $id_serie . "','" . $id_serveur . "','" . $url . "')";
+            $sql = " INSERT INTO  EpisodesSerieTvEtrangere (titre_originale,identifiant_streaming,id_saison,id_serie,id_serveur,url,qualite) VALUES ('" . $titre_originale . "','" . $identifiant_streaming . "','" . $id_saison . "','" . $id_serie . "','" . $id_serveur . "','" . $url . "','" . $qualite_video . "')";
             
         } else {
             
 
-            $sql = " INSERT INTO  EpisodesSerieTvEtrangere (titre_originale,identifiant_streaming,id_serie,id_serveur,url) VALUES ('" . $titre_originale . "','" . $identifiant_streaming . "','" . $id_serie . "','" . $id_serveur . "','" . $url . "')";
+            $sql = " INSERT INTO  EpisodesSerieTvEtrangere (titre_originale,identifiant_streaming,id_serie,id_serveur,url,qualite) VALUES ('" . $titre_originale . "','" . $identifiant_streaming . "','" . $id_serie . "','" . $id_serveur . "','" . $url . "','" . $qualite_video . "')";
         }
 
 
@@ -61,6 +61,7 @@ if (!empty($_POST['button_register'])) {
         $stmt = $cxn->prepare($sql);
 
         $stmt->execute();
+        
     } catch (Exception $e) {
 
         $etat = FALSE;
