@@ -812,7 +812,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
 
                                         $tr.="<option value='" . $qualite['id_qualite'] . "' ";
 
-                                        $tr.= ">" . $value3['nom_qualite'] . "</option>";
+                                        $tr.= ">" . $qualite['nom_qualite'] . "</option>";
                                     }
 
                                     echo $tr;
