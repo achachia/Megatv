@@ -44,6 +44,19 @@ $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $idtmd 
 // Décode le JSON
 $json_data = json_decode($json_source);
 
+/* * ************************************************ */
+
+$tab = explode("-", $json_data->release_date);
+
+$annee_release = $tab[0];
+
+$poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" . $json_data->poster_path;
+
+$overview = $json_data->overview;
+
+
+/* * ************************************************* */
+
 
 $genres = '';
 
@@ -80,9 +93,7 @@ if (!empty($_POST['add_serveur'])) {
 
     try {
 
-        $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre) VALUES (:param1,:param2,:param3,:param4,:param5,:param6)";
-        
-      
+        $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre,annee_release,overview,poster) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -98,8 +109,13 @@ if (!empty($_POST['add_serveur'])) {
 
         $stmt->bindParam(':param6', $genres);
 
+        $stmt->bindParam(':param7', $annee_release);
+
+        $stmt->bindParam(':param8', $overview);
+
+        $stmt->bindParam(':param9', $poster);
+
         $stmt->execute();
-        
     } catch (Exception $e1) {
 
         echo $e1->getMessage();
@@ -108,7 +124,7 @@ if (!empty($_POST['add_serveur'])) {
 
         $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
     }
-      /*     * ******************************************************************* */
+    /*     * ******************************************************************* */
 
     try {
 
@@ -153,7 +169,6 @@ if (!empty($_POST['add_serveur'])) {
         $resultat = $cxn->prepare($sql);
 
         $resultat->execute();
-        
     } catch (Exception $e) {
 
         echo $e->getMessage();
