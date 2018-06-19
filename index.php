@@ -105,7 +105,7 @@ require_once './connection/config.php';
                             <a href="http://megatv.fr/librairie/Html2pdf/generer_pdf/liste_chaines_iptv.php" target="_blank"><h1 class="about-heading">Consulter la liste complete des bouquets IPTV <i class="fa fa-download"></i>
 </h1></a>
                             </p>
-                            <img class="about-img" src="theme/images/nos_chaines_tv.png"    alt="52de15aa5d3566c14300015e_about.png" />
+                            <img class="about-img" src="theme/images/nos_chaines_tv.png"    alt="52de15aa5d3566c14300015e_about.png" />   
                         </div>
                     </div>
                 </div>
