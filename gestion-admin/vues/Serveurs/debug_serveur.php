@@ -1,36 +1,4 @@
-<div>
-    <?php
-    $strStart = '2013-06-19 21:47:40';
-    $strEnd = '2013-06-20 21:48:30';
 
-    $dteStart = new DateTime($strStart);
-    $dteEnd = new DateTime($strEnd);
-
-    $dteDiff = $dteStart->diff($dteEnd);
-
-    $nbr_seconde = intval($dteDiff->s);
-
-    $nbr_minute = intval($dteDiff->i);
-
-    $nbr_minute = intval($dteDiff->i);
-
-    $nbr_heure = intval($dteDiff->h);
-
-    $nbr_jour = intval($dteDiff->d);
-
-    $nbre_seconde_totale = $nbr_jour * 86400 + $nbr_heure * 3600 + $nbr_minute * 60 + $nbr_seconde;
-
-    echo "total seconde:" . $nbr_seconde . '<br/>';
-
-    echo "total jour:" . $nbr_jour . '<br/>';
-
-    echo "total heure:" . $nbr_heure . '<br/>';
-
-    echo "total minute:" . $nbr_minute . '<br/>';
-
-    echo "total :" . $nbre_seconde_totale.'secondes';
-    ?>
-</div>
 <div class="row" style="margin-top: 5%">
     <form class="form-horizontal" id="debug_server" name="debug_server" method="GET" action="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur">
 

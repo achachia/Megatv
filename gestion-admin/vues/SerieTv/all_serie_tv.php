@@ -1,3 +1,29 @@
+
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <?php if (isset($_GET['message']) && $_GET['message'] == 'echec') { ?>
+
+            <div class="alert alert-warning alert-dismissible  show" role="alert">
+                <strong>Votre opération a été échoué.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        <?php } ?>
+        <?php if (isset($_GET['message']) && $_GET['message'] == 'success') { ?>
+            <div class="alert alert-success alert-dismissible  show" role="alert">
+                <strong>Votre opération a été enregistré avec succées</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } ?>
+
+    </div>
+</div>
 <?php if (sizeof($liste_serie_non_enregistre) > 0) { ?>
     <div class="row">
 
