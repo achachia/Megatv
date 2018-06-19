@@ -12,15 +12,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     $root_projet = 'C:\wamp64\www\MegaTV-Backend';
 } else {
 
-    $dns = 'mysql:host=localhost:3307;dbname=megatv_ip';
 
-    $user = 'achachia';
-
-    $password = '7130chachia';
-
-    $host = 'http://' . $_SERVER['SERVER_NAME'];
-    
-    $root_projet = '/volume1/web/Megacours/MegacoursProcedural';
 }
 
 $url_espace_client=$host.'/espace_client';
