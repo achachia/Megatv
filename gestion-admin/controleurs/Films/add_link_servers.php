@@ -58,6 +58,8 @@ if (!empty($_POST['url'])) {
     $stmt->bindParam(':param5', $date_created);
 
     $stmt->bindParam(':param6', $qualite_video);
+    
+    $stmt->execute();$stmt->execute();
         
     } catch (Exception $e1) {
 
