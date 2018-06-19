@@ -96,7 +96,7 @@ require_once './connection/config.php';
                     <div id="about-animation">
                         <div class="wrap">
                             <div class="about">
-                                <h1 class="about-heading">Liste des chaines IPTV disponibles00</h1>            
+                                <h1 class="about-heading">Liste des chaines IPTV disponibles</h1>            
                                 <div class="sepreater"></div>
                             </div>
                             <p class="about-des">Découvrez notre catalogue de chaines Françaises et étrangères…<br/>
