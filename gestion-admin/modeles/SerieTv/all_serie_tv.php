@@ -1,6 +1,38 @@
 <?php
 
 //modele
+
+function updateInfosSerie($id_serie, $idtmd) {
+
+    global $cxn;
+
+    $json_source = file_get_contents('https://api.themoviedb.org/3/tv/' . $idtmd . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
+
+
+// Decode le JSON
+    $json_data = json_decode($json_source);
+
+    $tab = explode("-", $json_data->first_air_date);
+
+    $annee_release = $tab[0];
+
+    $poster_path = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" . $json_data->poster_path;
+
+    $overview = $json_data->overview;
+
+    try {
+
+        $sql = " UPDATE  SerieTvFr  SET  poster_path='" . $poster_path . "',overview='" . $overview . "',annee_release='" . $annee_release . "'   WHERE  id_serie='" . $id_serie . "' ";
+
+        $resultat = $cxn->prepare($sql);
+
+        $resultat->execute();
+    } catch (Exception $e) {
+
+        echo $e->getMessage();
+    }
+}
+
 function listeQualiteVod() {
 
     global $cxn;
@@ -22,7 +54,7 @@ function listeQualiteVod() {
 
             $liste[$i]['id_qualite'] = $enregistrement['id_qualite'];
 
-            $liste[$i]['nom_qualite'] = $enregistrement['qualite']; 
+            $liste[$i]['nom_qualite'] = $enregistrement['qualite'];
 
 
             $i++;
@@ -34,6 +66,7 @@ function listeQualiteVod() {
 
     return $liste;
 }
+
 function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
     global $cxn;
@@ -100,7 +133,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
                     /*                     * ************************************************************** */
 
-                 
+
 
                     /*                     * ***************************************************************** */
                 }
@@ -127,8 +160,6 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
         return $liste_episodes_saison_non_enregistre;
     }
 }
-
-
 
 function liste_saisons($id_serie, $nom_serie, $mod) {
 
@@ -261,16 +292,18 @@ function liste_serie($mod) {
 
                         /*                         * ************************ Progression d'enregistrement ************************************** */
 
-                       $nbr = liste_fichiers($enregistrement['nom_serie']);
+                        $nbr = liste_fichiers($enregistrement['nom_serie']);
 
-                       $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
+                        $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
 
-                       $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
+                        $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
 
 
                         //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
 
                         /*                         * **************************************************************** */
+
+                        updateInfosSerie($enregistrement['id_serie'], $enregistrement['id_TMD']);
                     }
                 } catch (Exception $e) {
 
@@ -367,6 +400,7 @@ function liste_fichiers($serie) {
 
     return $nbr;
 }
+
 function listeServeursVod() {
 
     global $cxn;
@@ -404,7 +438,6 @@ function listeServeursVod() {
 
     return $liste;
 }
-
 ?>
 
 

@@ -1153,7 +1153,7 @@ if (isset($liste_episodes_enregistre) && sizeof($liste_episodes_enregistre) > 0)
                                         <th scope="row"  style="color:blue">ACTION :</th>
                                         <td>
                                             <a href="<?= $url_espace_admin; ?>/controleurs/SerieTvArabic/delete_links_serveur.php?id_link=<?= $serveur['id_link']; ?>&id_serie=<?= $episode_enregistre['id_serie']; ?>&nom_serie=<?= $episode_enregistre['nom_serie']; ?>&optionSaisonTV=<?= $episode_enregistre['optionSaisonTV']; ?>&id_saison=<?= $episode_enregistre['id_saison']?>&nom_saison=<?= $episode_enregistre['nom_saison']?>"><button    class="btn btn-danger btn-md"  > Supprimer </button></a>
-                                            <a href="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur?id_link=<?= $serveur['id_link']; ?>&=identifiant_streaming=<?= $serveur['identifiant_streaming'] ?>&serveur_video=<?= $serveur['id_serveur'] ?>"><button    class="btn btn-primary btn-md"  > Checker le serveur </button></a>
+                                            <a  target="_blank"  href="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur&id_link=<?= $serveur['id_link']; ?>&=identifiant_streaming=<?= $serveur['identifiant_streaming'] ?>&serveur_video=<?= $serveur['id_serveur'] ?>"><button    class="btn btn-primary btn-md"  > Checker le serveur </button></a>
                                         </td>
                                     </tr>
                                 </tbody>
