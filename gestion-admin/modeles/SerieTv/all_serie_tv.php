@@ -303,7 +303,7 @@ function liste_serie($mod) {
 
                         /*                         * **************************************************************** */
 
-                        updateInfosSerie($enregistrement['id_serie'], $enregistrement['id_TMD']);
+                      //  updateInfosSerie($enregistrement['id_serie'], $enregistrement['id_TMD']);
                     }
                 } catch (Exception $e) {
 
