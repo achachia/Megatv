@@ -318,17 +318,23 @@ if (isset($liste_films_en_ligne) && sizeof($liste_films_en_ligne) > 0) {
                                         <td><?= $serveur['identifiant_streaming'] ?></td>
 
                                     </tr>
+                                   <?php if($serveur['url']!=''){ ?>
                                     <tr>
                                         <th scope="row"  style="color:blue">URL :</th>
                                         <td><?= $serveur['url'] ?></td>
                                     </tr>
+                                    
+                                    <?php } ?>
                                     <tr>
                                         <th scope="row"  style="color:blue">ACTIVATION :</th>
                                         <td><?= $serveur['activation'] ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"  style="color:blue">ACTION :</th>
-                                        <td><a href="<?= $url_espace_admin; ?>/controleurs/Films/delete_links_serveur.php?id_link=<?= $serveur['id_link']; ?>"><button    class="btn btn-danger btn-md"  > Supprimer </button></a></td>
+                                        <td>
+                                            <a href="<?= $url_espace_admin; ?>/controleurs/Films/delete_links_serveur.php?id_link=<?= $serveur['id_link']; ?>"><button    class="btn btn-danger btn-md"  > Supprimer </button></a>
+                                            <a href="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur?id_link=<?= $serveur['id_link']; ?>&identifiant_streaming=<?= $serveur['identifiant_streaming'] ?>&serveur_video=<?= $serveur['id_serveur'] ?>"><button    class="btn btn-primary btn-md"  > Checker le serveur </button></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>        

@@ -1,4 +1,5 @@
 <?php
+
 function listeServeursVod() {
 
     global $cxn;
@@ -36,7 +37,6 @@ function listeServeursVod() {
 
     return $liste;
 }
-
 
 function get_link_vidoza($identifiant, $nbr_lettres) {
 
@@ -103,9 +103,9 @@ function get_link_vidoza($identifiant, $nbr_lettres) {
     }
 }
 
-function get_link_uptostream($identifiant,$nbr_lettres) {
-    
-    //$nbr_lettres=117
+function get_link_uptostream($identifiant, $nbr_lettres) {
+
+    //$nbr_lettres=41
 
     $wikipediaURL = 'https://uptostream.com/iframe/' . $identifiant;
 
@@ -144,20 +144,111 @@ function get_link_uptostream($identifiant,$nbr_lettres) {
 
                 if (strpos($contenu, 'sources') !== FALSE) {
 
-                    // echo $key1;
+                    /*                     * *************************** DEBUG******************************* */
+                    // echo $key1.'<br/>';
                     //var_dump($contenu);
                     //echo '<br/>';
 
-                    $parsing.=$key1 . '-';
+                    /*                     * ***************************************************** */
+
+                    $contenu_script = explode(";", $contenu);
+
+                    foreach ($contenu_script as $key2 => $value2) {
+
+                        if (strpos($value2, 'window.sources = JSON.parse') !== FALSE) {
+
+                            /*                             * *************************** DEBUG******************************* */
+                            // echo $key2.'<br/>';
+                            //var_dump($value2);
+                            //echo '<br/>';
+
+                            /*                             * ***************************************************** */
+
+                            $parsing.=$key2 . '-';
+
+                            $parsing.=$nbr_lettres . '-' . $identifiant;
+
+                            $chaine = substr($value2, $nbr_lettres);
+
+                            $chaine = substr($chaine, 0, -1);
+
+                            $lien1 = stripslashes($chaine);
+
+                            $contenu_affiche.=$parsing . "</br/>" . $contenu . "<br/>" . $lien1;
+
+                            echo $contenu_affiche;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function get_link_vdk($identifiant, $nbr_lettres) {
+
+    //$wikipediaURL = 'https://www.kvid.org/v2/vid-5af030210b509';
+//https://filmstreaming1.cc/
+
+    $wikipediaURL = 'https://www.kvid.org/v2/vid-' . $identifiant;
+
+    $nbr_lettres = 9;
+
+//echo $wikipediaURL;
+//On initialise cURL
+    $ch = curl_init();
+//On lui transmet la variable qui contient l'URL
+    curl_setopt($ch, CURLOPT_URL, $wikipediaURL);
+//On lui demdande de nous retourner la page
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//On envoie un user-agent pour ne pas être considéré comme un bot malicieux
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Le blog de Samy Dindane (www.dinduks.com');
+//On exécute notre requête et met le résultat dans une variable
+    $resultat = curl_exec($ch);
+//On ferme la connexion cURL
+    curl_close($ch);
+
+//On crée un nouveau document DOMDocument
+    $wikipediaPage = new DOMDocument();
+//On y charge le contenu qu'on a récupéré avec cURL
+    $wikipediaPage->loadHTML($resultat);
+
+    $parsing = '';
+
+    $contenu_affiche = '';
+
+    foreach ($wikipediaPage->getElementsByTagName('script') as $key => $script) {
+
+
+        if (strpos($script->textContent, 'playerInstance = jwplayer("kvideo")') !== FALSE) {
+
+
+            $contenus = explode(",", $script->textContent);
+
+
+            foreach ($contenus as $key1 => $contenu) {
+
+
+
+                if (strpos($contenu, '.mp4') !== FALSE) {
+
+
+                    /*                     * *************************** DEBUG******************************* */
+                    // echo $key1.'<br/>';
+                    //var_dump($contenu);
+                    //echo '<br/>';
+
+                    /*                     * ***************************************************** */
+
+                    $parsing.=$key2 . '-';
 
                     $parsing.=$nbr_lettres . '-' . $identifiant;
 
-                    $chaine = substr($contenu, $nbr_lettres);
+                    $chaine = substr($value2, $nbr_lettres);
 
                     $chaine = substr($chaine, 0, -1);
 
                     $lien1 = stripslashes($chaine);
-
 
                     $contenu_affiche.=$parsing . "</br/>" . $contenu . "<br/>" . $lien1;
 

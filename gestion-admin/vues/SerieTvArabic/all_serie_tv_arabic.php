@@ -47,7 +47,7 @@
 </div>
 
 <?php if (sizeof($liste_serie_non_enregistre) > 0) { ?>
-    <div class="row">
+    <div class="row" style="margin-left:100px">
 
         <div class="col-lg-12">
 
@@ -58,7 +58,7 @@
                 <div class="panel-body">
 
 
-                    <table   class="dataTable_tv"  id="liste_serie_non_enregistre" name="liste_serie_non_enregistre" class="table table-striped table-hover"> 
+                    <table     id="liste_serie_non_enregistre" name="liste_serie_non_enregistre" class="table table-striped table-hover table-bordered"> 
 
                         <thead  style="background-color:#D8ECF7">
 
@@ -130,11 +130,13 @@
 
                         <thead  style="background-color:#D0D1D2">
 
-                            <tr>                          
+                            <tr> 
+
+                                <th>JAQUETTE SERIE</th> 
 
                                 <th>NOM SERIE</th> 
 
-                                                                                            <!--                                <th>Progression</th>-->
+                                                                                                                    <!--                                <th>Progression</th>-->
 
                                 <th class="sort-alpha">ACTION</th>
 
@@ -153,6 +155,8 @@
                                 foreach ($liste_serie_enregistre as $value) {
 
                                     $tr .= '<tr>';
+
+                                    $tr .= '<td><img src="' . $value['poster_path'] . '" class="img-rounded"  width="100" height="100"></td>';
 
                                     $tr .= '<td style="text-align:center;padding-top:2%">' . $value['nom_serie'] . '</td>';
 
@@ -292,9 +296,7 @@
 
                             <thead style="color:#red">
 
-                                <tr>  
-
-                                    <th>Num SAISON</th>
+                                <tr>                                    
 
                                     <th>Nom SAISON</th>                            
 
@@ -314,15 +316,13 @@
 
                                     $tr .= '<tr>';
 
-                                    $tr .= '<td>' . $value['Num_saison'] . '</td>';
-
                                     $tr .= '<td>' . $value['nom_saison'] . '</td>';
 
                                     $tr .= '<td><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  style="margin:5px" > EDITER </button>';
 
                                     $tr .= '<a href="' . $url_espace_admin . '/index.php?module=SerieTvArabic&action=all_serie_tv_arabic&id_serie=' . $value['id_serie'] . '&nom_serie=' . $_GET['nom_serie'] . '&id_saison=' . $value['id_saison'] . '&nom_saison=' . $value['nom_saison'] . '"><button   class="btn btn-primary btn-lg"  > CONSULTER LES EPISODES </button></a>';
 
-                                    $tr .= '<button data-toggle="modal" data-target="#myModal_add_episode"  class="btn btn-success btn-lg" style="margin:5px" > AJOUTER UNE EPISODE TV </button></td>';
+                                    $tr .= '<button data-toggle="modal" data-target="#myModal_add_episode_saison_' . $j . '"  class="btn btn-success btn-lg" style="margin:5px" > AJOUTER UNE EPISODE TV </button></td>';
 
 
                                     $tr .= '</tr>';
@@ -363,7 +363,7 @@
 <?php if (isset($liste_episodes_enregistre) && sizeof($liste_episodes_enregistre) > 0) { ?>
 
 
-    <div class="row"  style="margin-left:200px">
+    <div class="row"  style="margin-left:20%">
 
         <div class="col-lg-12">
 
@@ -380,11 +380,7 @@
 
                             <tr>                          
 
-                                <th>Titre originale</th>
-
-                                <th>IDENTIFIANT</th>   
-
-                                <th>NOM SERVEUR </th>
+                                <th>Titre originale</th>                      
 
                                 <th class="sort-alpha">ACTION</th>
 
@@ -404,11 +400,12 @@
 
                                 $tr .= '<td>' . $value['titre_originale'] . '</td>';
 
-                                $tr .= '<td>' . $value['identifiant_streaming'] . '</td>';
+                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button>';
 
-                                $tr .= '<td>' . $value['nom_serveur'] . '</td>';
+                                $tr .= '<button  style="margin:5px"  data-toggle="modal" data-target="#myModal_list_serveurs_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter les serveurs </button>';
 
-                                $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button></td>';
+
+                                $tr .= '<button    data-toggle="modal" data-target="#myModal_add_link_serveur_' . $j . '"  class="btn btn-primary btn-lg"  > ADD LINK SERVEUR </button></td>';
 
 
                                 $tr .= '</tr>';
@@ -720,11 +717,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                 <form class="form-horizontal" id="form1_add_episode" name="form1_add_episode" method="POST" action="./controleurs/SerieTvArabic/set_episode_serie_tv.php">
                     <div class="modal-header">
 
-                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer un episode [<?= $_GET['nom_serie']; ?>]<?php
-                            if (!empty($_GET['nom_saison'])) {
-                                echo '[' . $_GET['nom_saison'] . ']';
-                            }
-                            ?></h3>
+                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une episode [<?= $_GET['nom_serie']; ?>]</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -826,15 +819,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
 
                         <input type="hidden" name="nom_serie" value="<?= $_GET['nom_serie']; ?>">
 
-                        <input type="hidden" name="saisonTV" value="<?= $_GET['saisonTV']; ?>">
-
-    <?php if ($_GET['saisonTV'] != 'no') { ?>
-
-                            <input type="hidden" name="id_saison" value="<?= $_GET['id_saison']; ?>">
-
-                            <input type="hidden" name="nom_saison" value="<?= $_GET['nom_saison']; ?>">
-
-    <?php } ?> 
+                        <input type="hidden" name="saisonTV" value="<?= $_GET['saisonTV']; ?>">                   
 
                     </div>
                     <div class="modal-footer">
@@ -846,6 +831,358 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
             </div>
         </div>
     </div>
+<?php } ?>  
+
+<?php if (isset($liste_saisons_enregistre) && sizeof($liste_saisons_enregistre) > 0 && $_GET['saisonTV'] != 'no') { ?>
+
+    <?php
+    $j = 1;
+    foreach ($liste_saisons_enregistre as $saison) {
+        ?>
+
+        <div id="myModal_add_episode_saison_<?= $j ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="form-horizontal" id="form1_add_episode-saison" name="form1_add_episode-saison" method="POST" action="./controleurs/SerieTvArabic/set_episode_serie_tv.php">
+                        <div class="modal-header">
+
+                            <h3 class="modal-title" id="exampleModalLabel" style="color:blue">Enregistrer une episode [<?= $_GET['nom_serie']; ?>][<?= $saison['nom_saison'] ?>]</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="col-sm-12">
+
+                                <label class="control-label" for="titre_originale_episode" style="color:blue;font-size:16px">Titre originale: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="titre_originale"  name="titre_originale"   value="" >
+
+                                </div>
+                            </div>                                
+
+
+
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="url_episode" style="color:blue;font-size:16px">URL: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label> 
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="url"  name="url"   value="" >
+
+                                </div>
+                            </div> 
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="identifiant_streaming_episode" style="color:blue;font-size:16px">IDENTIFIANT: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label> 
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="identifiant_streaming"  name="identifiant_streaming"   value="" >
+
+                                </div>
+                            </div> 
+                            <div class="form-group"  style="padding-top:1%">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="serveur" style="color:blue;font-size:16px">SERVEUR: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" name="serveur_film"  id="serveur_film" >
+
+                                        <?php
+                                        $tr = '<option value="">Select-serveur</option>';
+
+                                        foreach ($liste_serveurs_vod as $serveur) {
+
+
+                                            $tr.="<option value='" . $serveur['id_serveur'] . "' ";
+
+                                            $tr.= ">" . $serveur['nom_serveur'] . '-' . $serveur['emplacement_serveur'] . "</option>";
+                                        }
+
+                                        echo $tr;
+                                        ?>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-group"  style="padding-top:1%">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="qualite_video_<?= $j; ?>" style="color:blue;font-size:16px">QUALITE VIDEO: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <select class="form-control" name="qualite_video"  id="qualite_video" >
+
+                                        <?php
+                                        $tr = '<option value="">Select-qualite</option>';
+
+                                        foreach ($listeQualiteVod as $qualite) {
+
+
+                                            $tr.="<option value='" . $qualite['id_qualite'] . "' ";
+
+                                            $tr.= ">" . $qualite['nom_qualite'] . "</option>";
+                                        }
+
+                                        echo $tr;
+                                        ?>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                            <input type="hidden" name="id_serie" value="<?= $_GET['id_serie']; ?>">                   
+
+                            <input type="hidden" name="nom_serie" value="<?= $_GET['nom_serie']; ?>">
+
+                            <input type="hidden" name="saisonTV" value="yes">
+
+                            <input type="hidden" name="id_saison" value="<?= $saison['id_saison']; ?>">
+
+                            <input type="hidden" name="nom_saison" value="<?= $saison['nom_saison']; ?>"> 
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Fermer</button>
+                            <button type="submit" class="btn btn-danger"  name="button_delete"  value="delete_file">Supprimer episode</button>
+                            <button type="submit" class="btn btn-primary" name="button_register"  value="register_episode">Enregistrer episode</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <?php } ?>
 <?php } ?>   
+
+
+<?php
+$j = 1;
+foreach ($liste_episodes_enregistre as $episode_enregistre) {
+    ?>
+    <div id="myModal_add_link_serveur_<?= $j; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-horizontal" id="form_add_link_<?= $j; ?>" name="form_add_link_<?= $j; ?>" method="POST" action="./controleurs/SerieTvArabic/add_link_servers.php">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">AJOUTER UN SERVEUR </h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group"  style="padding-top:1%">
+                            <div class="col-sm-12">
+                                <label class="control-label" for="identifiant_<?= $j; ?>" style="color:blue;font-size:16px">Identifiant streaming: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="identifiant_streaming"  name="identifiant_streaming"  placeholder="Entrer identifiant streaming" value="" >
+
+                            </div>
+                        </div> 
+                        <div class="form-group"  style="padding-top:1%">
+                            <div class="col-sm-12">
+                                <label class="control-label" for="serveur_<?= $j; ?>" style="color:blue;font-size:16px">SERVEUR: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <select class="form-control" name="serveur_film"  id="serveur_film" >
+
+                                    <?php
+                                    $tr = '<option value="">Select-serveur</option>';
+
+                                    foreach ($liste_serveurs_vod as $serveur) {
+
+
+                                        $tr.="<option value='" . $serveur['id_serveur'] . "' ";
+
+                                        $tr.= ">" . $serveur['nom_serveur'] . '-' . $serveur['emplacement_serveur'] . "</option>";
+                                    }
+
+                                    echo $tr;
+                                    ?>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group"  style="padding-top:1%">
+                            <div class="col-sm-12">
+                                <label class="control-label" for="qualite_video_<?= $j; ?>" style="color:blue;font-size:16px">QUALITE VIDEO: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <select class="form-control" name="qualite_video"  id="qualite_video" >
+
+                                    <?php
+                                    $tr = '<option value="">Select-qualite</option>';
+
+                                    foreach ($listeQualiteVod as $qualite) {
+
+
+                                        $tr.="<option value='" . $qualite['id_qualite'] . "' ";
+
+                                        $tr.= ">" . $qualite['nom_qualite'] . "</option>";
+                                    }
+
+                                    echo $tr;
+                                    ?>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group"  style="padding-top:1%">
+                            <div class="col-sm-12">
+                                <label class="control-label" for="url_<?= $j; ?>" style="color:blue;font-size:16px">URL: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="url"  name="url"   value="" >
+
+                            </div>
+                        </div> 
+
+
+                        <input type="hidden"  name="id_fichier"  value="<?= $episode_enregistre['id_episode']; ?>">
+
+                        <input type="hidden"  name="id_serie"  value="<?= $episode_enregistre['id_serie']; ?>">
+
+                        <input type="hidden"  name="nom_serie"  value="<?= $episode_enregistre['nom_serie']; ?>">
+
+                        <input type="hidden"  name="optionSaisonTV"  value="<?= $episode_enregistre['optionSaisonTV']; ?>">
+
+                       <?php if ($episode_enregistre['optionSaisonTV'] == 'yes') { ?>
+
+                       <input type="hidden"  name="id_saison"  value="<?= $episode_enregistre['id_saison']; ?>">
+                       
+                       <input type="hidden"  name="nom_saison"  value="<?= $episode_enregistre['nom_saison']; ?>">
+
+                      <?php } ?>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Fermer</button>                         
+                        <button type="submit" class="btn btn-primary" name="button_update"  value="update_file">Enregistrer le link</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <?php
+    $j++;
+}
+?>
+<?php
+if (isset($liste_episodes_enregistre) && sizeof($liste_episodes_enregistre) > 0) {
+
+
+    $j = 1;
+
+    foreach ($liste_episodes_enregistre as $episode_enregistre) {
+        ?>
+
+        <div id="myModal_list_serveurs_<?= $j; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel" style="color:blue">LA LISTE DES SERVEURS</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+
+                        <?php
+                        $k = 1;
+                        foreach ($episode_enregistre['list_serveurs'] as $serveur) {
+                            ?>
+
+                            <h3 style="color:red">SERVEUR N° <?= $k ?></h3>
+
+                            <table class="table table-bordered">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" style="color:blue">DATE CREATION :</th>
+                                        <td><?= $serveur['date_created'] ?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"  style="color:blue">NOM SERVEUR :</th>
+                                        <td><?= $serveur['nom_serveur'] ?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"  style="color:blue">IDENTIFIANT :</th>
+                                        <td><?= $serveur['identifiant_streaming'] ?></td>
+
+                                    </tr>
+            <?php if ($serveur['url'] != '') { ?>
+                                        <tr>
+                                            <th scope="row"  style="color:blue">URL :</th>
+                                            <td><?= $serveur['url'] ?></td>
+                                        </tr>
+
+            <?php } ?>
+                                    <tr>
+                                        <th scope="row"  style="color:blue">ACTIVATION :</th>
+                                        <td><?= $serveur['activation'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"  style="color:blue">ACTION :</th>
+                                        <td>
+                                            <a href="<?= $url_espace_admin; ?>/controleurs/SerieTvArabic/delete_links_serveur.php?id_link=<?= $serveur['id_link']; ?>&id_serie=<?= $episode_enregistre['id_serie']; ?>&nom_serie=<?= $episode_enregistre['nom_serie']; ?>&optionSaisonTV=<?= $episode_enregistre['optionSaisonTV']; ?>&id_saison=<?= $episode_enregistre['id_saison']?>&nom_saison=<?= $episode_enregistre['nom_saison']?>"><button    class="btn btn-danger btn-md"  > Supprimer </button></a>
+                                            <a href="<?= $url_espace_admin; ?>/index.php?module=Serveurs&action=debug_serveur?id_link=<?= $serveur['id_link']; ?>&=identifiant_streaming=<?= $serveur['identifiant_streaming'] ?>&serveur_video=<?= $serveur['id_serveur'] ?>"><button    class="btn btn-primary btn-md"  > Checker le serveur </button></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>        
+
+
+                            <?php
+                            $k++;
+                        }
+                        ?>
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Fermer</button>     
+
+                    </div>
+
+                </div>
+            </div>
+        </div>   
+
+        <?php
+        $j++;
+    }
+    ?>
+<?php } ?> 
+
 
 

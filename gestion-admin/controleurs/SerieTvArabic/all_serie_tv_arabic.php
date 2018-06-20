@@ -31,32 +31,39 @@ if (isset($_GET['id_serie']) && isset($_GET['nom_serie'])) {
 
     $nom_serie = $_GET['nom_serie'];
 
-    if ($_GET['saisonTV'] != 'no') {
-
-
+    if ($_GET['saisonTV'] == 'no') {
 
         $liste_episodes = liste_episodes($id_serie, $nom_serie);
+        
     } else {
 
-        $nom_saison = $_GET['nom_saison'];
 
-        $liste_episodes = liste_episodes($id_serie, $nom_serie, $nom_saison);
+        if (!empty($_GET['nom_saison'])) {            
+ 
+
+            $nom_saison = $_GET['nom_saison'];
+            
+            $id_saison = $_GET['id_saison'];
+
+            $liste_episodes = liste_episodes($id_serie, $nom_serie, $nom_saison, $id_saison);
+        }
     }
 
 
+    if (!empty($liste_episodes)) {       
+        
 
-    $liste_episodes_non_enregistre = $liste_episodes['episodes_non_enregistre'];
+        $liste_episodes_non_enregistre = $liste_episodes['episodes_non_enregistre'];
 
-    $liste_episodes_enregistre = $liste_episodes['episodes_enregistre'];
-
-    
+        $liste_episodes_enregistre = $liste_episodes['episodes_enregistre'];
+    }
 }
 
 
 
 $liste_serveurs_vod = listeServeursVod();
 
-$listeQualiteVod=listeQualiteVod();
+$listeQualiteVod = listeQualiteVod();
 
 include dirname(dirname(dirname(__FILE__))) . chemin_vue . $module . "/" . $action . ".php";
 ?>

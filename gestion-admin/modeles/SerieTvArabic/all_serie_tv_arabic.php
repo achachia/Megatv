@@ -22,7 +22,7 @@ function listeQualiteVod() {
 
             $liste[$i]['id_qualite'] = $enregistrement['id_qualite'];
 
-            $liste[$i]['nom_qualite'] = $enregistrement['qualite']; 
+            $liste[$i]['nom_qualite'] = $enregistrement['qualite'];
 
 
             $i++;
@@ -34,6 +34,7 @@ function listeQualiteVod() {
 
     return $liste;
 }
+
 function liste_serie() {
 
     global $cxn;
@@ -107,7 +108,7 @@ function liste_serie() {
 
             $liste_serie_enregistre[$j]['nom_serie'] = $enregistrement['nom_serie'];
 
-            $liste_serie_enregistre[$j]['poster'] = $enregistrement['poster'];
+            $liste_serie_enregistre[$j]['poster_path'] = $enregistrement['poster'];
 
             $liste_serie_enregistre[$j]['activation'] = $enregistrement['activation'];
 
@@ -235,7 +236,7 @@ function liste_saisons($id_serie, $nom_serie) {
     return $liste_saison;
 }
 
-function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL) {
+function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL, $id_saison = NULL) {
 
     global $cxn;
 
@@ -279,7 +280,18 @@ function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL) {
 
             try {
 
-                $sql = " SELECT  id_episode,titre_originale,nom_fichier  FROM   EpisodesSerieTvEtrangere   WHERE   nom_fichier='" . $value . "' ORDER BY id_episode DESC";
+                if (is_null($nom_saison)) {
+
+                    $sql = " SELECT  LinksServersEpisodesSerieTvEtrangere.id_link "
+                            . "  FROM    LinksServersEpisodesSerieTvEtrangere,EpisodesSerieTvEtrangere "
+                            . "  WHERE LinksServersEpisodesSerieTvEtrangere.id_fichier=EpisodesSerieTvEtrangere.id_episode "
+                            . "  AND   LinksServersEpisodesSerieTvEtrangere.nom_fichier='" . $value . "'  "
+                            . " AND EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'  ";
+                } else {
+                    
+                }
+
+
 
 
 
@@ -295,7 +307,9 @@ function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL) {
                 }
             } catch (Exception $e1) {
 
-                echo $e1->getMessage();
+                echo $sql;
+
+                echo $e1->getMessage() . 'toto';
             }
 
 
@@ -304,39 +318,121 @@ function liste_episodes($id_serie, $nom_serie, $nom_saison = NULL) {
 
         $j++;
     }
+
+
     /*     * ********************************************************************* */
+
     try {
 
-        $sql = " SELECT  EpisodesSerieTvEtrangere.id_episode,EpisodesSerieTvEtrangere.titre_originale,EpisodesSerieTvEtrangere.identifiant_streaming,ListeServeursVod.nom_serveur  "
-                . " FROM  EpisodesSerieTvEtrangere,ListeServeursVod "
-                . "  WHERE  EpisodesSerieTvEtrangere.id_serveur=ListeServeursVod.id_serveur "
-                . "  AND EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'   ORDER BY EpisodesSerieTvEtrangere.id_episode DESC";
+        if (is_null($nom_saison)) {
+
+            $sql1 = " SELECT  EpisodesSerieTvEtrangere.id_episode,EpisodesSerieTvEtrangere.titre_originale  "
+                    . "  FROM    EpisodesSerieTvEtrangere  "
+                    . " WHERE  EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'   ";
+        } else {
+
+            $sql1 = " SELECT  EpisodesSerieTvEtrangere.id_episode,EpisodesSerieTvEtrangere.titre_originale  "
+                    . "  FROM    EpisodesSerieTvEtrangere  "
+                    . " WHERE  EpisodesSerieTvEtrangere.id_serie='" . $id_serie . "'  AND id_saison='" . $id_saison . "'  ";
+        }
 
 
 
-
-        $resultat = $cxn->query($sql);
+        $resultat1 = $cxn->query($sql1);
 
         $j = 0;
 
-        while ($enregistrement = $resultat->fetch()) {
+        while ($enregistrement1 = $resultat1->fetch()) {
 
-            $liste_episodes_enregistre[$j]['id_episode'] = $enregistrement['id_episode'];
+            $liste_episodes_enregistre[$j]['id_episode'] = $enregistrement1['id_episode'];
 
-            $liste_episodes_enregistre[$j]['titre_originale'] = $enregistrement['titre_originale'];
+            $liste_episodes_enregistre[$j]['titre_originale'] = $enregistrement1['titre_originale'];
 
-            $liste_episodes_enregistre[$j]['identifiant_streaming'] = $enregistrement['identifiant_streaming'];
+            $liste_episodes_enregistre[$j]['id_serie'] = $id_serie;
 
-            $liste_episodes_enregistre[$j]['nom_serveur'] = $enregistrement['nom_serveur'];
+            $liste_episodes_enregistre[$j]['nom_serie'] = $nom_serie;
 
-            // $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+            if (is_null($nom_saison)) {
+
+                $liste_episodes_enregistre[$j]['optionSaisonTV'] = 'no';
+            } else {
+
+                $liste_episodes_enregistre[$j]['optionSaisonTV'] = 'yes';
+                
+                $liste_episodes_enregistre[$j]['id_saison'] = $id_saison;
+                
+                $liste_episodes_enregistre[$j]['nom_saison'] = $nom_saison;
+            }
+
+
+
+
+            /*             * ***************** recuperer les links des serveurs ************************************* */
+
+            $id_episode = $enregistrement1['id_episode'];
+
+            try {
+
+                $sql3 = " SELECT  ListeServeursVod.nom_serveur,LinksServersEpisodesSerieTvEtrangere.date_created,LinksServersEpisodesSerieTvEtrangere.id_link,LinksServersEpisodesSerieTvEtrangere.identifiant_streaming,"
+                        . "LinksServersEpisodesSerieTvEtrangere.id_serveur,LinksServersEpisodesSerieTvEtrangere.activation,"
+                        . "LinksServersEpisodesSerieTvEtrangere.qualite,LinksServersEpisodesSerieTvEtrangere.url  "
+                        . "  FROM    LinksServersEpisodesSerieTvEtrangere,ListeServeursVod  "
+                        . " WHERE LinksServersEpisodesSerieTvEtrangere.id_serveur=ListeServeursVod.id_serveur "
+                        . " AND  LinksServersEpisodesSerieTvEtrangere.id_fichier='" . $id_episode . "'  ";
+
+
+                $resultat3 = $cxn->query($sql3);
+
+                $k = 0;
+
+                while ($enregistrement3 = $resultat3->fetch()) {
+
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['id_link'] = $enregistrement3['id_link'];
+
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['date_created'] = $enregistrement3['date_created'];
+                    
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['id_serveur'] = $enregistrement3['id_serveur'];
+
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['nom_serveur'] = $enregistrement3['nom_serveur'];
+
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['identifiant_streaming'] = $enregistrement3['identifiant_streaming'];
+
+                    $liste_episodes_enregistre[$j]['list_serveurs'][$k]['url'] = $enregistrement3['url'];
+
+                    if ($enregistrement3['activation'] == '0') {
+
+                        $liste_episodes_enregistre[$j]['list_serveurs'][$k]['activation'] = '<button    class="btn btn-danger btn-md"  > Inactif </button>';
+                    }
+                    if ($enregistrement3['activation'] == '1') {
+
+                        $liste_episodes_enregistre[$j]['list_serveurs'][$k]['activation'] = '<button    class="btn btn-success btn-md"  > Actif </button>';
+                    }
+
+
+
+
+
+
+                    $k++;
+                }
+            } catch (Exception $e3) {
+
+                echo $e3->getMessage();
+            }
+
+
+
+            /*             * *************************************************************************************** */
+
+
 
             $j++;
         }
-    } catch (Exception $e2) {
+    } catch (Exception $e3) {
 
-        echo $e2->getMessage();
+        echo $e3->getMessage();
     }
+
 
     /*     * *************************************************************************** */
 

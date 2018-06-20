@@ -18,6 +18,12 @@
 
 
                             $tr.="<option value='" . $serveur['id_serveur'] . "' ";
+                            
+                            if($serveur['id_serveur']==$_GET['serveur_video']){
+                               
+                                 $tr.=' selected="selected" ';
+                                
+                            }
 
                             $tr.= ">" . $serveur['nom_serveur'] . '-' . $serveur['emplacement_serveur'] . "</option>";
                         }
@@ -108,6 +114,10 @@
         if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '1') {
 
             get_link_uptostream($_GET['identifiant_streaming'], $nbr_lettres);
+        }
+           if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '5') {
+
+            get_link_vdk($_GET['identifiant_streaming'], $nbr_lettres);
         }
     }
     ?>

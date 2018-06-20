@@ -664,7 +664,7 @@ if (isset($liste_episodes_saison_non_enregistre) && sizeof($liste_episodes_saiso
 
                             <div class="form-group"  style="padding-top:1%">
                                 <div class="col-sm-12">
-                                    <label class="control-label" for="nom_fichier_<?= $j; ?>" style="color:blue;font-size:16px">Nom saison: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                    <label class="control-label" for="nom_fichier_<?= $j; ?>" style="color:blue;font-size:16px">Nom fichier: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                                 </div>
 
                                 <div class="col-sm-12">

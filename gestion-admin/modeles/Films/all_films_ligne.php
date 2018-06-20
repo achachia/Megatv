@@ -66,7 +66,7 @@ function liste_films_en_ligne() {
 
             try {
 
-                $sql1 = "  SELECT  LinksServersFichierVod.id_link,LinksServersFichierVod.identifiant_streaming,LinksServersFichierVod.url,LinksServersFichierVod.activation,LinksServersFichierVod.date_created,"
+                $sql1 = "  SELECT  LinksServersFichierVod.id_serveur,LinksServersFichierVod.id_link,LinksServersFichierVod.identifiant_streaming,LinksServersFichierVod.url,LinksServersFichierVod.activation,LinksServersFichierVod.date_created,"
                         . " ListeServeursVod.nom_serveur "
                         . "    FROM  LinksServersFichierVod,ListeServeursVod   WHERE LinksServersFichierVod.id_serveur=ListeServeursVod.id_serveur   AND  LinksServersFichierVod.id_fichier='" . $id_fichier . "' ";
 
@@ -113,6 +113,8 @@ function liste_films_en_ligne() {
                             
 
                             $liste[$i]['list_serveur'][$j]['id_link'] = $enregistrement1['id_link'];
+                            
+                            $liste[$i]['list_serveur'][$j]['id_serveur'] = $enregistrement1['id_serveur'];
 
                             $liste[$i]['list_serveur'][$j]['identifiant_streaming'] = $enregistrement1['identifiant_streaming'];
 

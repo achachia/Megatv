@@ -27,6 +27,16 @@ if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '1') {
         $nbr_lettres = 117;
     }
 }
+if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '5') {
+
+    if (!empty($_GET['nbr_lettres'])) {
+
+        $nbr_lettres = $_GET['nbr_lettres'];
+    } else {
+
+        $nbr_lettres = 9;
+    }
+}
 
 
 $liste_serveurs_vod = listeServeursVod();

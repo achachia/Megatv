@@ -22,11 +22,14 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
 
     $dir_jaquette = 'C:/wamp64/www/MegaTV-Backend/gestion-admin/images/JaquetteSerieEtrangere/JaquetteSerieArabic/JaquetteSerieArabe/';
+    
+     $host_jaquette = 'http://localhost/MegaTV-Backend'.'/gestion-admin/images/JaquetteSerieEtrangere/JaquetteSerieArabic/JaquetteSerieArabe/';
+     
 } else {
-
-
-
+    
     $dir_jaquette = '/volume1/web/Megatv/MegatvProcedural/gestion-admin/images/JaquetteSerieEtrangere/JaquetteSerieArabic/JaquetteSerieArabe/';
+    
+     $host_jaquette = 'http://' . $_SERVER['SERVER_NAME'].'/gestion-admin/images/JaquetteSerieEtrangere/JaquetteSerieArabic/JaquetteSerieArabe/';
 }
 
 if ($SaisonTv == '0') {
@@ -99,6 +102,7 @@ if (!empty($_POST['button_register'])) {
         $enregistrement = $stmt->fetch();
 
         $MaxId = $enregistrement['MaxId'];
+        
     } catch (Exception $e) {
 
         $etat = FALSE;
@@ -119,20 +123,27 @@ if (!empty($_POST['button_register'])) {
 
         $imgExt = strtolower(pathinfo($_FILES['affiche_serie']['name'], PATHINFO_EXTENSION));
 
-        $affiche_serie = 'poster_' . $MaxId . '.' . $imgExt;
+        $affiche_serie =  $host_jaquette.'poster_' . $MaxId . '.' . $imgExt;
+        
+       
     }
 
 
     try {
 
-        $sql = " UPDATE  SerieTvEtrangere  SET   poster='" . $affiche_serie . "'   WHERE id_serie='" . $MaxId . "'";
+        $sql = " UPDATE  SerieTvEtrangere  SET   poster='" . $affiche_serie . "'   WHERE id_serie='" . $MaxId . "' ";        
+      
 
         $stmt = $cxn->prepare($sql);
 
-        $stmt->execute();
+        $stmt->execute();        
+        
+        
     } catch (Exception $e) {
 
         $etat = FALSE;
+        
+        echo $e->getMessage();
 
         $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
     }
