@@ -249,7 +249,7 @@
 
                                 $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_edit_' . $j . '"  class="btn btn-danger btn-lg"  > Editer </button>';
                                 
-                                  $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
+                                  $tr .= '<button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
 
                                 $tr .= '<button  style="margin:5px"  data-toggle="modal" data-target="#myModal_list_serveurs_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter les serveurs </button>';
 

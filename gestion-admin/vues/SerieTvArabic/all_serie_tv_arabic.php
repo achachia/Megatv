@@ -165,7 +165,7 @@
 
                                     $tr .= '<td style="text-align:left;padding-top:2%"><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-info btn-lg" style="margin:5px" > Editer </button>';
                                     
-                                     $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
+                                     $tr .= '<button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
 
 
                                     if ($value['SaisonTv'] == '0') {
@@ -174,7 +174,7 @@
 
                                         if (isset($_GET['id_serie']) && isset($_GET['nom_serie'])) {
 
-                                            $tr .= '<button data-toggle="modal" data-target="#myModal_add_episode"  class="btn btn-success btn-lg" style="margin:5px" > AJOUTER UNE EPISODE TV </button></td>';
+                                            $tr .= '<button data-toggle="modal" data-target="#myModal_add_episode"  class="btn btn-success btn-lg" style="margin:5px" > AJOUTER UNE EPISODE TV </button>';
                                         }
                                     } else {
 
@@ -182,10 +182,10 @@
                                     }
                                     if (isset($_GET['id_serie']) && isset($_GET['nom_serie']) && $value['SaisonTv'] == '1') {
 
-                                        $tr .= '<button data-toggle="modal" data-target="#myModal_add_saison"  class="btn btn-primary btn-lg" style="margin:5px" > AJOUTER UNE SAISON TV </button></td>';
+                                        $tr .= '<button data-toggle="modal" data-target="#myModal_add_saison"  class="btn btn-primary btn-lg" style="margin:5px" > AJOUTER UNE SAISON TV </button>';
                                     }
-
-
+                                    
+                                    $tr .= '</td>';
 
 
 
