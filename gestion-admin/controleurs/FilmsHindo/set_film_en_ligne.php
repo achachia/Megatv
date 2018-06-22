@@ -68,7 +68,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
 /* * *********************** Donnes recus par le navigateur client *************************** */
 
-$titre_original = $_POST['titre_original']; 
+$titre_original = $_POST['titre_original'];
 
 $annee_release = $_POST['annee_release'];
 
@@ -78,13 +78,23 @@ $overview = $_POST['overview'];
 
 $section = '10';
 
+$activation = '1';
+
+if (!empty($_POST['source_video'])) {
+
+    $source_video = $_POST['source_video'];
+} else {
+
+    $source_video = NULL;
+}
+
 
 if (!empty($_POST['add_serveur'])) {
 
 
     try {
 
-        $sql = " INSERT INTO  Movies_arabic_hindo (titre_originale,overview,annee_release,categorie) VALUES (:param1,:param2,:param3,:param4)";
+        $sql = " INSERT INTO  Movies_arabic_hindo (titre_originale,overview,annee_release,categorie,activation,source) VALUES (:param1,:param2,:param3,:param4,:param5,:param6)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -95,6 +105,10 @@ if (!empty($_POST['add_serveur'])) {
         $stmt->bindParam(':param3', $annee_release);
 
         $stmt->bindParam(':param4', $section);
+
+        $stmt->bindParam(':param5', $activation);
+
+        $stmt->bindParam(':param6', $source_video);
 
         $stmt->execute();
     } catch (Exception $e1) {
@@ -174,12 +188,11 @@ if (!empty($_POST['add_serveur'])) {
 
     try {
 
-        $sql = " INSERT INTO  LinksServersMoviesArabicHindo  (id_fichier,id_serveur,url,date_created,qualite,identifiant_streaming) VALUES ('" . $MaxId . "','" . $id_serveur . "','" . $url . "','" . $date_upload . "','" . $qualite_video . "','".$identifiant_streaming."') ";
+        $sql = " INSERT INTO  LinksServersMoviesArabicHindo  (id_fichier,id_serveur,url,date_created,qualite,identifiant_streaming) VALUES ('" . $MaxId . "','" . $id_serveur . "','" . $url . "','" . $date_upload . "','" . $qualite_video . "','" . $identifiant_streaming . "') ";
 
         $resultat = $cxn->prepare($sql);
 
         $resultat->execute();
-        
     } catch (Exception $e) {
 
         echo $e->getMessage();

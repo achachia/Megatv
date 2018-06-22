@@ -67,23 +67,32 @@
                         </div>
                     </div> 
                     <div class="form-group"  style="padding-top:1%">
-                        <label class="control-label col-lg-3 col-md-3 col-sm-4" for="tannee_release_<?= $j; ?>" style="color:blue;font-size:16px">Annee release: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="tannee_release_<?= $j; ?>" style="color:blue;font-size:16px">Annee release: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
+
+                        <div class="col-sm-12">
                             <input type="text" class="form-control" id="annee_release"  name="annee_release"  placeholder="Entrer Année de realisation" value="" >
 
                         </div>
                     </div>
                     <div class="form-group"  style="padding-top:1%">
-                        <label class="control-label col-lg-3 col-md-3 col-sm-4" for="overview_<?= $j; ?>" style="color:blue;font-size:16px">Description: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="overview_<?= $j; ?>" style="color:blue;font-size:16px">Description: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
+
+                        <div class="col-sm-12">
                             <textarea rows="4" cols="50" id="overview"  name="overview" ></textarea> 
 
                         </div>
                     </div>
                     <div class="form-group"  style="padding-top:1%">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="affiche_movie_<?= $j; ?>" style="color:blue;font-size:16px">AFFICHE DE DOC: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
 
-                        <label class="control-label col-lg-3 col-md-3 col-sm-4" for="affiche_movie_<?= $j; ?>" style="color:blue;font-size:16px">AFFICHE DE DOC: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                        <div class="col-sm-8">
+
+                        <div class="col-sm-12">
 
                             <input type="file" name="affiche_movie" id="affiche_movie" />                                   
 
@@ -160,6 +169,16 @@
 
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="url"  name="url"   value="" >
+
+                        </div>
+                    </div> 
+                    <div class="form-group"  style="padding-top:1%">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="source_<?= $j; ?>" style="color:blue;font-size:16px">Identifiant streaming: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="source_video"  name="source_video"  placeholder="Entrer source video" value="" >
 
                         </div>
                     </div> 

@@ -77,13 +77,37 @@ $overview = $_POST['overview'];
 
 $section = '9';
 
+$activation = '1';
+
+
+if (!empty($_POST['source_video'])) {
+
+   $source_video = $_POST['source_video'];
+} else {
+
+    $source_video = NULL;
+}
+
+if (!empty($_POST['id_el_cinema'])) {
+
+   $id_el_cinema = $_POST['id_el_cinema'];
+} else {
+
+    $id_el_cinema = NULL;
+}
+
+
+
+
+
+
 
 if (!empty($_POST['add_serveur'])) {
 
 
     try {
 
-        $sql = " INSERT INTO  Movies_arabic_hindo (titre_originale,overview,annee_release,categorie) VALUES (:param1,:param2,:param3,:param4)";
+        $sql = " INSERT INTO  Movies_arabic_hindo (titre_originale,overview,annee_release,categorie,activation,id_el_cinema,source) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -94,6 +118,12 @@ if (!empty($_POST['add_serveur'])) {
         $stmt->bindParam(':param3', $annee_release);
 
         $stmt->bindParam(':param4', $section);
+
+        $stmt->bindParam(':param5', $activation);
+        
+        $stmt->bindParam(':param6', $id_el_cinema);
+        
+        $stmt->bindParam(':param7', $source_video);
 
         $stmt->execute();
     } catch (Exception $e1) {
@@ -142,7 +172,6 @@ if (!empty($_POST['add_serveur'])) {
         $resultat = $cxn->prepare($sql);
 
         $resultat->execute();
-        
     } catch (Exception $e) {
 
         echo $e->getMessage();
@@ -173,14 +202,13 @@ if (!empty($_POST['add_serveur'])) {
     $date_upload = date("Y-m-d");
 
 
-   try {
+    try {
 
-        $sql = " INSERT INTO  LinksServersMoviesArabicHindo  (id_fichier,id_serveur,url,date_created,qualite,identifiant_streaming) VALUES ('" . $MaxId . "','" . $id_serveur . "','" . $url . "','" . $date_upload . "','" . $qualite_video . "','".$identifiant_streaming."') ";
+        $sql = " INSERT INTO  LinksServersMoviesArabicHindo  (id_fichier,id_serveur,url,date_created,qualite,identifiant_streaming) VALUES ('" . $MaxId . "','" . $id_serveur . "','" . $url . "','" . $date_upload . "','" . $qualite_video . "','" . $identifiant_streaming . "') ";
 
         $resultat = $cxn->prepare($sql);
 
         $resultat->execute();
-        
     } catch (Exception $e) {
 
         echo $e->getMessage();

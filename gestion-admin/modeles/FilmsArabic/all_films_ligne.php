@@ -93,7 +93,7 @@ function liste_films_en_ligne() {
 
                             $liste[$i]['titre_originale'] = $enregistrement['titre_originale'];
 
-                            $liste[$i]['poster_path'] = 'http://megatv.ovh/gestion-admin/images/JaquetteFilmsArabic/'.$enregistrement['cover']; 
+                            $liste[$i]['poster_path'] = $enregistrement['cover']; 
                             
                             
 
