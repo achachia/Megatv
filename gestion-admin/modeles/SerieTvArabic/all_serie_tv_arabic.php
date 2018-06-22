@@ -118,7 +118,7 @@ function liste_serie() {
 
             $liste_serie_enregistre[$j]['annee_release'] = $enregistrement['annee_release'];
 
-            $liste_serie_enregistre[$j]['source_serie'] = $enregistrement['source'];
+            $liste_serie_enregistre[$j]['source'] = $enregistrement['source'];
 
             /*             * ************************ Progression d'enregistrement ************************************** */
 

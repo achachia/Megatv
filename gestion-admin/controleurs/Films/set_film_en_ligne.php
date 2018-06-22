@@ -39,6 +39,16 @@ $langage = 'VF';
 
 $date_upload = date("Y-m-d");
 
+if (!empty($_POST['source_video'])) {
+
+    $source_video = $_POST['source_video'];
+} else {
+
+    $source_video = NULL;
+}
+
+/* * ******************************************************** */
+
 $json_source = file_get_contents('https://api.themoviedb.org/3/movie/' . $idtmd . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
 
 // Décode le JSON
@@ -93,7 +103,7 @@ if (!empty($_POST['add_serveur'])) {
 
     try {
 
-        $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre,annee_release,overview,poster) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9)";
+        $sql = " INSERT INTO  FichierVod (titre_originale,date_upload,section_fichier,id_TMD,langage,genre,annee_release,overview,poster,source) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7,:param8,:param9,:param10)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -115,7 +125,11 @@ if (!empty($_POST['add_serveur'])) {
 
         $stmt->bindParam(':param9', $poster);
 
+        $stmt->bindParam(':param10', $source_video);
+
         $stmt->execute();
+        
+        
     } catch (Exception $e1) {
 
         echo $e1->getMessage();

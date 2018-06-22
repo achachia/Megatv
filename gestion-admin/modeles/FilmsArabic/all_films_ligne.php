@@ -47,7 +47,7 @@ function liste_films_en_ligne() {
 
     try {
 
-        $sql = "  SELECT  Movies_arabic_hindo.titre_originale,Movies_arabic_hindo.id_movie,Movies_arabic_hindo.categorie,Movies_arabic_hindo.activation,Movies_arabic_hindo.cover "
+        $sql = "  SELECT  Movies_arabic_hindo.titre_originale,Movies_arabic_hindo.id_movie,Movies_arabic_hindo.categorie,Movies_arabic_hindo.activation,Movies_arabic_hindo.cover,Movies_arabic_hindo.source "
                 . " FROM  Movies_arabic_hindo  WHERE   Movies_arabic_hindo.categorie='9' ";
 
 
@@ -95,6 +95,8 @@ function liste_films_en_ligne() {
 
                             $liste[$i]['poster_path'] = $enregistrement['cover']; 
                             
+                            $liste[$i]['source'] = $enregistrement['source'];
+                            
                             
 
 
@@ -124,7 +126,7 @@ function liste_films_en_ligne() {
                                 $liste[$i]['list_serveur'][$j]['activation'] = '<button    class="btn btn-success btn-md"  > Actif </button>';
                             }
 
-
+                            
 
                             $j++;
                         }

@@ -178,6 +178,16 @@
 
                         </div>
                     </div> 
+                    <div class="form-group"  style="padding-top:1%">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="source_<?= $j; ?>" style="color:blue;font-size:16px">Identifiant streaming: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="source_video"  name="source_video"  placeholder="Entrer source video" value="" >
+
+                        </div>
+                    </div> 
 
 
                 </div>
@@ -232,7 +242,9 @@
 
                                 $tr .= '<td style="padding-top:2%">' . $value ['titre_originale'] . '</td>';
 
-                                $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_edit_' . $j . '"  class="btn btn-primary btn-lg"  > Editer </button>';
+                                $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_edit_' . $j . '"  class="btn btn-danger btn-lg"  > Editer </button>';
+
+                                $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
 
                                 $tr .= '<button  style="margin:5px"  data-toggle="modal" data-target="#myModal_list_serveurs_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter les serveurs </button>';
 
@@ -318,12 +330,12 @@ if (isset($liste_films_en_ligne) && sizeof($liste_films_en_ligne) > 0) {
                                         <td><?= $serveur['identifiant_streaming'] ?></td>
 
                                     </tr>
-                                   <?php if($serveur['url']!=''){ ?>
-                                    <tr>
-                                        <th scope="row"  style="color:blue">URL :</th>
-                                        <td><?= $serveur['url'] ?></td>
-                                    </tr>
-                                    
+                                    <?php if ($serveur['url'] != '') { ?>
+                                        <tr>
+                                            <th scope="row"  style="color:blue">URL :</th>
+                                            <td><?= $serveur['url'] ?></td>
+                                        </tr>
+
                                     <?php } ?>
                                     <tr>
                                         <th scope="row"  style="color:blue">ACTIVATION :</th>
@@ -446,7 +458,46 @@ foreach ($liste_films_en_ligne as $film) {
     $j++;
 }
 ?> 
+<?php $j = 1; foreach ($liste_films_en_ligne as $film) { ?>
 
+    <div id="myModal_consult_<?= $j; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">               
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel" style="color:blue">CONSULTATION LA FICHE</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table table-bordered">
+
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="color:blue">SOURCE :</th>
+                                <td><a href="<?= $film['source']; ?>" target="_blank">Accéder</a></td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Fermer</button>                       
+
+                </div>             
+            </div>
+        </div>
+    </div>
+
+
+    <?php $j++; } ?> 
 
 
 

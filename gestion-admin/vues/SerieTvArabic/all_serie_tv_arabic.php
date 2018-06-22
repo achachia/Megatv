@@ -164,6 +164,8 @@
                                     //   $tr .= '<td><div data-label="'.$value['progression'].'%" class="radial-bar radial-bar-'.$value['progression'].'"></div></td>';
 
                                     $tr .= '<td style="text-align:left;padding-top:2%"><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-info btn-lg" style="margin:5px" > Editer </button>';
+                                    
+                                     $tr .= '<td style="padding-top:2%"><button  style="margin:5px"  data-toggle="modal" data-target="#myModal_consult_' . $j . '"  class="btn btn-primary btn-lg"  > Consulter </button>';
 
 
                                     if ($value['SaisonTv'] == '0') {
@@ -1184,6 +1186,48 @@ if (isset($liste_episodes_enregistre) && sizeof($liste_episodes_enregistre) > 0)
     }
     ?>
 <?php } ?> 
+
+<?php $j = 1; foreach ($liste_serie_enregistre as $serie) { ?>
+
+    <div id="myModal_consult_<?= $j; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">               
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel" style="color:blue">CONSULTATION LA FICHE</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-30px">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table table-bordered">
+
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="color:blue">SOURCE :</th>
+                                <td><a href="<?= $serie['source']; ?>" target="_blank">Accéder</a></td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Fermer</button>                       
+
+                </div>             
+            </div>
+        </div>
+    </div>
+
+
+    <?php $j++; } ?> 
+
 
 
 

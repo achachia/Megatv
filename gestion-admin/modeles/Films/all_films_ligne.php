@@ -46,7 +46,7 @@ function liste_films_en_ligne() {
 
     try {
 
-        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_fichier,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,"
+        $sql = " SELECT  FichierVod.titre_originale,FichierVod.id_fichier,FichierVod.date_upload,FichierVod.section_fichier,FichierVod.id_TMD,FichierVod.source,"
                 . "FichierVod.genre,FichierVod.langage,FichierVod.activation "
                 . "FROM  FichierVod  WHERE FichierVod.section_fichier=2 ";
 
@@ -98,6 +98,8 @@ function liste_films_en_ligne() {
                             $liste[$i]['id_TMD'] = $enregistrement['id_TMD'];
 
                             $liste[$i]['id_fichier'] = $enregistrement['id_fichier'];
+                            
+                            $liste[$i]['source'] = $enregistrement['source'];
 
                             /*                             * ******************************************************* */
 

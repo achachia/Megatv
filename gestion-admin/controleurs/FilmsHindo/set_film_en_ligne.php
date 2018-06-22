@@ -74,7 +74,6 @@ $annee_release = $_POST['annee_release'];
 
 $overview = $_POST['overview'];
 
-$overview = $_POST['overview'];
 
 $section = '10';
 
