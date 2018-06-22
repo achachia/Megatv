@@ -68,7 +68,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
 /* * *********************** Donnes recus par le navigateur client *************************** */
 
-$titre_original = $_POST['titre_original'];
+$titre_original = $_POST['titre_original']; 
 
 $annee_release = $_POST['annee_release'];
 
