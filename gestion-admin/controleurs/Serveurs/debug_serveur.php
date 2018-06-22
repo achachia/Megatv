@@ -24,7 +24,7 @@ if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '1') {
         $nbr_lettres = $_GET['nbr_lettres'];
     } else {
 
-        $nbr_lettres = 117;
+        $nbr_lettres = 41;
     }
 }
 if (isset($_GET['serveur_video']) && $_GET['serveur_video'] == '5') {

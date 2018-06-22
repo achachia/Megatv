@@ -560,7 +560,7 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                                 </div>
                             </div>
                             <div class="form-group"  style="padding-top:1%">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="source_serie_<?= $j; ?>" style="color:blue;font-size:16px">SOURCE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="source_serie_<?= $j; ?>" style="color:blue;font-size:16px">AFFICHE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                                 <div class="col-sm-8">
                                     <input type="file" name="affiche_serie" id="affiche_serie" />
 
@@ -568,8 +568,8 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                             </div>
                             <div class="form-group"  style="padding-top:1%">
                                 <label class="control-label col-lg-3 col-md-3 col-sm-4" for="source_serie_<?= $j; ?>" style="color:blue;font-size:16px">SOURCE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="source_serie" id="source_serie" value="<?= $value['source_serie']; ?>" />
+                                <div class="col-sm-12">
+                                    <textarea rows="4" cols="50" name="source_serie" id="source_serie" ></textarea>
 
                                 </div>
                             </div>
@@ -649,7 +649,8 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                     <div class="form-group"  style="padding-top:1%">
                         <label class="control-label col-lg-3 col-md-3 col-sm-4" for="source_serie" style="color:blue;font-size:16px">SOURCE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                         <div class="col-sm-8">
-                            <input type="text" name="source_serie" id="source_serie" />
+                         
+                             <textarea rows="4" cols="50" name="source_serie" id="source_serie" ></textarea>
 
                         </div>
                     </div>
