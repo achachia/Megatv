@@ -20,7 +20,7 @@ try {
 
     $stmt = $cxn->prepare($sql);
 
-    $stmt->execute();
+    $resultat->execute();
 
     $enregistrement = $resultat->fetch();
 
