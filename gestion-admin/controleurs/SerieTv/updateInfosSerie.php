@@ -20,9 +20,9 @@ try {
 
     $stmt = $cxn->prepare($sql);
 
-    $resultat->execute();
+    $stmt->execute();
 
-    $enregistrement = $resultat->fetch();
+    $enregistrement = $stmt->fetch();
 
     $idtmd = $enregistrement['id_TMD'];
 } catch (Exception $e) {
