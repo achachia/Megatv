@@ -149,7 +149,7 @@
                                     $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosSerie.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a></td>';
 
 
-                                    $tr .= '</tr>'; 
+                                    $tr .= '</tr>';
 
                                     $j++;
                                 }
@@ -262,11 +262,11 @@
                                 <tr>  
 
                                     <th>Num SAISON</th>                                   
-                                    
+
 
                                     <th>Nom SAISON</th> 
-                                    
-                                     <th>Check-Fiche </th>
+
+                                    <th>Check-Fiche </th>
 
                                     <th class="sort-alpha">ACTION</th>
 
@@ -287,12 +287,12 @@
                                     $tr .= '<td>' . $value['Num_saison'] . '</td>';
 
                                     $tr .= '<td>' . $value['nom_saison'] . '</td>';
-                                    
+
                                     $tr .= '<td>' . $value['check_fiche'] . '</td>';
 
                                     $tr .= '<td><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  style="margin:5px" > EDITER </button>';
-                                    
-                                     $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosSaison.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '&id_saison='.$value['id_saison'].'" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a>';
+
+                                    $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosSaison.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '&id_saison=' . $value['id_saison'] . '" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a>';
 
                                     $tr .= '<a href="' . $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $_GET['nom_serie'] . '&id_saison=' . $value['id_saison'] . '&nom_saison=' . $value['nom_saison'] . '"><button   class="btn btn-primary btn-lg"  > CONSULTER LES EPISODES </button></a></td>';
 
@@ -349,6 +349,8 @@
 
                                         <th>Numero épisode</th>
 
+                                        <th>Check-Fiche </th>
+
                                         <th class="sort-alpha">ACTION</th>
 
                                     </tr>
@@ -371,7 +373,11 @@
 
                                         $tr .= '<td>' . $value['Num_episode'] . '</td>';
 
-                                        $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button></td>';
+                                        $tr .= '<td>' . $value['check_fiche'] . '</td>';
+
+                                        $tr .= '<td><button data-toggle="modal" data-target="#myModal_episode_saison_enregistre_' . $j . '"  class="btn btn-primary btn-lg"  > EDITER </button>';
+
+                                        $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosEpisode.php?module=SerieTv&action=all_serie_tv&id_episode=' . $value['id_episode'] . '" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a></td>';
 
 
                                         $tr .= '</tr>';

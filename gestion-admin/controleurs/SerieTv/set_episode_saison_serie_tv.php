@@ -28,7 +28,47 @@ $nom_saison = $_POST['nom_saison'];
 
 $etat = TRUE;
 
-/* * ********************************************** */
+/* * ************************************************************************** */
+
+try {
+
+    $sql = "  SELECT  SaisonsTvFr.Num_saison,SerieTvFr.id_TMD  "
+            . " FROM SaisonsTvFr,SerieTvFr    "
+            . " WHERE   SaisonsTvFr.id_serie=SerieTvFr.id_serie  AND  SaisonsTvFr.id_saison='" . $id_saison . "'  ";
+
+    $stmt = $cxn->prepare($sql);
+
+    $stmt->execute();
+
+    $enregistrement = $stmt->fetch(); 
+
+    $id_TMD = $enregistrement['id_TMD'];
+
+    $num_saison = $enregistrement['Num_saison'];
+
+
+} catch (Exception $e) {
+
+    $etat = FALSE;
+
+    $objet ['message_erreur'] [] = 'Probleme dans l\'excution de la requette' . $sql;
+}
+
+/* * ********************************************************************** */
+
+$json_source = file_get_contents('https://api.themoviedb.org/3/tv/' . $id_TMD . '/season/' . $num_saison . '/episode/' . $Num_episode . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
+
+$json_data = json_decode($json_source);
+
+$tab = explode("-", $json_data->air_date);
+
+$date_release = $tab[2] . '-' . $tab[1] . '-' . $tab[0];
+
+$poster_path = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" . $json_data->poster_path;
+
+$overview = addslashes($json_data->overview);
+
+/* * ********************************************************************** */
 /* * **************** Recuperer url serveur ****************************************** */
 try {
 
@@ -59,7 +99,7 @@ if (!empty($_POST['button_register'])) {
 
     try {
 
-        $sql = " INSERT INTO  EpisodesSerieTvFr (titre_originale,date_created,id_saison,Num_episode) VALUES (:param1,:param2,:param3,:param4)";
+        $sql = " INSERT INTO  EpisodesSerieTvFr (titre_originale,date_created,id_saison,Num_episode,date_release,poster_path,overview) VALUES (:param1,:param2,:param3,:param4,:param5,:param6,:param7)";
 
         $stmt = $cxn->prepare($sql);
 
@@ -70,8 +110,15 @@ if (!empty($_POST['button_register'])) {
         $stmt->bindParam(':param3', $id_saison);
 
         $stmt->bindParam(':param4', $Num_episode);
+        
+        $stmt->bindParam(':param5', $date_release);
+        
+        $stmt->bindParam(':param6', $poster_path);
+        
+        $stmt->bindParam(':param7', $overview);
 
         $stmt->execute();
+        
     } catch (Exception $e) {
 
         $etat = FALSE;

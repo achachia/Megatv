@@ -97,7 +97,7 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
 
             try {
 
-                $sql = " SELECT  EpisodesSerieTvFr.id_episode,EpisodesSerieTvFr.titre_originale,EpisodesSerieTvFr.date_created,EpisodesSerieTvFr.id_saison,EpisodesSerieTvFr.Num_episode ,LinksServersEpisodesSeriesTvFr.nom_fichier "
+                $sql = " SELECT  EpisodesSerieTvFr.poster_path,EpisodesSerieTvFr.overview,EpisodesSerieTvFr.date_release,EpisodesSerieTvFr.id_episode,EpisodesSerieTvFr.titre_originale,EpisodesSerieTvFr.date_created,EpisodesSerieTvFr.id_saison,EpisodesSerieTvFr.Num_episode ,LinksServersEpisodesSeriesTvFr.nom_fichier "
                         . " FROM  EpisodesSerieTvFr,LinksServersEpisodesSeriesTvFr  "
                         . "  WHERE  EpisodesSerieTvFr.id_episode=LinksServersEpisodesSeriesTvFr.id_fichier "
                         . "AND LinksServersEpisodesSeriesTvFr.nom_fichier='" . $value . "' ORDER BY EpisodesSerieTvFr.id_episode DESC";
@@ -130,6 +130,16 @@ function liste_episodes_saison($id_serie, $nom_serie, $nom_saison, $mod) {
                     $liste_episodes_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
 
                     $liste_episodes_saison_enregistre[$j]['Num_episode'] = $enregistrement['Num_episode'];
+
+                    if ($enregistrement['overview'] != '' && $enregistrement['poster_path'] != '' && $enregistrement['date_release'] != '') {
+
+
+                        $liste_episodes_saison_enregistre[$j]['check_fiche'] = '<span class="label label-success">Fiche a jour</span>';
+                    } else {
+
+                        $liste_episodes_saison_enregistre[$j]['check_fiche'] = '<span class="label label-warning">Fiche non a jour</span>';
+                    }
+
 
                     /*                     * ************************************************************** */
 
