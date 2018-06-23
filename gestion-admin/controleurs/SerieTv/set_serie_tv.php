@@ -24,7 +24,7 @@ $annee_release = $tab[0];
 
 $poster_path = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" . $json_data->poster_path;
 
-$overview = $json_data->overview;
+$overview = addslashes($json_data->overview);
 
 if (!empty($_POST['button_register'])) {
 

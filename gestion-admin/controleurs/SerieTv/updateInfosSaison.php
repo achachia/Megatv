@@ -8,6 +8,8 @@ $nom_serie = $_GET['nom_serie'];
 
 $id_serie = $_GET['id_serie'];
 
+$id_saison = $_GET['id_saison'];
+
 $etat = TRUE;
 
 $date_created = date("Y-m-d");
@@ -16,7 +18,7 @@ $date_created = date("Y-m-d");
 
 try {
 
-    $sql = " SELECT  id_TMD   FROM  SerieTvFr    WHERE  id_serie='" . $id_serie . "' ";
+    $sql = "  SELECT  SaisonsTvFr.id_saison,SaisonsTvFr.Num_saison,SerieTvFr.id_TMD  FROM SaisonsTvFr,SerieTvFr    WHERE    SaisonsTvFr.id_serie=SerieTvFr.id_serie  AND  SaisonsTvFr.id_serie='" . $id_serie . "'   AND   SaisonsTvFr.id_saison='" . $id_saison . "' ";
 
     $stmt = $cxn->prepare($sql);
 
@@ -24,7 +26,11 @@ try {
 
     $enregistrement = $stmt->fetch();
 
-    $idtmd = $enregistrement['id_TMD'];
+    $id_TMD = $enregistrement['id_TMD'];
+    
+    $num_saison = $enregistrement['Num_saison'];
+    
+    
 } catch (Exception $e) {
 
     $etat = FALSE;
@@ -35,17 +41,20 @@ try {
 
 /* * ********************************************************************** */
 
-$json_source = file_get_contents('https://api.themoviedb.org/3/tv/' . $idtmd . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
+$json_source = file_get_contents('https://api.themoviedb.org/3/tv/' . $id_TMD . '/season/' . $num_saison . '?api_key=cf673ba3b2a3baceeeefa90d7460cd10&language=fr');
 
 
-// Decode le JSON
 $json_data = json_decode($json_source);
 
-$tab = explode("-", $json_data->first_air_date);
+$tab = explode("-", $json_data->air_date);
 
-$annee_release = $tab[0];
+$date_release = $tab[2] . '-' . $tab[1] . '-' . $tab[0];
+
+$date_release = $date_release;
 
 $poster_path = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" . $json_data->poster_path;
+
+
 
 $overview = addslashes($json_data->overview);
 
@@ -55,8 +64,9 @@ $overview = addslashes($json_data->overview);
 
 try {
 
-    $sql = " UPDATE  SerieTvFr  SET  poster_path='" . $poster_path . "',overview='" . $overview . "',annee_release='" . $annee_release . "'   WHERE  id_serie='" . $id_serie . "' ";
-    
+    $sql = " UPDATE  SaisonsTvFr  SET  poster_path='" . $poster_path . "',overview='" . $overview . "',annee_release='" . $annee_release . "'   WHERE  id_saison='" . $id_saison . "' ";
+ 
+
     $stmt = $cxn->prepare($sql);
 
     $stmt->execute();
@@ -81,4 +91,5 @@ if ($etat) {
 
 header("Location:  $url");
 ?>
+
 

@@ -192,7 +192,7 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
 
                 try {
 
-                    $sql = " SELECT  id_saison,nom_saison,date_created,id_serie,Num_saison   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ORDER BY id_saison DESC ";
+                    $sql = " SELECT  id_saison,nom_saison,date_created,id_serie,Num_saison,poster_path,overview,date_release   FROM  SaisonsTvFr   WHERE   id_serie='" . $id_serie . "'  AND   nom_saison='" . $value . "' ORDER BY id_saison DESC ";
 
                     $select = $cxn->query($sql);
 
@@ -215,6 +215,15 @@ function liste_saisons($id_serie, $nom_serie, $mod) {
                         $liste_saison_enregistre[$j]['Num_saison'] = $enregistrement['Num_saison'];
 
                         $liste_saison_enregistre[$j]['date_created'] = $enregistrement['date_created'];
+
+                        if ($enregistrement['overview'] != '' && $enregistrement['poster_path'] != '' && $enregistrement['annee_release'] != '') {
+
+
+                            $liste_saison_enregistre[$j]['check_fiche'] = '<span class="label label-success">Fiche a jour</span>';
+                        } else {
+
+                            $liste_saison_enregistre[$j]['check_fiche'] = '<span class="label label-warning">Fiche non a jour</span>';
+                        }
                     }
                 } catch (Exception $e) {
 
@@ -297,15 +306,14 @@ function liste_serie($mod) {
                         $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
 
                         $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
-                        
-                        if($enregistrement['overview']!=''  && $enregistrement['poster_path']!='' && $enregistrement['annee_release']!=''){
-                            
-                            
-                             $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-success">Fiche a jour</span>';
-                            
-                        }else{
-                            
-                             $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-warning">Fiche non a jour</span>';
+
+                        if ($enregistrement['overview'] != '' && $enregistrement['poster_path'] != '' && $enregistrement['annee_release'] != '') {
+
+
+                            $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-success">Fiche a jour</span>';
+                        } else {
+
+                            $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-warning">Fiche non a jour</span>';
                         }
 
 
@@ -313,7 +321,7 @@ function liste_serie($mod) {
 
                         /*                         * **************************************************************** */
 
-                      //  updateInfosSerie($enregistrement['id_serie'], $enregistrement['id_TMD']);
+                        //  updateInfosSerie($enregistrement['id_serie'], $enregistrement['id_TMD']);
                     }
                 } catch (Exception $e) {
 
