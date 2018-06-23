@@ -180,7 +180,7 @@
                     </div>
                     <div class="form-group"  style="padding-top:1%">
                         <div class="col-sm-12">
-                            <label class="control-label" for="source_<?= $j; ?>" style="color:blue;font-size:16px">Identifiant streaming: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                            <label class="control-label" for="source_<?= $j; ?>" style="color:blue;font-size:16px">Source Vidéo: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                         </div>
 
                         <div class="col-sm-12">

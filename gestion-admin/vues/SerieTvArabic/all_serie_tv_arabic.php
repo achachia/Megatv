@@ -555,14 +555,14 @@ if (isset($liste_serie_non_enregistre) && sizeof($liste_serie_non_enregistre) > 
                                 </div>
                             </div>
                             <div class="form-group"  style="padding-top:1%">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="tannee_release_<?= $j; ?>" style="color:blue;font-size:16px">Annee release: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="annee_release_<?= $j; ?>" style="color:blue;font-size:16px">Annee release: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="annee_release"  name="annee_release"  placeholder="Entrer Année de realisation" value="<?= $value['annee_release']; ?>" >
 
                                 </div>
                             </div>
                             <div class="form-group"  style="padding-top:1%">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="source_serie_<?= $j; ?>" style="color:blue;font-size:16px">AFFICHE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-4" for="affiche_serie_<?= $j; ?>" style="color:blue;font-size:16px">AFFICHE SERIE: <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span></label>
                                 <div class="col-sm-8">
                                     <input type="file" name="affiche_serie" id="affiche_serie" />
 

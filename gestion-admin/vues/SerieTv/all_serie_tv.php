@@ -114,6 +114,8 @@
 
                                 <th>Progression</th>
 
+                                <th>Check-Fiche </th>
+
                                 <th class="sort-alpha">ACTION</th>
 
                             </tr>
@@ -138,9 +140,13 @@
 
                                     $tr .= '<td><div data-label="' . $value['progression'] . '%" class="radial-bar radial-bar-' . $value['progression'] . '"></div></td>';
 
+                                    $tr .= '<td>' . $value['check_fiche'] . '</td>';
+
                                     $tr .= '<td style="text-align:left;padding-top:2%"><button data-toggle="modal" data-target="#myModal_serie_enregistre_' . $j . '"  class="btn btn-primary btn-lg" style="margin:5px" > Editer </button>';
 
-                                    $tr .= '<a href="' . $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > CONSULTER LES SAISONS</button></a></td>';
+                                    $tr .= '<a href="' . $url_espace_admin . '/index.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > CONSULTER LES SAISONS</button></a>';
+
+                                    $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosSerie.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a></td>';
 
 
                                     $tr .= '</tr>';

@@ -268,7 +268,7 @@ function liste_serie($mod) {
 
                 try {
 
-                    $sql = " SELECT  id_serie,nom_serie,id_TMD,date_created    FROM  SerieTvFr   WHERE  nom_serie='" . $value . "' ORDER BY id_serie DESC ";
+                    $sql = " SELECT  id_serie,nom_serie,id_TMD,date_created,overview,poster_path,annee_release    FROM  SerieTvFr   WHERE  nom_serie='" . $value . "' ORDER BY id_serie DESC ";
 
                     $select = $cxn->query($sql);
 
@@ -297,6 +297,16 @@ function liste_serie($mod) {
                         $pourcentage = $nbr['nbr_fichier_enregistre'] / $nbr['nbr_total_fichier'] * 100;
 
                         $liste_serie_enregistre[$j]['progression'] = intval($pourcentage);
+                        
+                        if($enregistrement['overview']!=''  && $enregistrement['poster_path']!='' && $enregistrement['annee_release']!=''){
+                            
+                            
+                             $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-success">Fiche a jour</span>';
+                            
+                        }else{
+                            
+                             $liste_serie_enregistre[$j]['check_fiche'] = '<span class="label label-warning">Fiche non a jour</span>';
+                        }
 
 
                         //  $liste_serie_enregistre[$j]['progression']=intval('45.5');
