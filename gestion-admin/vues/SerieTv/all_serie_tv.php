@@ -149,7 +149,7 @@
                                     $tr .= '<a href="' . $url_espace_admin . '/controleurs/SerieTv/updateInfosSerie.php?module=SerieTv&action=all_serie_tv&id_serie=' . $value['id_serie'] . '&nom_serie=' . $value['nom_serie'] . '" ><button    class="btn btn-primary btn-lg"  > Mettre a jour la fiche</button></a></td>';
 
 
-                                    $tr .= '</tr>';
+                                    $tr .= '</tr>'; 
 
                                     $j++;
                                 }
